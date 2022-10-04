@@ -1,7 +1,3 @@
-/* TODO
-1) Create Leaflet map from JSON file--coordinates only. 
-*/ 
-
 const map = L.map('map', {
     center: [13.4443, 144.7937],
     zoom: 11,
@@ -49,8 +45,6 @@ const baseLayers = {
 }
 
 const layerControl = L.control.layers(baseLayers).addTo(map)
-
-var wellLocations
 
 // Gets the data from the JSON file and adds well to the map
 fetch('./static/data/data3.json')
