@@ -1,6 +1,6 @@
 const map = L.map('map', {
-    center: [13.4443, 144.7937],
-    zoom: 11,
+    center: [13.4453556,144.7043994],
+    zoom: 12,
 })
 
 const baseLayersZoom = 19;
