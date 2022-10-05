@@ -62,3 +62,33 @@ fetch('./static/data/data3.json')
         }
     })
     .catch(console.error);
+
+let plotData 
+
+// Plots data points from selected well to chart 
+const plotWNL = (plotData, selectedWell) => {
+    // Plots x,y coordinates 
+    const wnlTrace = {
+        x: ,
+        y: ,
+        type: 'scatter', 
+        mode: 'markers',
+        name: 'Well Nitrate Levels'
+    }
+    // Plot features and layout
+    const layout = {
+        title: {
+            text: `Nitrate Levels for Well ${selectedWell}`,
+            font: {
+                size: 20
+            }
+        },
+        xaxis: {
+            title: 'Years'
+        },
+        yaxis: {
+            title: 'ppm (mg/L)'
+        }
+    }
+    Plotly.newPlot('plot', [wnlTrace], layout)
+}
