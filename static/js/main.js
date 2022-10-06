@@ -71,9 +71,6 @@ fetch('./static/data/data3.json')
             // Prints [x,y] to console--a check to ensure data from each well is correct 
             // console.log(`x: ${well.Plot.X}, y: ${well.Plot.Y} \n\n`)
         }
-        // JSON is local; only available through this fetch function, so need to pass data 
-        // console.log(JSON.stringify(data))
-
     })
     .catch(console.error);
 // console.log(wellMarkers)
