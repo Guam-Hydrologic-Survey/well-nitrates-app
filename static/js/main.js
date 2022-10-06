@@ -46,16 +46,11 @@ const baseLayers = {
 
 const layerControl = L.control.layers(baseLayers).addTo(map)
 
-// Array to house well markers on the map
-var wellMarkers = [];
-var wellPlot = [];
-
 fetch('./static/data/data3.json')
     .then(response => response.json())
     .then(data => {
-        for (const well of data.wells) {
-            
-        }
+        var jsonFeatures = [];
+        
     })
     .catch(console.error);
 
