@@ -54,11 +54,14 @@ fetch('./static/data/data3.json')
         for (const well of data.wells) {
             console.log(well.Name + ', Coords: [' + well.Location.Lat + ', ' + well.Location.Lon + ']');
             var latLng = L.latLng(well.Location.Lat, well.Location.Lon);
-            console.log(latLng);
+            // console.log(latLng);
             L.marker(latLng).addTo(map)
                 .bindPopup(
-                    `Well: ${well.Name} <br> Lat: ${well.Location.Lat} <br> Lon: ${well.Location.Lon}`
+                    `Well: ${well.Name} <br> Lat: ${well.Location.Lat} <br> Lon: ${well.Location.Lon} <br> 
+                    <button type="button" class="btn" data-bs-toggle="modal" onclick="">Plot</button>`
                 );
+            // Prints [x,y] to console--a check to ensure data from each well is correct 
+            console.log(`x: ${well.Plot.X}, y: ${well.Plot.Y} \n\n`)
         }
     })
     .catch(console.error);
@@ -66,11 +69,12 @@ fetch('./static/data/data3.json')
 let plotData 
 
 // Plots data points from selected well to chart 
+// TODO: Function that will pass plot data based on selected well on map 
 const plotWNL = (plotData, selectedWell) => {
     // Plots x,y coordinates 
     const wnlTrace = {
-        x: ,
-        y: ,
+        // x: ,
+        // y: ,
         type: 'scatter', 
         mode: 'markers',
         name: 'Well Nitrate Levels'
