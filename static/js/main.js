@@ -50,7 +50,24 @@ fetch('./static/data/data3.json')
     .then(response => response.json())
     .then(data => {
         var jsonFeatures = [];
-        
+        for (const well of data.wells) {
+            var lat = well.Lat;
+            var lon = well.Lon;
+
+            var feature = {
+                type: 'Feature',
+                properties: 'Point', 
+                coordinates: [lon,lat]
+            }
+        };
+        jsonFeatures.push(feature);
+        //const wells = L.geoJSON(geojsonFeature).addTo(map);
+        //console.log(jsonFeatures);
+        var geoJson = { 
+            type: 'FeatureCollection',
+            features: jsonFeatures
+        };
+        L.geoJSON(geoJson).addTo(map);
     })
     .catch(console.error);
 
