@@ -33,7 +33,27 @@
     <!-- TODO: Adjust z-index for each of these and display view upon first page load (CSS) -->
     <div class="about">About side panel</div>
     <div class="sidebar">Main side panel</div>
+
+    <!-- Leaflet Map -->
     <div id="map"></div>
+
+    <!-- Bootstrap Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Well Nitrates</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div id="plot"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    <!-- Footer: Attribution -->
     <div class="footer">DKValerio, MWZapata, JBulaklak, NCHabana 2022</div>
 </body>
 </html>
