@@ -50,30 +50,14 @@ const layerControl = L.control.layers(baseLayers).addTo(map)
 var wellMarkers = [];
 var wellPlot = [];
 
-// Gets the data from the JSON file and adds well to the map
 fetch('./static/data/data3.json')
     .then(response => response.json())
     .then(data => {
-        // For loop traverses through each well in JSON file, extracts coordinates and adds points to the map
         for (const well of data.wells) {
-            // console.log(well.Name + ', Coords: [' + well.Location.Lat + ', ' + well.Location.Lon + ']');
-            var latLng = L.latLng(well.Location.Lat, well.Location.Lon);
-            console.log(latLng);
-            // L.marker(latLng).addTo(map)
-            var marker = new L.marker(latLng)
-            marker.addTo(map)
-                .bindPopup(
-                    `Well: ${well.Name} <br> Lat: ${well.Location.Lat} <br> Lon: ${well.Location.Lon} <br> 
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="plotWNL()" data-bs-target="#exampleModal">Plot</button>`
-                );
-            wellMarkers.push(marker);
             
-            // Prints [x,y] to console--a check to ensure data from each well is correct 
-            // console.log(`x: ${well.Plot.X}, y: ${well.Plot.Y} \n\n`)
         }
     })
     .catch(console.error);
-// console.log(wellMarkers)
 
 // Used to test functionality of Plot button 
 function showMessage() {
