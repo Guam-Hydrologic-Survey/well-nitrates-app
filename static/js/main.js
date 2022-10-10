@@ -60,11 +60,23 @@ fetch('./static/data/data3.json')
             var latLng = L.latLng(well.Location.Lat, well.Location.Lon);
             console.log(latLng);
             // L.marker(latLng).addTo(map)
-            var marker = new L.marker(latLng)
+            var marker = new L.marker(latLng);
+
+            var plotValues = [well.Plot.X, well.Plot.Y];
+            // console.log(plotValues);
+
+            /*
+            Pass x and y values in multiple methods: 
+            - using myFunc.apply() 
+            - combine arrays to multi-dim array (see zip Python method to implement something similar)
+            - create an object 
+            */
+
             marker.addTo(map)
                 .bindPopup(
                     `Well: ${well.Name} <br> Lat: ${well.Location.Lat} <br> Lon: ${well.Location.Lon} <br> 
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="plotWNL()" data-bs-target="#exampleModal">Plot</button>`
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="plotWNL.apply(${null, plotValues})" data-bs-target="#exampleModal">Plot</button>
+                    `
                 );
             wellMarkers.push(marker);
             
@@ -83,15 +95,18 @@ function showMessage() {
     alert('Clicked');
 }
 
-let plotData 
+// let plotData 
 
 // Plots data points from selected well to chart 
 // TODO: Function that will pass plot data based on selected well on map 
-const plotWNL = (selectedWell) => {
+const plotWNL = (dateTime, values, selectedWell) => {
+    console.log(dateTime);
+    console.log(values)
+    console.log(selectedWell)
     // Plots x,y coordinates 
     const wnlTrace = {
-        x: [2015,2016,2017,2018,2019,2020],
-        y: [1,2,3,4,5,6],
+        x: dateTime,
+        y: values,
         type: 'scatter', 
         mode: 'markers',
         name: 'Well Nitrate Levels'
