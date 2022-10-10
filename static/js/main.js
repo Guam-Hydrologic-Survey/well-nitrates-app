@@ -54,20 +54,21 @@ var wellPlot = [];
 fetch('./static/data/data3.json')
     .then(response => response.json())
     .then(data => {
+        localStorage.setItem('wellData', JSON.stringify(data))
         // For loop traverses through each well in JSON file, extracts coordinates and adds points to the map
         for (const well of data.wells) {
             // console.log(well.Name + ', Coords: [' + well.Location.Lat + ', ' + well.Location.Lon + ']');
             var latLng = L.latLng(well.Location.Lat, well.Location.Lon);
-            console.log(latLng);
+            // console.log(latLng);
             // L.marker(latLng).addTo(map)
             var marker = new L.marker(latLng);
 
-            var plotValues = [well.Plot.X, well.Plot.Y];
+            // var plotValues = [well.Plot.X, well.Plot.Y];
             // console.log(plotValues);
 
             /*
             Pass x and y values in multiple methods: 
-            - using myFunc.apply() 
+            - using myFunc.apply() --> used for arrays 
             - combine arrays to multi-dim array (see zip Python method to implement something similar)
             - create an object 
             */
@@ -75,7 +76,7 @@ fetch('./static/data/data3.json')
             marker.addTo(map)
                 .bindPopup(
                     `Well: ${well.Name} <br> Lat: ${well.Location.Lat} <br> Lon: ${well.Location.Lon} <br> 
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="plotWNL.apply(${null, plotValues})" data-bs-target="#exampleModal">Plot</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="plotWNL(${well.Name})" data-bs-target="#exampleModal">Plot</button>
                     `
                 );
             wellMarkers.push(marker);
@@ -88,7 +89,7 @@ fetch('./static/data/data3.json')
 
     })
     .catch(console.error);
-// console.log(wellMarkers)
+console.log(wellMarkers)
 
 // Used to test functionality of Plot button 
 function showMessage() {
@@ -99,7 +100,7 @@ function showMessage() {
 
 // Plots data points from selected well to chart 
 // TODO: Function that will pass plot data based on selected well on map 
-const plotWNL = (dateTime, values, selectedWell) => {
+const plotWNL = (selectedWell) => {
     console.log(dateTime);
     console.log(values)
     console.log(selectedWell)
@@ -107,6 +108,9 @@ const plotWNL = (dateTime, values, selectedWell) => {
     const wnlTrace = {
         x: dateTime,
         y: values,
+        // Dummy data for preliminary testing 
+        // x: [2015,2016,2017,2018,2019,2020], 
+        // y: [1,2,3,4,5,6],
         type: 'scatter', 
         mode: 'markers',
         name: 'Well Nitrate Levels'
