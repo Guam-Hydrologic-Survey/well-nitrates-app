@@ -1,6 +1,6 @@
 const dataFilePath = './static/data/data3.json';
 
-var jsonFile = require(dataFilePath); 
+var jsonFile; // = require(dataFilePath); 
 
 fetch(dataFilePath)
     .then(response => response.json())
@@ -35,18 +35,18 @@ const trace = {
 
   // Creates the plot layout
 const layout = {
-title: {
-    text: 'Nitrate Levels for Well D-7',
-    font: {
-        size: 20
+    title: {
+        text: 'Nitrate Levels for Well D-7',
+        font: {
+            size: 20
+        }
+    }, 
+    xaxis: {
+        title: 'Years'
+    }, 
+    yaxis: {
+        title: 'ppm (mg/L)'
     }
-}, 
-xaxis: {
-    title: 'Years'
-}, 
-yaxis: {
-    title: 'ppm (mg/L)'
-}
 }
 
 var data = [trace];
