@@ -86,6 +86,13 @@ const plotWNL = () => {
     Plotly.newPlot('plot', [wnlTrace], layout, {scrollZoom: true})
 }
 
+let getStats
+const showStats = () => {
+    document.getElementById("sidebar").innerText = `
+                Well Name: ${getStats.name}
+            `
+}
+
 // Filepaths for map (lat, lon coords) json and data (stats, x-y vals) json 
 const data_url = './static/data/data3.json';
 const map_url = './static/data/data4.json'; 
@@ -98,16 +105,21 @@ fetch(map_url)
         // Creates pop-ups for each point on the map 
         const getWellInfo = (feature, layer) => {
             layer.bindPopup(
-                `<strong>Well</strong>: ${feature.properties.name} 
-                    <br><strong>Lat:</strong> ${feature.properties.lat} 
-                    <br><strong>Lon:</strong> ${feature.properties.lon}
-                    <br><strong>Basin:</strong> ${feature.properties.basin}
-                    <br><button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="plotWNL()" data-bs-target="#exampleModal">Plot</button>`
+                `
+                <strong>Well</strong>: ${feature.properties.name} 
+                <br><strong>Lat:</strong> ${feature.properties.lat} 
+                <br><strong>Lon:</strong> ${feature.properties.lon}
+                <br><strong>Basin:</strong> ${feature.properties.basin}
+                <br><br>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="plotWNL()" data-bs-target="#exampleModal">Plot</button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Statistics</button>
+                `
             );
 
             // On click event on the points
             // Sends data for clicked item to global variable plotData 
             layer.on('click', pt => plotData = pt.target.feature.properties) 
+            // layer.on('click', pt => getStats = pt.target.feature.properties)
         }
 
         // Places points on the map and calls on getWellInfo function (right above) to show pop-ups 
