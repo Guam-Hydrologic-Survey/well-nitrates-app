@@ -46,43 +46,23 @@ const baseLayers = {
 
 const layerControl = L.control.layers(baseLayers).addTo(map)
 
-// Filepaths for map (lat, lon coords) json and data (stats, x-y vals) json 
-const data_url = './static/data/data3.json';
-const map_url = './static/data/data4.json'; // './static/data/mapInfo1.json';
-
-// Gets the data from the JSON file and adds well to the map
-fetch(map_url)
-    .then(response => response.json())
-    .then(geojson => {
-        const mapJson = L.geoJSON(geojson, {
-            onEachFeature: function (feature, layer) {
-                layer.bindPopup(`<strong>Well</strong>: ${feature.properties.name} 
-                    <br><strong>Lat</strong>: ${feature.properties.lat} 
-                    <br><strong>Lon</strong>: ${feature.properties.lon}
-                    <br><strong>Basin</strong>: ${feature.properties.basin}`);
-            }
-        }).addTo(map);
-        layerControl.addOverlay(mapJson, "Wells")
-    })
-    .catch(console.error);
-
-// Used to test functionality of Plot button 
-function showMessage() {
-    alert('Clicked');
-}
-
-// let plotData 
-
 // Plots data points from selected well to chart 
-// TODO: Function that will pass plot data based on selected well on map 
-const plotWNL = (selectedWell) => {
-    console.log(dateTime);
-    console.log(values)
-    console.log(selectedWell)
+let plotData 
+const plotWNL = () => {
+
+    // Array to hold date objects
+    const x_dates_conv = [];
+
+    // Converted date strings from x_vals to JS date objects 
+    for (let i = 0; i < plotData.x_vals.length; i++) {
+        x_dates_conv[i] = new Date(plotData.x_vals[i]);
+        console.log(`${plotData.x_vals[i]} --> ${x_dates_conv[i]}`);
+    }
+
     // Plots x,y coordinates 
     const wnlTrace = {
-        x: dateTime,
-        y: values,
+        x: x_dates_conv,
+        y: plotData.y_vals,
         // Dummy data for preliminary testing 
         // x: [2015,2016,2017,2018,2019,2020], 
         // y: [1,2,3,4,5,6],
@@ -90,10 +70,11 @@ const plotWNL = (selectedWell) => {
         mode: 'markers',
         name: 'Well Nitrate Levels'
     }
+
     // Plot features and layout
     const layout = {
         title: {
-            text: `Nitrate Levels for Well ${selectedWell}`,
+            text: `Nitrate Levels for Well ${plotData.name}`,
             font: {
                 size: 20
             }
@@ -105,5 +86,41 @@ const plotWNL = (selectedWell) => {
             title: 'ppm (mg/L)'
         }
     }
-    Plotly.newPlot('plot', [wnlTrace], layout)
+    Plotly.newPlot('plot', [wnlTrace], layout, {scrollZoom: true})
+}
+
+// Filepaths for map (lat, lon coords) json and data (stats, x-y vals) json 
+const data_url = './static/data/data3.json';
+const map_url = './static/data/data4.json'; 
+
+// Gets the data from the JSON file and adds well to the map
+fetch(map_url)
+    .then(response => response.json())  // Requests for a json file as a response
+    .then(geojson => { 
+
+        // Creates pop-ups for each point on the map 
+        const getWellInfo = (feature, layer) => {
+            layer.bindPopup(
+                `<strong>Well</strong>: ${feature.properties.name} 
+                    <br><strong>Lat:</strong> ${feature.properties.lat} 
+                    <br><strong>Lon:</strong> ${feature.properties.lon}
+                    <br><strong>Basin:</strong> ${feature.properties.basin}
+                    <br><button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="plotWNL()" data-bs-target="#exampleModal">Plot</button>`
+            );
+
+            // On click event on the points
+            // Sends data for clicked item to global variable plotData 
+            layer.on('click', pt => plotData = pt.target.feature.properties) 
+        }
+
+        // Places points on the map and calls on getWellInfo function (right above) to show pop-ups 
+        const mapJson = L.geoJSON(geojson, {onEachFeature: getWellInfo}).addTo(map);
+        layerControl.addOverlay(mapJson, "Wells") 
+    })
+    .catch(console.error);
+
+// Used to test functionality of Plot button 
+function showMessage(name) {
+    console.log(`Clicked on ${name}`);
+    alert(`Clicked on ${name}`);
 }
