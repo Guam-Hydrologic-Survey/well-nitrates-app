@@ -53,7 +53,3 @@ var data = [trace];
 
 // Places plot where ID on html div is 'plot'
 Plotly.newPlot('plot', data); 
-function convertArr() {
-    var x_pts = 
-    // return 
-}
