@@ -52,14 +52,22 @@ var wellPlot = [];
 
 // Filepaths for map (lat, lon coords) json and data (stats, x-y vals) json 
 const data_url = './static/data/data3.json';
-const map_url = './static/data/mapInfo1.json';
+const map_url = './static/data/data4.json'; // './static/data/mapInfo1.json';
 
 // Gets the data from the JSON file and adds well to the map
 fetch(map_url)
     .then(response => response.json())
     .then(geojson => {
-        const mapJson = L.geoJSON(geojson).addTo(map);
-        layerControl.addOverlay(mapJson, 'Wells');
+        // const mapJson = L.geoJSON(geojson).addTo(map);
+        // layerControl.addOverlay(mapJson, 'Wells');
+        const mapJson = L.geoJSON(geojson, {
+            onEachFeature: function (feature, layer) {
+                layer.bindPopup(`<strong>Well</strong>: ${feature.properties.name} 
+                    <br><strong>Lat</strong>: ${feature.properties.lat} 
+                    <br><strong>Lon</strong>: ${feature.properties.lon}
+                    <br><strong>Basin</strong>: ${feature.properties.basin}`);
+            }
+        }).addTo(map);
     })
     .catch(console.error);
 console.log(wellMarkers)
