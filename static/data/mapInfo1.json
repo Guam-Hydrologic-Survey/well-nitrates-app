@@ -1,0 +1,38 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "WID": 1,
+                "name": "D-7"
+                }, 
+            "geometry": {
+                "type": "Point",
+                "coordinates": [13.5329522, 144.8508027]
+                }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "WID": 2,
+                "name": "D-21"
+                }, 
+            "geometry": {
+                "type": "Point",
+                "coordinates": [13.54193941, 144.8439739]
+                }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "WID": 3,
+                "name": "Y-6"
+                }, 
+            "geometry": {
+                "type": "Point",
+                "coordinates": [13.52625649, 144.8798558]
+                }
+        }
+    ]
+}
