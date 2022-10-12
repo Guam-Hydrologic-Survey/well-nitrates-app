@@ -63,9 +63,6 @@ const plotWNL = () => {
     const wnlTrace = {
         x: x_dates_conv,
         y: plotData.y_vals,
-        // Dummy data for preliminary testing 
-        // x: [2015,2016,2017,2018,2019,2020], 
-        // y: [1,2,3,4,5,6],
         type: 'scatter', 
         mode: 'markers',
         name: 'Well Nitrate Levels'
