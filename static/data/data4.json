@@ -115,7 +115,9 @@
                 "x_yrs_1ppm": 8.25010431646653,
                 "sig": 1,
                 "MoP": 0,
-                "annual_freq": 1.16666666666667
+                "annual_freq": 1.16666666666667,
+                "x_vals": [],
+                "y_vals": []
                 },
             "geometry": {
                 "type": "Point",
@@ -154,7 +156,9 @@
                 "x_yrs_1ppm": 1093.11340553533,
                 "sig": 0,
                 "MoP": "N/A",
-                "annual_freq": 0.404761904761905
+                "annual_freq": 0.404761904761905,
+                "x_vals": [],
+                "y_vals": []
                 },
             "geometry": {
                 "type": "Point",
