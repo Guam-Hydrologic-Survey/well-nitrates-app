@@ -46,10 +46,6 @@ const baseLayers = {
 
 const layerControl = L.control.layers(baseLayers).addTo(map)
 
-// Array to house well markers on the map
-var wellMarkers = [];
-var wellPlot = [];
-
 // Filepaths for map (lat, lon coords) json and data (stats, x-y vals) json 
 const data_url = './static/data/data3.json';
 const map_url = './static/data/data4.json'; // './static/data/mapInfo1.json';
@@ -70,7 +66,6 @@ fetch(map_url)
         }).addTo(map);
     })
     .catch(console.error);
-console.log(wellMarkers)
 
 // Used to test functionality of Plot button 
 function showMessage() {
