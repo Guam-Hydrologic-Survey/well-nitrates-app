@@ -50,43 +50,16 @@ const layerControl = L.control.layers(baseLayers).addTo(map)
 var wellMarkers = [];
 var wellPlot = [];
 
+// Filepaths for map (lat, lon coords) json and data (stats, x-y vals) json 
+const data_url = './static/data/data3.json';
+const map_url = './static/data/mapInfo1.json';
+
 // Gets the data from the JSON file and adds well to the map
-fetch('./static/data/data3.json')
+fetch(map_url)
     .then(response => response.json())
-    .then(data => {
-        localStorage.setItem('wellData', JSON.stringify(data))
-        // For loop traverses through each well in JSON file, extracts coordinates and adds points to the map
-        for (const well of data.wells) {
-            // console.log(well.Name + ', Coords: [' + well.Location.Lat + ', ' + well.Location.Lon + ']');
-            var latLng = L.latLng(well.Location.Lat, well.Location.Lon);
-            // console.log(latLng);
-            // L.marker(latLng).addTo(map)
-            var marker = new L.marker(latLng);
-
-            // var plotValues = [well.Plot.X, well.Plot.Y];
-            // console.log(plotValues);
-
-            /*
-            Pass x and y values in multiple methods: 
-            - using myFunc.apply() --> used for arrays 
-            - combine arrays to multi-dim array (see zip Python method to implement something similar)
-            - create an object 
-            */
-
-            marker.addTo(map)
-                .bindPopup(
-                    `Well: ${well.Name} <br> Lat: ${well.Location.Lat} <br> Lon: ${well.Location.Lon} <br> 
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="plotWNL(${well.Name})" data-bs-target="#exampleModal">Plot</button>
-                    `
-                );
-            wellMarkers.push(marker);
-            
-            // Prints [x,y] to console--a check to ensure data from each well is correct 
-            // console.log(`x: ${well.Plot.X}, y: ${well.Plot.Y} \n\n`)
-        }
-        // JSON is local; only available through this fetch function, so need to pass data 
-        // console.log(JSON.stringify(data))
-
+    .then(geojson => {
+        const mapJson = L.geoJSON(geojson).addTo(map);
+        layerControl.addOverlay(mapJson, 'Wells');
     })
     .catch(console.error);
 console.log(wellMarkers)
