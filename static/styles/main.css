@@ -12,3 +12,12 @@
     align-items: center;
     justify-content: center;
 }
+
+.stats-row {
+    display: flex;
+}
+
+.stats-col {
+    flex: 50%;
+    padding: 10px;
+}
