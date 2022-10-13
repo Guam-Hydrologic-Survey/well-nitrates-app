@@ -120,7 +120,7 @@ const showStats = () => {
                     <p class="stats-num">${getStats.std_dev}</p>
                     <p class="stats-num">${getStats.deg_of_free}</p>
                     <br>
-                    <button type="button"><i>View full statistics<i></button>
+                    <button type="button" class="btn btn-primary">View Full Statistics</button>
                 </div>
             </div>
         `
@@ -129,6 +129,10 @@ const showStats = () => {
 // Filepaths for map (lat, lon coords) json and data (stats, x-y vals) json 
 const data_url = './static/data/data3.json';
 const map_url = './static/data/data4.json'; 
+
+L.marker([13.45409, 144.7594]).addTo(map).on('click', function(e) {
+    console.log(e.latlng);
+});
 
 // Gets the data from the JSON file and adds well to the map
 fetch(map_url)
