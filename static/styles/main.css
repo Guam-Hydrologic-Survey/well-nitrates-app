@@ -18,7 +18,7 @@
 }
 
 .offcanvas-size-xl {
-    --bs-offcanvas-width: min(95vw, 500px) !important;
+    --bs-offcanvas-width: min(95vw, 400px) !important;
 }
 
 /* Style configuration for the title and location section of stats panel */
@@ -49,4 +49,8 @@
     text-align: right;
     padding: 3px;
     margin: 0;
+}
+
+button {
+    font-style: italic;
 }
