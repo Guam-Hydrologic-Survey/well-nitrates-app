@@ -127,9 +127,3 @@ fetch(map_url)
         layerControl.addOverlay(mapJson, "Wells") 
     })
     .catch(console.error);
-
-// Used to test functionality of Plot button 
-function showMessage(name) {
-    console.log(`Clicked on ${name}`);
-    alert(`Clicked on ${name}`);
-}
