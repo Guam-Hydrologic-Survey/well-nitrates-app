@@ -31,19 +31,15 @@
     <script src="./static/js/read.js" defer></script>
 </head>
 <body>
-    <!-- TODO: Adjust z-index for each of these and display view upon first page load (CSS) -->
-    <div class="about">About side panel</div>
-    <div class="sidebar">Main side panel</div>
-
     <!-- Leaflet Map -->
     <div id="map"></div>
 
-    <!-- Bootstrap Modal -->
+    <!-- Bootstrap Modal for Plot -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Well Nitrates Plot</h5>
+              <!-- <h5 class="modal-title" id="exampleModalLabel">Well Nitrates Plot</h5> -->
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -53,6 +49,15 @@
         </div>
       </div>
 
+    <!-- Bootstrap Offcanvas for Side Panel -->
+    <div class="offcanvas offcanvas-start offcanvas-size-xl" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel" data-bs-backdrop="false">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body" id="sidebar">
+      </div>
+    </div>
 
     <!-- Footer: Attribution -->
     <div class="footer">DKValerio, MWZapata, JBulaklak, NCHabana 2022</div>

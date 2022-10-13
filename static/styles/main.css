@@ -6,3 +6,51 @@
     right: 0;
     width: 100%;
 }
+
+.modal-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.offcanvas-title {
+    text-align: center;
+}
+
+.offcanvas-size-xl {
+    --bs-offcanvas-width: min(95vw, 400px) !important;
+}
+
+/* Style configuration for the title and location section of stats panel */
+.stats-location {
+    font-style: italic;
+    padding: 0;
+    margin: 0;
+}
+
+.stats-row {
+    display: flex;
+}
+
+.stats-col {
+    flex: 50%;
+    padding: 5px;
+}
+
+.stats-text {
+    /* font-weight: bold; */
+    font-size: 15px;
+    padding: 3px;
+    margin: 0;
+}
+
+.stats-num {
+    font-size: 15px;
+    text-align: right;
+    padding: 3px;
+    margin: 0;
+}
+
+button {
+    font-style: italic;
+}
