@@ -90,10 +90,13 @@ let getStats
 const showStats = () => {
     document.getElementById("sidebar").innerHTML =
         `
-            <h4>Well ${getStats.name}</h4>
-            <p class="stats-location">${getStats.lat}, ${getStats.lon}</p>
-            <p class="stats-location">${getStats.basin}</p>
-            <hr/>
+            <div>
+                <h4>Well ${getStats.name}</h4>
+                <p class="stats-location">${getStats.lat}, ${getStats.lon}</p>
+                <p class="stats-location">${getStats.basin}</p>
+                <hr/>
+            </div>
+
             <div class="stats-row">
                 <div class="stats-col">
                     <p class="stats-text">Average</p>
