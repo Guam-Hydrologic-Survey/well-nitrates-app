@@ -86,15 +86,27 @@ const plotWNL = (selectedWell) => {
 fetch('./static/data/data3.json')
     .then(response => response.json())
     .then(data => {
+        const getWellInfo = (feature, layer) => {
+            layer.bindPopup(
+                `
+                <strong>Well</strong>: ${feature.properties.name} 
+                <br><strong>Lat:</strong> ${feature.properties.lat} 
+                <br><strong>Lon:</strong> ${feature.properties.lon}
+                <br><strong>Basin:</strong> ${feature.properties.basin}
+                `
+            );
+            layer.on('click', pt => plotData = pt.target.feature.properties)
+        }
+
         for (const well of data.wells) {
             var latLng = L.latLng(well.Location.Lat, well.Location.Lon);
             var marker = new L.marker(latLng);
-            marker.addTo(map)
-                .bindPopup(
-                    `Well: ${well.Name} <br> Lat: ${well.Location.Lat} <br> Lon: ${well.Location.Lon} <br> 
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="plotWNL(${well.Name})" data-bs-target="#exampleModal">Plot</button>
-                    `
-                );
+            marker.addTo(map);
+            // .bindPopup(
+            //     `Well: ${well.Name} <br> Lat: ${well.Location.Lat} <br> Lon: ${well.Location.Lon} <br> 
+            //     <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="plotWNL(${well.Name})" data-bs-target="#exampleModal">Plot</button>
+            //     `
+            // );
             wellMarkers.push(marker);
         }
     })
@@ -105,3 +117,4 @@ console.log(wellMarkers)
 function showMessage() {
     alert('Clicked');
 }
+
