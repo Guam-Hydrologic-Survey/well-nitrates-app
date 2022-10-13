@@ -91,8 +91,8 @@ const showStats = () => {
     document.getElementById("sidebar").innerHTML =
         `
             <h4><strong>Well ${getStats.name}</strong> </h4>
-            <p class="location">${getStats.lat}, ${getStats.lon}</p>
-            <p class="location">${getStats.basin}</p>
+            <p class="stats-location">${getStats.lat}, ${getStats.lon}</p>
+            <p class="stats-location">${getStats.basin}</p>
             <hr/>
             <div class="stats-row">
                 <div class="stats-col">
@@ -104,6 +104,8 @@ const showStats = () => {
                     <p class="stats-text">Intercept</p>
                     <p class="stats-text">Standard Deviation</p>
                     <p class="stats-text">Degrees of Freedom</p>
+                    <br>
+                    <br>
                 </div>
                 <div class="stats-col">
                     <p class="stats-num">${getStats.average}</p>
@@ -114,6 +116,8 @@ const showStats = () => {
                     <p class="stats-num">${getStats.intercept}</p>
                     <p class="stats-num">${getStats.std_dev}</p>
                     <p class="stats-num">${getStats.deg_of_free}</p>
+                    <br>
+                    <button type="button"><i>View full statistics<i></button>
                 </div>
             </div>
         `
