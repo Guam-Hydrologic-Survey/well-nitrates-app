@@ -18,6 +18,6 @@ Read the technical report [here](#).
 
 - [@Dannika Valerio](#)
 - [@Matt Zapata](#)
-- [@Jezreel Bulaklak](#)
+- [@Jezreelyn Bulaklak](#)
 - [@Dr Nathan Habana](#)
 
