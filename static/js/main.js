@@ -1,120 +1,55 @@
-const map = L.map('map', {
-    center: [13.4453556,144.7043994],
-    zoom: 12,
-})
+const dataFilePath = './static/data/data3.json';
 
-const baseLayersZoom = 19;
+var jsonFile; // = require(dataFilePath); 
 
-// Open Street Map layer 
-const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: baseLayersZoom, 
-    attribution: '© OpenStreetMap'
-}).addTo(map)
-
-// ESRI World Street Map 
-const ewsp = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
-    maxZoom: baseLayersZoom,
-	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
-})
-
-// ESRI World Topo Map 
-const ewtm = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
-    maxZoom: baseLayersZoom, 
-	attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'
-});
-
-// ESRI World Imagery 
-const ewi = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-    maxZoom: baseLayersZoom,
-	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-}); 
-
-// ESRI World Shaded Relief 
-const ewsr = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile/{z}/{y}/{x}', {
-    maxZoom: baseLayersZoom,
-	attribution: 'Tiles &copy; Esri &mdash; Source: Esri'
-});
-
-
-const baseLayers = {
-    'Open Street Map': osm,
-    'ESRI World Street Map': ewsp,
-    'ESRI World Topo Map': ewtm,
-    'ESRI World Imagery': ewi,
-    'ESRI World Shaded Relief': ewsr
-}
-
-const layerControl = L.control.layers(baseLayers).addTo(map)
-
-// Array to house well markers on the map
-var wellMarkers = [];
-
-let plotData 
-
-// Plots data points from selected well to chart 
-const plotWNL = (selectedWell) => {
-    console.log(dateTime);
-    console.log(values)
-    console.log(selectedWell)
-    // Plots x,y coordinates 
-    const wnlTrace = {
-        x: dateTime,
-        y: values,
-        type: 'scatter', 
-        mode: 'markers',
-        name: 'Well Nitrate Levels'
-    }
-    // Plot features and layout
-    const layout = {
-        title: {
-            text: `Nitrate Levels for Well ${selectedWell}`,
-            font: {
-                size: 20
-            }
-        },
-        xaxis: {
-            title: 'Years'
-        },
-        yaxis: {
-            title: 'ppm (mg/L)'
-        }
-    }
-    Plotly.newPlot('plot', [wnlTrace], layout)
-}
-
-// Gets the data from the JSON file and adds well to the map
-fetch('./static/data/data3.json')
+fetch(dataFilePath)
     .then(response => response.json())
     .then(data => {
-        const getWellInfo = (wells, layer) => {
-            layer.bindPopup(
-                `
-                <strong>Well</strong>: ${wells.Name} 
-                <br><strong>Lat:</strong> ${wells.Location.Lat} 
-                <br><strong>Lon:</strong> ${wells.Location.Lon}
-                <br><strong>Basin:</strong> ${wells.Location.Basin}
-                `
-            );
-            layer.on('click', pt => plotData = pt.target.wells.Plot)
-        }
-
-        for (const well of data.wells) {
-            var latLng = L.latLng(well.Location.Lat, well.Location.Lon);
-            var marker = new L.marker(latLng);
-            marker.addTo(map);
-            // .bindPopup(
-            //     `Well: ${well.Name} <br> Lat: ${well.Location.Lat} <br> Lon: ${well.Location.Lon} <br> 
-            //     <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="plotWNL(${well.Name})" data-bs-target="#exampleModal">Plot</button>
-            //     `
-            // );
-            wellMarkers.push(marker);
-        }
+        jsonFile = data;
+        console.log(jsonFile); // Shows data 
     })
-    .catch(console.error);
-console.log(wellMarkers)
+console.log(jsonFile); // Shows undefined
 
-// Used to test functionality of Plot button 
-function showMessage() {
-    alert('Clicked');
+const x_dates = ["3/1/1986","6/1/1987","12/1/1987","2/1/1988","5/1/1988","8/1/1988","11/1/1988","1/1/1989","5/1/1989","7/1/1989","10/1/1989","1/1/1990","4/1/1990","6/1/1990","10/1/1990","1/1/1991","4/1/1991","7/1/1991","10/1/1991","4/1/1992","11/1/1992","1/1/1993","4/1/1993","7/1/1993","4/1/1994","7/1/1994","10/1/1994","4/1/1995","10/1/1995","11/1/1995","1/1/1996","9/1/1996","7/1/1997","10/1/1997","2/1/1998","2/1/2000","3/1/2000","1/1/2001","1/1/2002","1/1/2003","1/1/2004","1/1/2005","1/1/2006","1/1/2007","10/19/2008","11/17/2008","12/14/2008","1/18/2009","1/25/2009","4/12/2009","5/3/2009","5/31/2009","7/5/2009","8/2/2009","8/31/2009","10/4/2009","11/8/2009","12/6/2009","1/10/2010","1/17/2010","2/7/2010","2/14/2010","3/7/2010","3/10/2010","4/4/2010","4/11/2010","5/23/2010","6/6/2010","6/13/2010","7/11/2010","7/25/2010","8/8/2010","9/19/2010","10/18/2010","2/28/2011","4/18/2011","12/4/2011","1/29/2012","2/26/2012","3/18/2012","5/13/2012","6/25/2012","3/17/2013","4/21/2013","8/25/2013","9/15/2013","3/16/2014","4/20/2014","5/11/2014","7/13/2014","1/11/2015","3/29/2015","10/14/2015","3/9/2016","3/16/2016","5/3/2017","10/7/2017","10/14/2017","10/21/2017","4/18/2018","4/25/2018","7/15/2018","1/16/2019"];
+
+const y_values = [1.24,1.63,0.93,0.97,1.26,1.33,1.28,1.43,1.39,1.39,1.41,1.48,1.33,1.31,1.76,1.42,1.68,1.37,1.38,1.54,1.56,1.6,1.65,1.56,0.47,1.73,1.81,1.64,1.7,1.61,1.41,,,1.3,,2.1,,1.9,,2.1,2.3,2.5,2.58,2.4,2.6,2.5,2.5,2.5,,2.7,2.6,2.9,2.6,2.7,0.97,2.6,2.8,2.6,2.6,,2.5,,2.6,,2.5,,2.6,2.4,,2.6,2.5,,,,,1,,2.4,,,,,,2.6,,,,,2.6,,2.8,,,3.4,,,,,2.1,2.6,,,];
+
+// Array to hold converted JS date objects from string
+var x_dates_conv = [];
+
+// Converts date string to JS date object 
+for (let i = 0; i < x_dates.length; i++) {
+    x_dates_conv[i] = new Date(x_dates[i]);
+    console.log(`${x_dates[i]} --> ${x_dates_conv[i]}`);
 }
 
+// Creates the plot points 
+const trace = {
+    // x: x_dates,
+    x: x_dates_conv,
+    y: y_values,
+    mode: 'markers',
+    type: 'scatter',
+    name: 'Well Nitrates'
+  };
+
+  // Creates the plot layout
+const layout = {
+    title: {
+        text: 'Nitrate Levels for Well D-7',
+        font: {
+            size: 20
+        }
+    }, 
+    xaxis: {
+        title: 'Years'
+    }, 
+    yaxis: {
+        title: 'ppm (mg/L)'
+    }
+}
+
+var data = [trace];
+
+// Places plot where ID on html div is 'plot'
+Plotly.newPlot('plot', data); 
