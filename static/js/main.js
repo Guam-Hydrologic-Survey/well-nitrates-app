@@ -48,32 +48,6 @@ const layerControl = L.control.layers(baseLayers).addTo(map)
 
 // Array to house well markers on the map
 var wellMarkers = [];
-var wellPlot = [];
-
-// Gets the data from the JSON file and adds well to the map
-fetch('./static/data/data3.json')
-    .then(response => response.json())
-    .then(data => {
-        localStorage.setItem('wellData', JSON.stringify(data))
-        for (const well of data.wells) {
-            var latLng = L.latLng(well.Location.Lat, well.Location.Lon);
-            var marker = new L.marker(latLng);
-            marker.addTo(map)
-                .bindPopup(
-                    `Well: ${well.Name} <br> Lat: ${well.Location.Lat} <br> Lon: ${well.Location.Lon} <br> 
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="plotWNL(${well.Name})" data-bs-target="#exampleModal">Plot</button>
-                    `
-                );
-            wellMarkers.push(marker);
-        }
-    })
-    .catch(console.error);
-console.log(wellMarkers)
-
-// Used to test functionality of Plot button 
-function showMessage() {
-    alert('Clicked');
-}
 
 let plotData 
 
@@ -106,4 +80,28 @@ const plotWNL = (selectedWell) => {
         }
     }
     Plotly.newPlot('plot', [wnlTrace], layout)
+}
+
+// Gets the data from the JSON file and adds well to the map
+fetch('./static/data/data3.json')
+    .then(response => response.json())
+    .then(data => {
+        for (const well of data.wells) {
+            var latLng = L.latLng(well.Location.Lat, well.Location.Lon);
+            var marker = new L.marker(latLng);
+            marker.addTo(map)
+                .bindPopup(
+                    `Well: ${well.Name} <br> Lat: ${well.Location.Lat} <br> Lon: ${well.Location.Lon} <br> 
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="plotWNL(${well.Name})" data-bs-target="#exampleModal">Plot</button>
+                    `
+                );
+            wellMarkers.push(marker);
+        }
+    })
+    .catch(console.error);
+console.log(wellMarkers)
+
+// Used to test functionality of Plot button 
+function showMessage() {
+    alert('Clicked');
 }
