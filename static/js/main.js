@@ -90,7 +90,7 @@ let getStats
 const showStats = () => {
     document.getElementById("sidebar").innerHTML =
         `
-            <h4><strong>Well ${getStats.name}</strong> </h4>
+            <h4>Well ${getStats.name}</h4>
             <p class="stats-location">${getStats.lat}, ${getStats.lon}</p>
             <p class="stats-location">${getStats.basin}</p>
             <hr/>
