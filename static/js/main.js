@@ -93,7 +93,7 @@ const showStats = () => {
             <div>
                 <h4>Well ${getStats.name}</h4>
                 <p class="stats-location">${getStats.lat}, ${getStats.lon}</p>
-                <p class="stats-location">${getStats.basin}</p>
+                <p class="stats-location">${getStats.basin} Basin</p>
                 <hr/>
             </div>
 
