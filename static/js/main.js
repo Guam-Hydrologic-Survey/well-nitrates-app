@@ -86,16 +86,16 @@ const plotWNL = (selectedWell) => {
 fetch('./static/data/data3.json')
     .then(response => response.json())
     .then(data => {
-        const getWellInfo = (feature, layer) => {
+        const getWellInfo = (wells, layer) => {
             layer.bindPopup(
                 `
-                <strong>Well</strong>: ${feature.properties.name} 
-                <br><strong>Lat:</strong> ${feature.properties.lat} 
-                <br><strong>Lon:</strong> ${feature.properties.lon}
-                <br><strong>Basin:</strong> ${feature.properties.basin}
+                <strong>Well</strong>: ${wells.Name} 
+                <br><strong>Lat:</strong> ${wells.Location.Lat} 
+                <br><strong>Lon:</strong> ${wells.Location.Lon}
+                <br><strong>Basin:</strong> ${wells.Location.Basin}
                 `
             );
-            layer.on('click', pt => plotData = pt.target.feature.properties)
+            layer.on('click', pt => plotData = pt.target.wells.Plot)
         }
 
         for (const well of data.wells) {
