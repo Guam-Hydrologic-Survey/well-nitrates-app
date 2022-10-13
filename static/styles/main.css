@@ -45,6 +45,7 @@
 
 .stats-num {
     font-size: 15px;
+    text-align: right;
     padding: 3px;
     margin: 0;
 }
