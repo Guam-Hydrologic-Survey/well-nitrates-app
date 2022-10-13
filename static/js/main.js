@@ -44,7 +44,7 @@ const baseLayers = {
     'ESRI World Shaded Relief': ewsr
 }
 
-const layerControl = L.control.layers(baseLayers).addTo(map)
+const layerControl = L.control.layers(baseLayers).addTo(map);
 
 // Plots data points from selected well to chart 
 let plotData 
@@ -88,9 +88,35 @@ const plotWNL = () => {
 
 let getStats
 const showStats = () => {
-    document.getElementById("sidebar").innerText = `
-                Well Name: ${getStats.name}
-            `
+    document.getElementById("sidebar").innerHTML =
+        `
+            <h4><strong>Well ${getStats.name}</strong> </h4>
+            <p class="location">${getStats.lat}, ${getStats.lon}</p>
+            <p class="location">${getStats.basin}</p>
+            <hr/>
+            <div class="stats-row">
+                <div class="stats-col">
+                    <p class="stats-text">Average</p>
+                    <p class="stats-text">Min</p>
+                    <p class="stats-text">Max</p>
+                    <p class="stats-text">Mode</p>
+                    <p class="stats-text">Slope</p>
+                    <p class="stats-text">Intercept</p>
+                    <p class="stats-text">Standard Deviation</p>
+                    <p class="stats-text">Degrees of Freedom</p>
+                </div>
+                <div class="stats-col">
+                    <p class="stats-num">${getStats.average}</p>
+                    <p class="stats-num">${getStats.min}</p>
+                    <p class="stats-num">${getStats.max}</p>
+                    <p class="stats-num">${getStats.mode}</p>
+                    <p class="stats-num">${getStats.slope}</p>
+                    <p class="stats-num">${getStats.intercept}</p>
+                    <p class="stats-num">${getStats.std_dev}</p>
+                    <p class="stats-num">${getStats.deg_of_free}</p>
+                </div>
+            </div>
+        `
 }
 
 // Filepaths for map (lat, lon coords) json and data (stats, x-y vals) json 
@@ -112,14 +138,14 @@ fetch(map_url)
                 <br><strong>Basin:</strong> ${feature.properties.basin}
                 <br><br>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="plotWNL()" data-bs-target="#exampleModal">Plot</button>
-                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Statistics</button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" onclick="showStats()">Statistics</button>
                 `
             );
 
             // On click event on the points
             // Sends data for clicked item to global variable plotData 
             layer.on('click', pt => plotData = pt.target.feature.properties) 
-            // layer.on('click', pt => getStats = pt.target.feature.properties)
+            layer.on('click', pt => getStats = pt.target.feature.properties)
         }
 
         // Places points on the map and calls on getWellInfo function (right above) to show pop-ups 
@@ -127,3 +153,9 @@ fetch(map_url)
         layerControl.addOverlay(mapJson, "Wells") 
     })
     .catch(console.error);
+
+// Used to test functionality of Plot button 
+function showMessage(name) {
+    console.log(`Clicked on Statistics btn`);
+    alert(`Clicked on Statistics btn`);
+}
