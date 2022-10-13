@@ -23,6 +23,7 @@
 
 /* Style configuration for the title and location section of stats panel */
 .stats-location {
+    font-style: italic;
     padding: 0;
     margin: 0;
 }
