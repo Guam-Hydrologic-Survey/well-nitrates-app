@@ -130,6 +130,7 @@ const showStats = () => {
 const data_url = './static/data/data3.json';
 const map_url = './static/data/data4.json'; 
 
+// Testing single marker to trigger on click event
 L.marker([13.45409, 144.7594]).addTo(map).on('click', function(e) {
     console.log(e.latlng);
 });
