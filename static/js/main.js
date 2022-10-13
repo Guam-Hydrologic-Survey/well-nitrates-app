@@ -1,7 +1,3 @@
-const dataFilePath = './static/data/data3.json';
-
-var jsonFile; // = require(dataFilePath); 
-
 // Open Street Map layer 
 const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: baseLayersZoom, 
