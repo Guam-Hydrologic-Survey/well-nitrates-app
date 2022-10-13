@@ -13,6 +13,15 @@
     justify-content: center;
 }
 
+.offcanvas-title {
+    text-align: center;
+}
+
+/* Style configuration for the title and location section of stats panel */
+.stats-location {
+
+}
+
 .stats-row {
     display: flex;
 }
@@ -20,4 +29,13 @@
 .stats-col {
     flex: 50%;
     padding: 10px;
+}
+
+.stats-text {
+    /* font-weight: bold; */
+    font-size: 15px;
+}
+
+.stats-num {
+    font-size: 15px;
 }
