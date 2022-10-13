@@ -17,9 +17,13 @@
     text-align: center;
 }
 
+.offcanvas-size-xl {
+    --bs-offcanvas-width: min(95vw, 500px) !important;
+}
+
 /* Style configuration for the title and location section of stats panel */
 .stats-location {
-
+    padding: 5px;
 }
 
 .stats-row {
