@@ -23,7 +23,8 @@
 
 /* Style configuration for the title and location section of stats panel */
 .stats-location {
-    padding: 5px;
+    padding: 0;
+    margin: 0;
 }
 
 .stats-row {
