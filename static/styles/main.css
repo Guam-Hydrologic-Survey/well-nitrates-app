@@ -51,6 +51,18 @@
     margin: 0;
 }
 
+/* .full-stats {
+    font-size: 10px;
+} */
+
+.stats-text-full {
+    font-size: 13px;
+}
+
+.stats-num-full {
+    font-size: 13px;
+}
+
 button {
     font-style: italic;
 }
