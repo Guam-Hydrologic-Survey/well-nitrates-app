@@ -57,10 +57,15 @@
 
 .stats-text-full {
     font-size: 13px;
+    padding: 3px;
+    margin: 0;
 }
 
 .stats-num-full {
     font-size: 13px;
+    text-align: right;
+    padding: 3px;
+    margin: 0;
 }
 
 button {
