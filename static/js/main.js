@@ -1,3 +1,10 @@
+const map = L.map('map', {
+    center: [13.4453556,144.7043994],
+    zoom: 12,
+})
+
+const baseLayersZoom = 19;
+
 // Open Street Map layer 
 const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: baseLayersZoom, 
