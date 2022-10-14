@@ -1,3 +1,4 @@
+// Creates Leaflet map 
 const map = L.map('map', {
     center: [13.4453556,144.7043994],
     zoom: 12,
