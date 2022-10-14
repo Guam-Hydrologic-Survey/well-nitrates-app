@@ -120,7 +120,6 @@ const showStats = () => {
                     <p class="stats-num">${getStats.std_dev}</p>
                     <p class="stats-num">${getStats.deg_of_free}</p>
                     <br>
-                    <button type="button" class="btn btn-primary">View Full Statistics</button>
                 </div>
             </div>
             
