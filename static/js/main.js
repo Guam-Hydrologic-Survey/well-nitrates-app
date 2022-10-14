@@ -133,7 +133,46 @@ const showStats = () => {
                     </h2>
                     <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                        <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                        <div class="stats-row">
+                            <div class="stats-col">
+                                <p class="stats-text-full">Rcrit</p>
+                                <p class="stats-text">Rcalc Mo</p>
+                                <p class="stats-text">Rcalc New</p>
+                                <p class="stats-text">EA</p>
+                                <p class="stats-text">EA X<sup>2</sup></p>
+                                <p class="stats-text">Base Year</p>
+                                <p class="stats-text">End Year</p>
+                                <p class="stats-text">Top 1</p>
+                                <p class="stats-text">Top 2</p>
+                                <p class="stats-text">Bottom 1</p>
+                                <p class="stats-text">Bottom 2</p>
+                                <p class="stats-text">Increase in 10 Years</p>
+                                <p class="stats-text">Increase in 20 Years</p>
+                                <p class="stats-text">1ppm in X Years</p>
+                                <p class="stats-text">Significance</p>
+                                <p class="stats-text">MoP</p>
+                                <p class="stats-text">Annual Frequency</p>
+                            </div>
+                            <div class="stats-col">
+                                <p class="stats-num-full">${getStats.rcrit}</p>
+                                <p class="stats-num">${getStats.rcalc_mo}</p>
+                                <p class="stats-num">${getStats.rcalc_new}</p>
+                                <p class="stats-num">${getStats.EA}</p>
+                                <p class="stats-num">${getStats.EA_X2}</p>
+                                <p class="stats-num">${getStats.base_year}</p>
+                                <p class="stats-num">${getStats.end_year}</p>
+                                <p class="stats-num">${getStats.top1}</p>
+                                <p class="stats-num">${getStats.top2}</p>
+                                <p class="stats-num">${getStats.bottom1}</p>
+                                <p class="stats-num">${getStats.bottom2}</p>
+                                <p class="stats-num">${getStats.inc_10_yrs}</p>
+                                <p class="stats-num">${getStats.inc_20_yrs}</p>
+                                <p class="stats-num">${getStats.x_yrs_1ppm}</p>
+                                <p class="stats-num">${getStats.sig}</p>
+                                <p class="stats-num">${getStats.MoP}</p>
+                                <p class="stats-num">${getStats.annual_freq}</p>
+                            </div>
+                        </div>
                     </div>
                     </div>
                 </div>
