@@ -113,7 +113,60 @@ const showStats = () => {
                     <p class="stats-num">${getStats.std_dev}</p>
                     <p class="stats-num">${getStats.deg_of_free}</p>
                     <br>
-                    <button type="button" class="btn btn-primary">View Full Statistics</button>
+                </div>
+            </div>
+            
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        View Full ${getStats.name} Statistics
+                    </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <div class="stats-row">
+                            <div class="stats-col">
+                                <p class="stats-text-full">Rcrit</p>
+                                <p class="stats-text-full">Rcalc Mo</p>
+                                <p class="stats-text-full">Rcalc New</p>
+                                <p class="stats-text-full">EA</p>
+                                <p class="stats-text-full">EA X<sup>2</sup></p>
+                                <p class="stats-text-full">Base Year</p>
+                                <p class="stats-text-full">End Year</p>
+                                <p class="stats-text-full">Top 1</p>
+                                <p class="stats-text-full">Top 2</p>
+                                <p class="stats-text-full">Bottom 1</p>
+                                <p class="stats-text-full">Bottom 2</p>
+                                <p class="stats-text-full">Increase in 10 Years</p>
+                                <p class="stats-text-full">Increase in 20 Years</p>
+                                <p class="stats-text-full">1ppm in X Years</p>
+                                <p class="stats-text-full">Significance</p>
+                                <p class="stats-text-full">MoP</p>
+                                <p class="stats-text-full">Annual Frequency</p>
+                            </div>
+                            <div class="stats-col">
+                                <p class="stats-num-full">${getStats.rcrit}</p>
+                                <p class="stats-num-full">${getStats.rcalc_mo}</p>
+                                <p class="stats-num-full">${getStats.rcalc_new}</p>
+                                <p class="stats-num-full">${getStats.EA}</p>
+                                <p class="stats-num-full">${getStats.EA_X2}</p>
+                                <p class="stats-num-full">${getStats.base_year}</p>
+                                <p class="stats-num-full">${getStats.end_year}</p>
+                                <p class="stats-num-full">${getStats.top1}</p>
+                                <p class="stats-num-full">${getStats.top2}</p>
+                                <p class="stats-num-full">${getStats.bottom1}</p>
+                                <p class="stats-num-full">${getStats.bottom2}</p>
+                                <p class="stats-num-full">${getStats.inc_10_yrs}</p>
+                                <p class="stats-num-full">${getStats.inc_20_yrs}</p>
+                                <p class="stats-num-full">${getStats.x_yrs_1ppm}</p>
+                                <p class="stats-num-full">${getStats.sig}</p>
+                                <p class="stats-num-full">${getStats.MoP}</p>
+                                <p class="stats-num-full">${getStats.annual_freq}</p>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
                 </div>
             </div>
         `
