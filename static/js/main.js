@@ -94,7 +94,7 @@ const plotWNL = () => {
     for (let i = 0; i < plotData.x_vals.length; i++) {
         x_dates_conv[i] = new Date(plotData.x_vals[i]);
         console.log(`${plotData.x_vals[i]} --> ${x_dates_conv[i]}`);
-    }
+    };
 
     // Plots x,y coordinates 
     const wnlTrace = {
@@ -103,7 +103,7 @@ const plotWNL = () => {
         type: 'scatter', 
         mode: 'markers',
         name: 'Well Nitrate Levels'
-    }
+    };
 
     // Plot features and layout
     const layout = {
@@ -119,8 +119,13 @@ const plotWNL = () => {
         yaxis: {
             title: 'ppm (mg/L)'
         }
-    }
-    Plotly.newPlot('plot', [wnlTrace], layout, {scrollZoom: true})
+    };
+
+    var config = {
+        responsive: true
+    };
+
+    Plotly.newPlot('plot', [wnlTrace], layout, {scrollZoom: true}, config);
 }
 
 // Shows the stats on the left side panel 
