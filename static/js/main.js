@@ -57,7 +57,7 @@ L.control.zoom({
 var resetMapZoom = L.Toolbar2.Action.extend({ 
     options: {
         toolbarIcon: {
-            html: '&#9873;',
+            html: '&#xF425;', // '&#x2302;', 
             tooltip: 'Reset Map View'
         }
     },
