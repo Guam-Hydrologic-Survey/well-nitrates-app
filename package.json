@@ -5,6 +5,7 @@
     "grunt": "^1.5.3",
     "leaflet": "^1.9.1",
     "leaflet-layerjson": "^0.3.4",
+    "leaflet-toolbar": "^0.4.0-alpha.2",
     "plotly.js-dist": "^2.14.0"
   }
 }
