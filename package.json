@@ -1,10 +1,12 @@
 {
   "dependencies": {
     "bootstrap": "^5.2.2",
+    "bootstrap-icons": "^1.9.1",
     "csvtojson": "^2.0.10",
     "grunt": "^1.5.3",
     "leaflet": "^1.9.1",
     "leaflet-layerjson": "^0.3.4",
+    "leaflet-toolbar": "^0.4.0-alpha.2",
     "plotly.js-dist": "^2.14.0"
   }
 }

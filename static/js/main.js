@@ -2,6 +2,7 @@
 const map = L.map('map', {
     center: [13.4453556,144.7043994],
     zoom: 12,
+    zoomControl: false,
 })
 
 const baseLayersZoom = 19;
@@ -9,25 +10,25 @@ const baseLayersZoom = 19;
 // Open Street Map layer 
 const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: baseLayersZoom, 
-    attribution: '© OpenStreetMap'
+    attribution: '© OpenStreetMap | DKValerio, MWZapata, JBulaklak, NCHabana 2022'
 }).addTo(map)
 
 // ESRI World Street Map 
 const ewsp = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
     maxZoom: baseLayersZoom,
-	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
+	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012 | DKValerio, MWZapata, JBulaklak, NCHabana 2022'
 })
 
 // ESRI World Topo Map 
 const ewtm = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
     maxZoom: baseLayersZoom, 
-	attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'
+	attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community | DKValerio, MWZapata, JBulaklak, NCHabana 2022'
 });
 
 // ESRI World Imagery 
 const ewi = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
     maxZoom: baseLayersZoom,
-	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community | DKValerio, MWZapata, JBulaklak, NCHabana 2022'
 }); 
 
 // ESRI World Shaded Relief 
@@ -46,6 +47,41 @@ const baseLayers = {
 }
 
 const layerControl = L.control.layers(baseLayers).addTo(map);
+
+L.control.zoom({
+    // options: topleft, topright, bottomleft, bottomright
+    position: 'topright'
+}).addTo(map);
+
+// Control: Reset map view (goes to initial map zoom on page load)
+var resetMapZoom = L.Toolbar2.Action.extend({ 
+    options: {
+        toolbarIcon: {
+            html: '&#xF425;', // '&#x2302;', 
+            tooltip: 'Reset Map View'
+        }
+    },
+    addHooks: function() {
+        map.setView([13.4453556,144.7043994], 12);
+    }
+});
+
+// Control: Measure distance and area 
+
+// Control: Drop a pin 
+
+// Control: Draw a line 
+
+// Control: Draw a polygon 
+
+// Control: Draw a rectangle 
+
+// Control: Draw a circle 
+
+// Control group for toolbar 
+new L.Toolbar2.Control({
+    actions: [resetMapZoom]
+}).addTo(map);
 
 // Plots data points from selected well to chart 
 let plotData 
@@ -87,6 +123,7 @@ const plotWNL = () => {
     Plotly.newPlot('plot', [wnlTrace], layout, {scrollZoom: true})
 }
 
+// Shows the stats on the left side panel 
 let getStats
 const showStats = () => {
     document.getElementById("sidebar").innerHTML =
@@ -127,7 +164,7 @@ const showStats = () => {
             <div class="accordion" id="accordionExample">
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                         View Full ${getStats.name} Statistics
                     </button>
                     </h2>
