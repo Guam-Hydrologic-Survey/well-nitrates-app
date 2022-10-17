@@ -5,11 +5,6 @@ const map = L.map('map', {
     zoomControl: false,
 })
 
-L.control.zoom({
-    // options: topleft, topright, bottomleft, bottomright
-    position: 'topright'
-}).addTo(map);
-
 const baseLayersZoom = 19;
 
 // Open Street Map layer 
@@ -52,6 +47,41 @@ const baseLayers = {
 }
 
 const layerControl = L.control.layers(baseLayers).addTo(map);
+
+L.control.zoom({
+    // options: topleft, topright, bottomleft, bottomright
+    position: 'topright'
+}).addTo(map);
+
+// Control: Reset map view (goes to initial map zoom on page load)
+var resetMapZoom = L.Toolbar2.Action.extend({ 
+    options: {
+        toolbarIcon: {
+            html: '&#9873;',
+            tooltip: 'Reset Map View'
+        }
+    },
+    addHooks: function() {
+        map.setView([13.4453556,144.7043994], 12);
+    }
+});
+
+// Control: Measure distance and area 
+
+// Control: Drop a pin 
+
+// Control: Draw a line 
+
+// Control: Draw a polygon 
+
+// Control: Draw a rectangle 
+
+// Control: Draw a circle 
+
+// Control group for toolbar 
+new L.Toolbar2.Control({
+    actions: [resetMapZoom]
+}).addTo(map);
 
 // Plots data points from selected well to chart 
 let plotData 
