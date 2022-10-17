@@ -93,6 +93,7 @@ const plotWNL = () => {
     Plotly.newPlot('plot', [wnlTrace], layout, {scrollZoom: true})
 }
 
+// Shows the stats on the left side panel 
 let getStats
 const showStats = () => {
     document.getElementById("sidebar").innerHTML =
