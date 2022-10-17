@@ -6,6 +6,7 @@ const map = L.map('map', {
 })
 
 L.control.zoom({
+    // options: topleft, topright, bottomleft, bottomright
     position: 'topright'
 }).addTo(map);
 
