@@ -2,7 +2,12 @@
 const map = L.map('map', {
     center: [13.4453556,144.7043994],
     zoom: 12,
+    zoomControl: false,
 })
+
+L.control.zoom({
+    position: 'topright'
+}).addTo(map);
 
 const baseLayersZoom = 19;
 
