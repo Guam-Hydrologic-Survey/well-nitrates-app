@@ -217,135 +217,10 @@ const showStats = () => {
         `
 }
 
-let getData
-const showData = () => {
-    document.getElementById("sidebar").innerHTML =
-        `
-            <div>
-                <h4>Well ${getData.name}</h4>
-                <p class="stats-location">${getData.lat}, ${getData.lon}</p>
-                <p class="stats-location">${getData.basin} Basin</p>
-                <hr/>
-            </div>
-
-            <div class="stats-row">
-                <div class="stats-col">
-                    <p class="stats-text">Average</p>
-                    <p class="stats-text">Min</p>
-                    <p class="stats-text">Max</p>
-                    <p class="stats-text">Mode</p>
-                    <p class="stats-text">Slope</p>
-                    <p class="stats-text">Intercept</p>
-                    <p class="stats-text">Standard Deviation</p>
-                    <p class="stats-text">Degrees of Freedom</p>
-                    <br>
-                    <br>
-                </div>
-                <div class="stats-col">
-                    <p class="stats-num">${getData.average}</p>
-                    <p class="stats-num">${getData.min}</p>
-                    <p class="stats-num">${getData.max}</p>
-                    <p class="stats-num">${getData.mode}</p>
-                    <p class="stats-num">${getData.slope}</p>
-                    <p class="stats-num">${getData.intercept}</p>
-                    <p class="stats-num">${getData.std_dev}</p>
-                    <p class="stats-num">${getData.deg_of_free}</p>
-                    <br>
-                </div>
-            </div>
-            
-            <div class="accordion" id="accordionExample">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        View Full ${getData.name} Statistics
-                    </button>
-                    </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <div class="stats-row">
-                            <div class="stats-col">
-                                <p class="stats-text-full">Rcrit</p>
-                                <p class="stats-text-full">Rcalc Mo</p>
-                                <p class="stats-text-full">Rcalc New</p>
-                                <p class="stats-text-full">EA</p>
-                                <p class="stats-text-full">EA X<sup>2</sup></p>
-                                <p class="stats-text-full">Base Year</p>
-                                <p class="stats-text-full">End Year</p>
-                                <p class="stats-text-full">Top 1</p>
-                                <p class="stats-text-full">Top 2</p>
-                                <p class="stats-text-full">Bottom 1</p>
-                                <p class="stats-text-full">Bottom 2</p>
-                                <p class="stats-text-full">Increase in 10 Years</p>
-                                <p class="stats-text-full">Increase in 20 Years</p>
-                                <p class="stats-text-full">1ppm in X Years</p>
-                                <p class="stats-text-full">Significance</p>
-                                <p class="stats-text-full">MoP</p>
-                                <p class="stats-text-full">Annual Frequency</p>
-                            </div>
-                            <div class="stats-col">
-                                <p class="stats-num-full">${getData.rcrit}</p>
-                                <p class="stats-num-full">${getData.rcalc_mo}</p>
-                                <p class="stats-num-full">${getData.rcalc_new}</p>
-                                <p class="stats-num-full">${getData.EA}</p>
-                                <p class="stats-num-full">${getData.EA_X2}</p>
-                                <p class="stats-num-full">${getData.base_year}</p>
-                                <p class="stats-num-full">${getData.end_year}</p>
-                                <p class="stats-num-full">${getData.top1}</p>
-                                <p class="stats-num-full">${getData.top2}</p>
-                                <p class="stats-num-full">${getData.bottom1}</p>
-                                <p class="stats-num-full">${getData.bottom2}</p>
-                                <p class="stats-num-full">${getData.inc_10_yrs}</p>
-                                <p class="stats-num-full">${getData.inc_20_yrs}</p>
-                                <p class="stats-num-full">${getData.x_yrs_1ppm}</p>
-                                <p class="stats-num-full">${getData.sig}</p>
-                                <p class="stats-num-full">${getData.MoP}</p>
-                                <p class="stats-num-full">${getData.annual_freq}</p>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="sidebar-plot"></div>
-        `
-
-        // Array to hold date objects
-    const x_dates_conv = [];
-
-    // Converted date strings from x_vals to JS date objects 
-    for (let i = 0; i < getData.x_vals.length; i++) {
-        x_dates_conv[i] = new Date(getData.x_vals[i]);
-        console.log(`${getData.x_vals[i]} --> ${x_dates_conv[i]}`);
-    }
-
-    // Plots x,y coordinates 
-    const wnlTrace = {
-        x: x_dates_conv,
-        y: getData.y_vals,
-        type: 'scatter', 
-        mode: 'markers',
-        name: 'Well Nitrate Levels'
-    }
-
-    // Plot features and layout
-    const layout = {
-        title: {
-            text: `Nitrate Levels for Well ${getData.name}`,
-            font: {
-                size: 20
-            }
-        },
-        xaxis: {
-            title: 'Years'
-        },
-        yaxis: {
-            title: 'ppm (mg/L)'
-        }
-    }
-    Plotly.newPlot('sidebar-plot', [wnlTrace], layout, {scrollZoom: true})
-}
+// All in one function to build side panel with both stats and plot for selected well 
+// let getData
+// const showData = () => {
+// }
 
 // Filepaths for map (lat, lon coords) json and data (stats, x-y vals) json 
 const data_url = './static/data/data3.json';
@@ -377,11 +252,11 @@ fetch(map_url)
 
             // On click event on the points
             // Sends data for clicked item to global variable plotData 
-            // layer.on('click', pt => plotData = pt.target.feature.properties) 
-            // layer.on('click', pt => getStats = pt.target.feature.properties)
+            layer.on('click', pt => plotData = pt.target.feature.properties) 
+            layer.on('click', pt => getStats = pt.target.feature.properties)
 
             // Completes both for plot and stats data 
-            layer.on('click', pt => getData = pt.target.feature.properties)
+            // layer.on('click', pt => getData = pt.target.feature.properties)
         }
 
         // Places points on the map and calls on getWellInfo function (right above) to show pop-ups 
