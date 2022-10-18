@@ -54,18 +54,22 @@ L.control.zoom({
     position: 'bottomright'
 }).addTo(map);
 
-// // Control: Reset map view (goes to initial map zoom on page load)
-var resetMapZoom = L.Toolbar2.Action.extend({ 
-    options: {
-        toolbarIcon: {
-            html: '&#xF425;', // '&#x2302;', 
-            tooltip: 'Reset Map View'
-        }
-    },
-    addHooks: function() {
-        map.setView([13.4453556,144.7043994], 12);
-    }
-});
+// Control: Reset map view (goes to initial map zoom on page load)
+// var resetMapZoom = L.Toolbar2.Action.extend({ 
+//     options: {
+//         toolbarIcon: {
+//             html: '&#xF425;', // '&#x2302;', 
+//             tooltip: 'Reset Map View'
+//         }
+//     },
+//     addHooks: function() {
+//         map.setView([13.4453556,144.7043994], 12);
+//     }
+// });
+
+L.easyButton('<i class="bi bi-map"></i>', function(map) {
+    map.setView([13.4453556,144.7043994], 12);
+}).addTo(map);
 
 // // Control: Measure distance and area 
 
@@ -80,10 +84,10 @@ var resetMapZoom = L.Toolbar2.Action.extend({
 // // Control: Draw a circle 
 
 // // Control group for toolbar 
-new L.Toolbar2.Control({
-    position: 'bottomright',
-    actions: [resetMapZoom]
-}).addTo(map);
+// new L.Toolbar2.Control({
+//     position: 'bottomright',
+//     actions: [resetMapZoom]
+// }).addTo(map);
 
 // Plots data points from selected well to chart 
 let plotData 
