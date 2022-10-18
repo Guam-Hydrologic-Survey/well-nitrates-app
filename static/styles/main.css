@@ -18,14 +18,23 @@
 /* .offcanvas-body {
     height: 1024px;
     top: 50%;
-} */
+} */ 
+
+.btn-group { 
+    z-index: 9999;
+    float: right;
+}
+
+.dropdown-toggle {
+    margin-right: 20px;
+}
 
 .offcanvas-title {
     text-align: center;
 }
 
 .offcanvas-size-xl {
-    --bs-offcanvas-width: min(95vw, 35vh) !important;
+    --bs-offcanvas-width: min(95vh, 450px) !important;
 }
 
 /* Style configuration for the title and location section of stats panel */
