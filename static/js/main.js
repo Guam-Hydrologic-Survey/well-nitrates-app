@@ -85,6 +85,16 @@ new L.Toolbar2.Control({
     actions: [resetMapZoom]
 }).addTo(map);
 
+// About pop-up 
+function showAbout() {
+    const about = document.getElementById('about');
+    // about.addEventListener('show.bs.modal', () => {
+
+    // })
+    console.log('Clicked about');
+}
+
+
 // Plots data points from selected well to chart 
 let plotData 
 const plotWNL = () => {
