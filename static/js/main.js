@@ -46,14 +46,15 @@ const baseLayers = {
     'ESRI World Shaded Relief': ewsr
 }
 
-const layerControl = L.control.layers(baseLayers).addTo(map);
+const layerControl = L.control.layers(null, baseLayers, {position: 'bottomright'});
+layerControl.addTo(map);
 
 L.control.zoom({
     // options: topleft, topright, bottomleft, bottomright
-    position: 'topright'
+    position: 'bottomright'
 }).addTo(map);
 
-// Control: Reset map view (goes to initial map zoom on page load)
+// // Control: Reset map view (goes to initial map zoom on page load)
 var resetMapZoom = L.Toolbar2.Action.extend({ 
     options: {
         toolbarIcon: {
@@ -66,20 +67,21 @@ var resetMapZoom = L.Toolbar2.Action.extend({
     }
 });
 
-// Control: Measure distance and area 
+// // Control: Measure distance and area 
 
-// Control: Drop a pin 
+// // Control: Drop a pin 
 
-// Control: Draw a line 
+// // Control: Draw a line 
 
-// Control: Draw a polygon 
+// // Control: Draw a polygon 
 
-// Control: Draw a rectangle 
+// // Control: Draw a rectangle 
 
-// Control: Draw a circle 
+// // Control: Draw a circle 
 
-// Control group for toolbar 
+// // Control group for toolbar 
 new L.Toolbar2.Control({
+    position: 'bottomright',
     actions: [resetMapZoom]
 }).addTo(map);
 
@@ -94,7 +96,7 @@ const plotWNL = () => {
     for (let i = 0; i < plotData.x_vals.length; i++) {
         x_dates_conv[i] = new Date(plotData.x_vals[i]);
         console.log(`${plotData.x_vals[i]} --> ${x_dates_conv[i]}`);
-    }
+    };
 
     // Plots x,y coordinates 
     const wnlTrace = {
@@ -103,7 +105,7 @@ const plotWNL = () => {
         type: 'scatter', 
         mode: 'markers',
         name: 'Well Nitrate Levels'
-    }
+    };
 
     // Plot features and layout
     const layout = {
@@ -119,11 +121,18 @@ const plotWNL = () => {
         yaxis: {
             title: 'ppm (mg/L)'
         }
-    }
-    Plotly.newPlot('plot', [wnlTrace], layout, {scrollZoom: true})
+    };
+
+    var config = {
+        responsive: true
+    };
+
+    Plotly.newPlot('plot', [wnlTrace], layout, {scrollZoom: true}, config);
 }
 
 // Shows the stats on the left side panel 
+// First row: General statistics
+// Second row: Additional statistics wrapped in an accordion 
 let getStats
 const showStats = () => {
     document.getElementById("sidebar").innerHTML =
@@ -217,6 +226,11 @@ const showStats = () => {
         `
 }
 
+// All in one function to build side panel with both stats and plot for selected well 
+// let getData
+// const showData = () => {
+// }
+
 // Filepaths for map (lat, lon coords) json and data (stats, x-y vals) json 
 const data_url = './static/data/data3.json';
 const map_url = './static/data/data4.json'; 
@@ -249,6 +263,9 @@ fetch(map_url)
             // Sends data for clicked item to global variable plotData 
             layer.on('click', pt => plotData = pt.target.feature.properties) 
             layer.on('click', pt => getStats = pt.target.feature.properties)
+
+            // Completes both for plot and stats data 
+            // layer.on('click', pt => getData = pt.target.feature.properties)
         }
 
         // Places points on the map and calls on getWellInfo function (right above) to show pop-ups 
