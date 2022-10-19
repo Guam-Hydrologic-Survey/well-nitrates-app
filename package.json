@@ -2,7 +2,6 @@
   "dependencies": {
     "bootstrap": "^5.2.2",
     "bootstrap-icons": "^1.9.1",
-    "csvtojson": "^2.0.10",
     "grunt": "^1.5.3",
     "leaflet": "^1.9.1",
     "leaflet-easybutton": "^2.4.0",
