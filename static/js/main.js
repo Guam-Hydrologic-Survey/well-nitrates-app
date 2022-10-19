@@ -131,7 +131,7 @@ const plotWNL = () => {
         responsive: true
     };
 
-    Plotly.newPlot('plot', [wnlTrace], layout, {scrollZoom: true}, config);
+    Plotly.newPlot('plot', [wnlTrace], layout, {scrollZoom: true, displaylogo: false}, config);
 }
 
 // Shows the stats on the left side panel 
