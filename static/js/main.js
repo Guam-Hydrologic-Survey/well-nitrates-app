@@ -215,8 +215,8 @@ const showStats = () => {
                                 <p class="stats-num-full">${getStats.top2}</p>
                                 <p class="stats-num-full">${getStats.bottom1}</p>
                                 <p class="stats-num-full">${getStats.bottom2}</p>
-                                <p class="stats-num-full">${getStats.inc_10_yrs}</p>
-                                <p class="stats-num-full">${getStats.inc_20_yrs}</p>
+                                <p class="stats-num-full">${getStats.inc_10_Yrs}</p>
+                                <p class="stats-num-full">${getStats.inc_20_Yrs}</p>
                                 <p class="stats-num-full">${getStats.x_yrs_1ppm}</p>
                                 <p class="stats-num-full">${getStats.sig}</p>
                                 <p class="stats-num-full">${getStats.MoP}</p>
@@ -237,12 +237,13 @@ const showStats = () => {
 
 // Filepaths for map (lat, lon coords) json and data (stats, x-y vals) json 
 const data_url = './static/data/data3.json';
-const map_url = './static/data/data4.json'; 
+const map_url_old = './static/data/data4.json'; 
+const map_url = './static/data/data5.json';
 
 // Testing single marker to trigger on click event
-L.marker([13.45409, 144.7594]).addTo(map).on('click', function(e) {
-    console.log(e.latlng);
-});
+// L.marker([13.45409, 144.7594]).addTo(map).on('click', function(e) {
+//     console.log(e.latlng);
+// });
 
 // Gets the data from the JSON file and adds well to the map
 fetch(map_url)
