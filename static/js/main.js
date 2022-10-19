@@ -65,39 +65,56 @@ L.control.zoom({
 }).addTo(map);
 
 // Control: Reset map view (goes to initial map zoom on page load)
-// var resetMapZoom = L.Toolbar2.Action.extend({ 
-//     options: {
-//         toolbarIcon: {
-//             html: '&#xF425;', // '&#x2302;', 
-//             tooltip: 'Reset Map View'
-//         }
-//     },
-//     addHooks: function() {
-//         map.setView([13.4453556,144.7043994], 12);
-//     }
-// });
+var resetMapZoom = L.Toolbar2.Action.extend({ 
+    options: {
+        toolbarIcon: {
+            html: '&#xF425;', // '&#x2302;', 
+            tooltip: 'Reset Map View'
+        }
+    },
+    addHooks: function() {
+        map.setView([13.4453556,144.7043994], 12);
+    }
+});
 
-L.easyButton('<i class="bi bi-map"></i>', function(map) {
+var resetZoomBtn = L.easyButton('<i class="bi bi-map"></i>', function() {
     map.setView([13.4453556,144.7043994], 12);
+});
+
+var drawBtn = L.easyButton('<i class="bi bi-pencil-fill"></i>', function() {
+    console.log('Clicked on draw btn')
+});
+
+var undoBtn = L.easyButton('<i class="bi bi-arrow-counterclockwise"></i>', function() {
+    console.log('Clicked on undo btn')
+});
+
+var redoBtn = L.easyButton('<i class="bi bi-arrow-clockwise"></i>', function() {
+    console.log('Clicked on redo btn')
+});
+
+var trashBtn = L.easyButton('<i class="bi bi-trash3-fill"></i>', function() {
+    console.log('Clicked on trash btn')
+});
+
+// Control: Measure distance and area 
+
+// Control: Drop a pin 
+
+// Control: Draw a line 
+
+// Control: Draw a polygon 
+
+// Control: Draw a rectangle 
+
+// Control: Draw a circle 
+
+// Control group for toolbar 
+new L.Toolbar2.Control({
+    position: 'bottomright',
+    actions: [resetMapZoom]
+    // actions: [resetZoom]
 }).addTo(map);
-
-// // Control: Measure distance and area 
-
-// // Control: Drop a pin 
-
-// // Control: Draw a line 
-
-// // Control: Draw a polygon 
-
-// // Control: Draw a rectangle 
-
-// // Control: Draw a circle 
-
-// // Control group for toolbar 
-// new L.Toolbar2.Control({
-//     position: 'bottomright',
-//     actions: [resetMapZoom]
-// }).addTo(map);
 
 // Plots data points from selected well to chart 
 let plotData 
