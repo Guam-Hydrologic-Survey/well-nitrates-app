@@ -1,3 +1,5 @@
+// import * as GeoSearch from 'leaflet-geosearch';
+
 // Creates Leaflet map 
 const map = L.map('map', {
     center: [13.4453556,144.7043994],
@@ -48,6 +50,14 @@ const baseLayers = {
 
 const layerControl = L.control.layers(null, baseLayers, {position: 'bottomright'});
 layerControl.addTo(map);
+
+// Search bar 
+// const search = new GeoSearch.GeoSearchControl({
+//     provider: new GeoSearch.OpenStreetMapProvider(),
+// });
+
+// map.addControl(search);
+
 
 L.control.zoom({
     // options: topleft, topright, bottomleft, bottomright
