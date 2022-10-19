@@ -318,7 +318,6 @@ const yellowIcon = new L.Icon({
     shadowSize: [41, 41]
   });
 
-
 // Gets the data from the JSON file and adds well to the map
 fetch(map_url)
     .then(response => response.json())  // Requests for a json file as a response
