@@ -7,6 +7,7 @@
     "leaflet-easybutton": "^2.4.0",
     "leaflet-layerjson": "^0.3.4",
     "leaflet-toolbar": "^0.4.0-alpha.2",
+    "leaflet.markercluster": "^1.5.3",
     "plotly.js-dist": "^2.14.0"
   }
 }
