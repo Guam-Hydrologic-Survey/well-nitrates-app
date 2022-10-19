@@ -54,18 +54,22 @@ L.control.zoom({
     position: 'bottomright'
 }).addTo(map);
 
-// // Control: Reset map view (goes to initial map zoom on page load)
-var resetMapZoom = L.Toolbar2.Action.extend({ 
-    options: {
-        toolbarIcon: {
-            html: '&#xF425;', // '&#x2302;', 
-            tooltip: 'Reset Map View'
-        }
-    },
-    addHooks: function() {
-        map.setView([13.4453556,144.7043994], 12);
-    }
-});
+// Control: Reset map view (goes to initial map zoom on page load)
+// var resetMapZoom = L.Toolbar2.Action.extend({ 
+//     options: {
+//         toolbarIcon: {
+//             html: '&#xF425;', // '&#x2302;', 
+//             tooltip: 'Reset Map View'
+//         }
+//     },
+//     addHooks: function() {
+//         map.setView([13.4453556,144.7043994], 12);
+//     }
+// });
+
+L.easyButton('<i class="bi bi-map"></i>', function(map) {
+    map.setView([13.4453556,144.7043994], 12);
+}).addTo(map);
 
 // // Control: Measure distance and area 
 
@@ -80,10 +84,10 @@ var resetMapZoom = L.Toolbar2.Action.extend({
 // // Control: Draw a circle 
 
 // // Control group for toolbar 
-new L.Toolbar2.Control({
-    position: 'bottomright',
-    actions: [resetMapZoom]
-}).addTo(map);
+// new L.Toolbar2.Control({
+//     position: 'bottomright',
+//     actions: [resetMapZoom]
+// }).addTo(map);
 
 // Plots data points from selected well to chart 
 let plotData 
@@ -127,7 +131,7 @@ const plotWNL = () => {
         responsive: true
     };
 
-    Plotly.newPlot('plot', [wnlTrace], layout, {scrollZoom: true}, config);
+    Plotly.newPlot('plot', [wnlTrace], layout, {scrollZoom: true, displaylogo: false}, config);
 }
 
 // Shows the stats on the left side panel 
@@ -211,8 +215,8 @@ const showStats = () => {
                                 <p class="stats-num-full">${getStats.top2}</p>
                                 <p class="stats-num-full">${getStats.bottom1}</p>
                                 <p class="stats-num-full">${getStats.bottom2}</p>
-                                <p class="stats-num-full">${getStats.inc_10_yrs}</p>
-                                <p class="stats-num-full">${getStats.inc_20_yrs}</p>
+                                <p class="stats-num-full">${getStats.inc_10_Yrs}</p>
+                                <p class="stats-num-full">${getStats.inc_20_Yrs}</p>
                                 <p class="stats-num-full">${getStats.x_yrs_1ppm}</p>
                                 <p class="stats-num-full">${getStats.sig}</p>
                                 <p class="stats-num-full">${getStats.MoP}</p>
@@ -233,12 +237,13 @@ const showStats = () => {
 
 // Filepaths for map (lat, lon coords) json and data (stats, x-y vals) json 
 const data_url = './static/data/data3.json';
-const map_url = './static/data/data4.json'; 
+const map_url_old = './static/data/data4.json'; 
+const map_url = './static/data/data5.json';
 
 // Testing single marker to trigger on click event
-L.marker([13.45409, 144.7594]).addTo(map).on('click', function(e) {
-    console.log(e.latlng);
-});
+// L.marker([13.45409, 144.7594]).addTo(map).on('click', function(e) {
+//     console.log(e.latlng);
+// });
 
 // Gets the data from the JSON file and adds well to the map
 fetch(map_url)
