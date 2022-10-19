@@ -250,28 +250,28 @@ fetch(map_url)
     .then(response => response.json())  // Requests for a json file as a response
     .then(geojson => { 
 
-        // Creates pop-ups for each point on the map 
-        const getWellInfo = (feature, layer) => {
-            layer.bindPopup(
-                `
-                <strong>Well</strong>: ${feature.properties.name} 
-                <br><strong>Lat:</strong> ${feature.properties.lat} 
-                <br><strong>Lon:</strong> ${feature.properties.lon}
-                <br><strong>Basin:</strong> ${feature.properties.basin}
-                <br><br>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="plotWNL()" data-bs-target="#exampleModal">Plot</button>
-                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" onclick="showStats()">Statistics</button>
-                `
-            );
+        // // Creates pop-ups for each point on the map 
+        // const getWellInfo = (feature, layer) => {
+        //     layer.bindPopup(
+        //         `
+        //         <strong>Well</strong>: ${feature.properties.name} 
+        //         <br><strong>Lat:</strong> ${feature.properties.lat} 
+        //         <br><strong>Lon:</strong> ${feature.properties.lon}
+        //         <br><strong>Basin:</strong> ${feature.properties.basin}
+        //         <br><br>
+        //         <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="plotWNL()" data-bs-target="#exampleModal">Plot</button>
+        //         <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" onclick="showStats()">Statistics</button>
+        //         `
+        //     );
 
-            // On click event on the points
-            // Sends data for clicked item to global variable plotData 
-            layer.on('click', pt => plotData = pt.target.feature.properties) 
-            layer.on('click', pt => getStats = pt.target.feature.properties)
+        //     // On click event on the points
+        //     // Sends data for clicked item to global variable plotData 
+        //     layer.on('click', pt => plotData = pt.target.feature.properties) 
+        //     layer.on('click', pt => getStats = pt.target.feature.properties)
 
-            // Completes both for plot and stats data 
-            // layer.on('click', pt => getData = pt.target.feature.properties)
-        }
+        //     // Completes both for plot and stats data 
+        //     // layer.on('click', pt => getData = pt.target.feature.properties)
+        // }
 
         // Places points on the map and calls on getWellInfo function (right above) to show pop-ups 
         const mapJson = L.geoJSON(geojson, {onEachFeature: getWellInfo}).addTo(map);
