@@ -97,6 +97,16 @@ var trashBtn = L.easyButton('<i class="bi bi-trash3-fill"></i>', function() {
     console.log('Clicked on trash btn')
 });
 
+var controlBar = L.easyBar([
+    resetZoomBtn,
+    drawBtn,
+    undoBtn,
+    redoBtn,
+    trashBtn
+])
+
+controlBar.addTo(map);
+
 // Control: Measure distance and area 
 
 // Control: Drop a pin 
