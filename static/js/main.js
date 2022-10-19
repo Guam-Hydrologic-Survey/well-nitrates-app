@@ -245,33 +245,114 @@ const map_url = './static/data/data5.json';
 //     console.log(e.latlng);
 // });
 
+// Map colored icons 
+const blackIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-black.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
+
+const blueIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
+
+const grayIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-grey.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
+
+const greenIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
+
+const orangeIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
+
+const redIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
+
+const violetIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
+
+const yellowIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-yellow.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
+
+
 // Gets the data from the JSON file and adds well to the map
 fetch(map_url)
     .then(response => response.json())  // Requests for a json file as a response
     .then(geojson => { 
+        const getWellInfo = (feature, layer) => {
+            // Conditionals for marker icons
+            if (feature.properties.sig == 1) {
+                layer.setIcon(greenIcon);
+            } else if (feature.properties.sig == 0) {
+                layer.setIcon(grayIcon);
+            } else {
+                layer.setIcon(blueIcon);
+            }
 
-        // // Creates pop-ups for each point on the map 
-        // const getWellInfo = (feature, layer) => {
-        //     layer.bindPopup(
-        //         `
-        //         <strong>Well</strong>: ${feature.properties.name} 
-        //         <br><strong>Lat:</strong> ${feature.properties.lat} 
-        //         <br><strong>Lon:</strong> ${feature.properties.lon}
-        //         <br><strong>Basin:</strong> ${feature.properties.basin}
-        //         <br><br>
-        //         <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="plotWNL()" data-bs-target="#exampleModal">Plot</button>
-        //         <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" onclick="showStats()">Statistics</button>
-        //         `
-        //     );
+            // Popups with basic well info and buttons for stats and plot 
+            layer.bindPopup(
+                `
+                <strong>Well</strong>: ${feature.properties.name} 
+                <br><strong>Lat:</strong> ${feature.properties.lat} 
+                <br><strong>Lon:</strong> ${feature.properties.lon}
+                <br><strong>Basin:</strong> ${feature.properties.basin}
+                <br><br>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="plotWNL()" data-bs-target="#exampleModal">Plot</button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" onclick="showStats()">Statistics</button>
+                `
+            );
+            // On click event on the points
+            // Sends data for clicked item to global variable plotData 
+            layer.on('click', pt => plotData = pt.target.feature.properties) 
+            layer.on('click', pt => getStats = pt.target.feature.properties)
 
-        //     // On click event on the points
-        //     // Sends data for clicked item to global variable plotData 
-        //     layer.on('click', pt => plotData = pt.target.feature.properties) 
-        //     layer.on('click', pt => getStats = pt.target.feature.properties)
-
-        //     // Completes both for plot and stats data 
-        //     // layer.on('click', pt => getData = pt.target.feature.properties)
-        // }
+            // // Completes both for plot and stats data 
+            // layer.on('click', pt => getData = pt.target.feature.properties)
+        }
 
         // Places points on the map and calls on getWellInfo function (right above) to show pop-ups 
         const mapJson = L.geoJSON(geojson, {onEachFeature: getWellInfo}).addTo(map);
