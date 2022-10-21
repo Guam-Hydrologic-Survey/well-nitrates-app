@@ -1,4 +1,6 @@
 // import * as GeoSearch from 'leaflet-geosearch';
+// import L from "leaflet";
+// import AwesomeMarkers from 'leaflet.awesome-markers';
 
 // Creates Leaflet map 
 const map = L.map('map', {
@@ -354,6 +356,14 @@ const yellowIcon = new L.Icon({
     popupAnchor: [1, -34],
     shadowSize: [41, 41]
   });
+
+// Map icons with shapes 
+// const incIcon = L.AwesomeMarkers.icon({
+//     icon: "fa-caret-up",
+//     prefix: "fa",
+//     markerColor: "red",
+//     iconColor: "white"
+// });
 
 // Gets the data from the JSON file and adds well to the map
 fetch(map_url)
