@@ -138,7 +138,6 @@ const plotWNL = () => {
     // Converted date strings from x_vals to JS date objects 
     for (let i = 0; i < plotData.x_vals.length; i++) {
         x_dates_conv[i] = new Date(plotData.x_vals[i]);
-        console.log(`${plotData.x_vals[i]} --> ${x_dates_conv[i]}`);
     };
 
     // Plots x,y coordinates 
