@@ -1,3 +1,7 @@
+// import * as GeoSearch from 'leaflet-geosearch';
+// import L from "leaflet";
+// import AwesomeMarkers from 'leaflet.awesome-markers';
+
 // Creates Leaflet map 
 const map = L.map('map', {
     center: [13.4453556,144.7043994],
@@ -49,45 +53,80 @@ const baseLayers = {
 const layerControl = L.control.layers(null, baseLayers, {position: 'bottomright'});
 layerControl.addTo(map);
 
+// Search bar 
+// const search = new GeoSearch.GeoSearchControl({
+//     provider: new GeoSearch.OpenStreetMapProvider(),
+// });
+
+// map.addControl(search);
+
+
 L.control.zoom({
     // options: topleft, topright, bottomleft, bottomright
     position: 'bottomright'
 }).addTo(map);
 
 // Control: Reset map view (goes to initial map zoom on page load)
-// var resetMapZoom = L.Toolbar2.Action.extend({ 
-//     options: {
-//         toolbarIcon: {
-//             html: '&#xF425;', // '&#x2302;', 
-//             tooltip: 'Reset Map View'
-//         }
-//     },
-//     addHooks: function() {
-//         map.setView([13.4453556,144.7043994], 12);
-//     }
-// });
+var resetMapZoom = L.Toolbar2.Action.extend({ 
+    options: {
+        toolbarIcon: {
+            html: '&#xF425;', // '&#x2302;', 
+            tooltip: 'Reset Map View'
+        }
+    },
+    addHooks: function() {
+        map.setView([13.4453556,144.7043994], 12);
+    }
+});
 
-L.easyButton('<i class="bi bi-map"></i>', function(map) {
+var resetZoomBtn = L.easyButton('<i class="bi bi-map"></i>', function() {
     map.setView([13.4453556,144.7043994], 12);
+});
+
+var drawBtn = L.easyButton('<i class="bi bi-pencil-fill"></i>', function() {
+    console.log('Clicked on draw btn')
+});
+
+var undoBtn = L.easyButton('<i class="bi bi-arrow-counterclockwise"></i>', function() {
+    console.log('Clicked on undo btn')
+});
+
+var redoBtn = L.easyButton('<i class="bi bi-arrow-clockwise"></i>', function() {
+    console.log('Clicked on redo btn')
+});
+
+var trashBtn = L.easyButton('<i class="bi bi-trash3-fill"></i>', function() {
+    console.log('Clicked on trash btn')
+});
+
+var controlBar = L.easyBar([
+    resetZoomBtn,
+    drawBtn,
+    undoBtn,
+    redoBtn,
+    trashBtn
+])
+
+controlBar.addTo(map);
+
+// Control: Measure distance and area 
+
+// Control: Drop a pin 
+
+// Control: Draw a line 
+
+// Control: Draw a polygon 
+
+// Control: Draw a rectangle 
+
+// Control: Draw a circle 
+
+// Control group for toolbar 
+new L.Toolbar2.Control({
+    position: 'bottomright',
+    actions: [resetMapZoom]
+    // actions: [resetZoom]
 }).addTo(map);
-
-// // Control: Measure distance and area 
-
-// // Control: Drop a pin 
-
-// // Control: Draw a line 
-
-// // Control: Draw a polygon 
-
-// // Control: Draw a rectangle 
-
-// // Control: Draw a circle 
-
-// // Control group for toolbar 
-// new L.Toolbar2.Control({
-//     position: 'bottomright',
-//     actions: [resetMapZoom]
-// }).addTo(map);
 
 // Plots data points from selected well to chart 
 let plotData 
@@ -245,13 +284,102 @@ const map_url = './static/data/data5.json';
 //     console.log(e.latlng);
 // });
 
+// Map colored icons 
+const blackIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-black.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
+
+const blueIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
+
+const grayIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-grey.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
+
+const greenIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
+
+const orangeIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
+
+const redIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
+
+const violetIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
+
+const yellowIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-yellow.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
+
+// Map icons with shapes 
+// const incIcon = L.AwesomeMarkers.icon({
+//     icon: "fa-caret-up",
+//     prefix: "fa",
+//     markerColor: "red",
+//     iconColor: "white"
+// });
+
 // Gets the data from the JSON file and adds well to the map
 fetch(map_url)
     .then(response => response.json())  // Requests for a json file as a response
     .then(geojson => { 
-
-        // Creates pop-ups for each point on the map 
         const getWellInfo = (feature, layer) => {
+            // Conditionals for marker icons
+            if (feature.properties.sig == 1) {
+                layer.setIcon(greenIcon);
+            } else if (feature.properties.sig == 0) {
+                layer.setIcon(grayIcon);
+            } else {
+                layer.setIcon(blueIcon);
+            }
+
+            // Popups with basic well info and buttons for stats and plot 
             layer.bindPopup(
                 `
                 <strong>Well</strong>: ${feature.properties.name} 
@@ -263,13 +391,12 @@ fetch(map_url)
                 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" onclick="showStats()">Statistics</button>
                 `
             );
-
             // On click event on the points
             // Sends data for clicked item to global variable plotData 
             layer.on('click', pt => plotData = pt.target.feature.properties) 
             layer.on('click', pt => getStats = pt.target.feature.properties)
 
-            // Completes both for plot and stats data 
+            // // Completes both for plot and stats data 
             // layer.on('click', pt => getData = pt.target.feature.properties)
         }
 
