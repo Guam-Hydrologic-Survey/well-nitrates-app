@@ -1,11 +1,14 @@
 # Well Nitrates Web App - Documentation 
 
 ## _Table of Contents_
-1. Setup 
-    - Libraries 
-    - Packages and Dependencies
-2. Deployment 
-3. Index 
+1. [Setup](#setup) 
+    - [Development Environment](#development-environment)
+    - [Libraries](#libraries) 
+    - [Packages and Dependencies](#packages-and-dependencies)
+2. [Deployment](#deployment)
+    - [Local Development Server](#run-a-local-development-server) 
+    - [Start and Build](#start-and-build)
+3. [Index](#index) 
 
 <br> 
 
@@ -53,8 +56,12 @@ _This allows to see active changes to web application while in development mode.
 ``` bash 
 npm run dev 
 ```  
-
-_Start build._
+### Start and Build
 ``` bash 
 npm start 
 ``` 
+
+<br>
+
+## Index 
+_(currently in progress)_
