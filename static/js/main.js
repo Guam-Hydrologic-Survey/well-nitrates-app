@@ -274,9 +274,7 @@ const showStats = () => {
 // }
 
 // Filepaths for map (lat, lon coords) json and data (stats, x-y vals) json 
-const data_url = './static/data/data3.json';
-const map_url_old = './static/data/data4.json'; 
-const map_url = './static/data/data5.json';
+const map_url = './static/data/data6.json';
 
 // Testing single marker to trigger on click event
 // L.marker([13.45409, 144.7594]).addTo(map).on('click', function(e) {
