@@ -21,3 +21,6 @@ Read the technical report [here](#).
 - [@Jezreelyn Bulaklak](#)
 - [@Dr Nathan Habana](#)
 
+<br>
+
+[_Documentation for developers_](./DOCS.md)
