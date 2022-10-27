@@ -403,10 +403,10 @@ fetch(map_url)
                         incIcon.options.markerColor = "cadetblue";
                         layer.setIcon(incIcon);
                         break;
-                    case "black":
-                        incIcon.options.markerColor = "black";
-                        layer.setIcon(incIcon);
-                        break;
+                    // case "black":
+                    //     incIcon.options.markerColor = "black";
+                    //     layer.setIcon(incIcon);
+                    //     break;
                     case "orange":
                         incIcon.options.markerColor = "orange";
                         layer.setIcon(incIcon);
@@ -424,6 +424,7 @@ fetch(map_url)
                         layer.setIcon(incIcon);
                         break;
                 }
+                console.log(incIcon.options.markerColor)
             } else if (feature.properties.sig == 0) {
                 if (feature.properties.mColor == "blue") {
                     insIcon.options.markerColor = "blue";
