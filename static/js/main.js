@@ -397,52 +397,40 @@ fetch(map_url)
                     incIcon.options.markerColor = "blue";
                 } else if (feature.properties.mColor == "light-blue") {
                     incIcon.options.markerColor = "purple";
-                    layer.setIcon(incIcon);
                 } else if (feature.properties.mColor == "black") {
                     incIcon.options.markerColor = "black";
-                    layer.setIcon(incIcon);
                 } else if (feature.properties.mColor == "orange") {
                     incIcon.options.markerColor = "orange";
-                    layer.setIcon(incIcon);
                 } else {
                     incIcon.options.markerColor = "red";
-                    layer.setIcon(incIcon);
                 }
-                // ayer.setIcon(incIcon);
+                layer.setIcon(incIcon);
             } else if (feature.properties.sig == 0) {
                 if (feature.properties.mColor == "blue") {
                     insIcon.options.markerColor = "blue";
                 } else if (feature.properties.mColor == "light-blue") {
                     insIcon.options.markerColor = "purple";
-                    layer.setIcon(insIcon);
                 } else if (feature.properties.mColor == "black") {
                     insIcon.options.markerColor = "black";
-                    layer.setIcon(insIcon);
                 } else if (feature.properties.mColor == "orange") {
                     insIcon.options.markerColor = "orange";
-                    layer.setIcon(insIcon);
                 } else {
                     insIcon.options.markerColor = "red";
-                    layer.setIcon(insIcon);
                 }
-                // layer.setIcon(insIcon);
+                layer.setIcon(insIcon);
             } else {
                 if (feature.properties.mColor == "blue") {
                     decIcon.options.markerColor = "blue";
                 } else if (feature.properties.mColor == "light-blue") {
                     decIcon.options.markerColor = "purple";
-                    layer.setIcon(decIcon);
                 } else if (feature.properties.mColor == "black") {
                     decIcon.options.markerColor = "black";
-                    layer.setIcon(decIcon);
                 } else if (feature.properties.mColor == "orange") {
                     decIcon.options.markerColor = "orange";
-                    layer.setIcon(decIcon);
                 } else {
                     decIcon.options.markerColor = "red";
-                    layer.setIcon(decIcon);
                 }
-                // layer.setIcon(decIcon)
+                layer.setIcon(decIcon)
             }
 
             // Popups with basic well info and buttons for stats and plot 
@@ -452,7 +440,6 @@ fetch(map_url)
                 <br><strong>Lat:</strong> ${feature.properties.lat} 
                 <br><strong>Lon:</strong> ${feature.properties.lon}
                 <br><strong>Basin:</strong> ${feature.properties.basin}
-                <br><strong>Sig:</strong> ${feature.properties.sig}
                 <br><br>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="plotWNL()" data-bs-target="#exampleModal">Plot</button>
                 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" onclick="showStats()">Statistics</button>
