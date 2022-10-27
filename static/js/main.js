@@ -397,36 +397,51 @@ fetch(map_url)
                 switch (feature.properties.mColor) {
                     case "blue":
                         incIcon.options.markerColor = "blue";
-                        layer.setIcon(incIcon);
                         break;
                     case "light-blue":
                         incIcon.options.markerColor = "cadetblue";
-                        layer.setIcon(incIcon);
                         break;
                     // case "black":
                     //     incIcon.options.markerColor = "black";
-                    //     layer.setIcon(incIcon);
                     //     break;
                     case "orange":
                         incIcon.options.markerColor = "orange";
-                        layer.setIcon(incIcon);
                         break;
                     case "red":
                         incIcon.options.markerColor = "red";
-                        layer.setIcon(incIcon);
                         break;
                     case "white":
                         incIcon.options.markerColor = "gray";
-                        layer.setIcon(incIcon);
                         break;
                     default:
                         incIcon.options.markerColor = "green";
-                        layer.setIcon(incIcon);
                         break;
                 }
-                console.log(incIcon.options.markerColor)
+                layer.setIcon(incIcon)
+                // console.log(incIcon.options.markerColor)
             } else if (feature.properties.sig == 0) {
-                insIcon.options.markerColor = "blue";
+                // insIcon.options.markerColor = "blue";
+
+                switch(feature.properties.LTG2019) {
+                    case 1:
+                        insIcon.options.markerColor = "gray";
+                        break;
+                    case 2:
+                        insIcon.options.markerColor = "purple";
+                        break;
+                    case 3:
+                        insIcon.options.markerColor = "blue";
+                        break;
+                    case 4:
+                        insIcon.options.markerColor = "black";
+                        break;
+                    case 5:
+                        insIcon.options.markerColor = "orange";
+                        break;
+                    case 6:
+                        insIcon.options.markerColor = "red";
+                        break;
+                }
                 layer.setIcon(insIcon);
             } else {
                 if (feature.properties.mColor == "blue") {
