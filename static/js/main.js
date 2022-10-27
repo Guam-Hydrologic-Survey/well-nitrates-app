@@ -393,18 +393,37 @@ fetch(map_url)
         const getWellInfo = (feature, layer) => {
             // Conditionals for marker icons
             if (feature.properties.sig == 1) {
-                if (feature.properties.mColor == "blue") {
-                    incIcon.options.markerColor = "blue";
-                } else if (feature.properties.mColor == "light-blue") {
-                    incIcon.options.markerColor = "purple";
-                } else if (feature.properties.mColor == "black") {
-                    incIcon.options.markerColor = "black";
-                } else if (feature.properties.mColor == "orange") {
-                    incIcon.options.markerColor = "orange";
-                } else {
-                    incIcon.options.markerColor = "red";
+                // const mc = feature.properties.mColor;
+                switch (feature.properties.mColor) {
+                    case "blue":
+                        incIcon.options.markerColor = "blue";
+                        layer.setIcon(incIcon);
+                        break;
+                    case "light-blue":
+                        incIcon.options.markerColor = "cadetblue";
+                        layer.setIcon(incIcon);
+                        break;
+                    case "black":
+                        incIcon.options.markerColor = "black";
+                        layer.setIcon(incIcon);
+                        break;
+                    case "orange":
+                        incIcon.options.markerColor = "orange";
+                        layer.setIcon(incIcon);
+                        break;
+                    case "red":
+                        incIcon.options.markerColor = "red";
+                        layer.setIcon(incIcon);
+                        break;
+                    case "white":
+                        incIcon.options.markerColor = "gray";
+                        layer.setIcon(incIcon);
+                        break;
+                    default:
+                        incIcon.options.markerColor = "green";
+                        layer.setIcon(incIcon);
+                        break;
                 }
-                layer.setIcon(incIcon);
             } else if (feature.properties.sig == 0) {
                 if (feature.properties.mColor == "blue") {
                     insIcon.options.markerColor = "blue";
@@ -414,8 +433,10 @@ fetch(map_url)
                     insIcon.options.markerColor = "black";
                 } else if (feature.properties.mColor == "orange") {
                     insIcon.options.markerColor = "orange";
-                } else {
+                } else if (feature.properties.mColor == "red") {
                     insIcon.options.markerColor = "red";
+                } else {
+                    insIcon.options.markerColor = "gray";
                 }
                 layer.setIcon(insIcon);
             } else {
@@ -427,8 +448,10 @@ fetch(map_url)
                     decIcon.options.markerColor = "black";
                 } else if (feature.properties.mColor == "orange") {
                     decIcon.options.markerColor = "orange";
-                } else {
+                } else if (feature.properties.mColor == "red") {
                     decIcon.options.markerColor = "red";
+                } else {
+                    decIcon.options.markerColor = "gray"
                 }
                 layer.setIcon(decIcon)
             }
