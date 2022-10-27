@@ -52,7 +52,7 @@ const baseLayers = {
     'ESRI World Shaded Relief': ewsr
 }
 
-const layerControl = L.control.layers(null, baseLayers, {position: 'bottomright'});
+const layerControl = L.control.layers(baseLayers, null, {position: 'bottomright'});
 layerControl.addTo(map);
 
 // Search bar 
