@@ -426,19 +426,7 @@ fetch(map_url)
                 }
                 console.log(incIcon.options.markerColor)
             } else if (feature.properties.sig == 0) {
-                if (feature.properties.mColor == "red") {
-                    insIcon.options.markerColor = "red";
-                } else if (feature.properties.mColor == "orange") {
-                    insIcon.options.markerColor = "orange";
-                } else if (feature.properties.mColor == "black") {
-                    insIcon.options.markerColor = "black";
-                } else if (feature.properties.mColor == "blue") {
-                    insIcon.options.markerColor = "blue";
-                } else if (feature.properties.mColor == "light-blue") {
-                    insIcon.options.markerColor = "purple";
-                } else if (feature.properties.mColor == "white") {
-                    insIcon.options.markerColor = "yellow";
-                }
+                insIcon.options.markerColor = "blue";
                 layer.setIcon(insIcon);
             } else {
                 if (feature.properties.mColor == "blue") {
