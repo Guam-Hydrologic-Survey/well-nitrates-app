@@ -463,6 +463,8 @@ fetch(map_url)
             // Label for well name
             layer.bindTooltip(feature.properties.name, {permanent: true, direction: 'bottom'})
 
+            // TODO - setup threshold for tooltip display (e.g., don't show on initial page load, but show on zoom or hover)
+
             // Popups with basic well info and buttons for stats and plot
             layer.bindPopup(
                 `
