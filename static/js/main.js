@@ -440,6 +440,8 @@ fetch(map_url)
                 <br><strong>Lat:</strong> ${feature.properties.lat} 
                 <br><strong>Lon:</strong> ${feature.properties.lon}
                 <br><strong>Basin:</strong> ${feature.properties.basin}
+                <br><strong>Sig:</strong> ${feature.properties.sig}
+                <br><strong>Marker Color:</strong> ${feature.properties.mColor}
                 <br><br>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="plotWNL()" data-bs-target="#exampleModal">Plot</button>
                 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" onclick="showStats()">Statistics</button>
