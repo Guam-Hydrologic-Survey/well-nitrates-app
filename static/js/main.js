@@ -1,4 +1,6 @@
 // import * as GeoSearch from 'leaflet-geosearch';
+// import 'node_modules/leaflet-geosearch/dist/geosearch.css';
+// import { SearchControl, OpenStreetMapProvider } from "leaflet-geosearch";
 // import L from "leaflet";
 // import AwesomeMarkers from 'leaflet.awesome-markers';
 
@@ -57,6 +59,13 @@ layerControl.addTo(map);
 // const search = new GeoSearch.GeoSearchControl({
 //     provider: new GeoSearch.OpenStreetMapProvider(),
 // });
+
+const search = new SearchControl({
+    style: 'button',
+    provider: new OpenStreetMapProvider(),
+});
+
+map.addControl(search);
 
 // map.addControl(search);
 
