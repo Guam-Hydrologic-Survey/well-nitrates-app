@@ -361,25 +361,27 @@ const yellowIcon = new L.Icon({
     shadowSize: [41, 41]
   });
 
+  
 // Map icons with shapes 
-const incIcon = L.AwesomeMarkers.icon({
+// Change marker color dynamically 
+var incIcon = L.AwesomeMarkers.icon({
     icon: "fa-caret-up",
     prefix: "fa",
-    markerColor: "red",
+    markerColor: "gray",
     iconColor: "white"
 });
 
-const decIcon = L.AwesomeMarkers.icon({
+var decIcon = L.AwesomeMarkers.icon({
     icon: "fa-caret-down",
     prefix: "fa",
-    markerColor: "blue",
+    markerColor: "gray",
     iconColor: "white"
 })
 
-const insIcon = L.AwesomeMarkers.icon({
+var insIcon = L.AwesomeMarkers.icon({
     icon: "fa-circle",
     prefix: "fa",
-    markerColor: "green",
+    markerColor: "gray",
     iconColor: "white"
 })
 
@@ -387,14 +389,63 @@ const insIcon = L.AwesomeMarkers.icon({
 fetch(map_url)
     .then(response => response.json())  // Requests for a json file as a response
     .then(geojson => { 
+
         const getWellInfo = (feature, layer) => {
             // Conditionals for marker icons
             if (feature.properties.sig == 1) {
-                layer.setIcon(incIcon);
+                // console.log(feature.properties.LTG2019)
+                if (feature.properties.LTG2019 > 5) {
+                    incIcon.options.markerColor = "red";
+                    layer.setIcon(incIcon);
+                } else if (feature.properties.LTG2019 <= 5) {
+                    incIcon.options.markerColor = "orange";
+                    layer.setIcon(incIcon);
+                } else if (feature.properties.LTG2019 <= 4) {
+                    incIcon.options.markerColor = "black";
+                    layer.setIcon(incIcon);
+                } else if (feature.properties.LTG2019 <= 3) {
+                    incIcon.options.markerColor = "purple";
+                    layer.setIcon(incIcon);
+                } else {
+                    incIcon.options.markerColor = "blue";
+                    layer.setIcon(incIcon);
+                }
             } else if (feature.properties.sig == 0) {
-                layer.setIcon(insIcon);
+                if (feature.properties.LTG2019 > 5) {
+                    insIcon.options.markerColor = "red";
+                    layer.setIcon(insIcon);
+                } else if (feature.properties.LTG2019 <= 5) {
+                    insIcon.options.markerColor = "orange";
+                    layer.setIcon(insIcon);
+                } else if (feature.properties.LTG2019 <= 4) {
+                    insIcon.options.markerColor = "black";
+                    layer.setIcon(insIcon);
+                } else if (feature.properties.LTG2019 <= 3) {
+                    insIcon.options.markerColor = "purple";
+                    layer.setIcon(insIcon);
+                } else {
+                    insIcon.options.markerColor = "blue";
+                    layer.setIcon(insIcon);
+                }
+                // layer.setIcon(insIcon);
             } else {
-                layer.setIcon(decIcon);
+                if (feature.properties.LTG2019 > 5) {
+                    decIcon.options.markerColor = "red";
+                    layer.setIcon(decIcon);
+                } else if (feature.properties.LTG2019 <= 5) {
+                    decIcon.options.markerColor = "orange";
+                    layer.setIcon(decIcon);
+                } else if (feature.properties.LTG2019 <= 4) {
+                    decIcon.options.markerColor = "black";
+                    layer.setIcon(decIcon);
+                } else if (feature.properties.LTG2019 <= 3) {
+                    decIcon.options.markerColor = "purple";
+                    layer.setIcon(decIcon);
+                } else {
+                    decIcon.options.markerColor = "blue";
+                    layer.setIcon(decIcon);
+                }
+                // layer.setIcon(decIcon);
             }
 
             // Popups with basic well info and buttons for stats and plot 
