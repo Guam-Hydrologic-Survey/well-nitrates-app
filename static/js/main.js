@@ -394,58 +394,61 @@ fetch(map_url)
             // Conditionals for marker icons
             if (feature.properties.sig == 1) {
                 // console.log(feature.properties.LTG2019)
-                if (feature.properties.LTG2019 > 5) {
-                    incIcon.options.markerColor = "red";
-                    layer.setIcon(incIcon);
-                } else if (feature.properties.LTG2019 <= 5) {
-                    incIcon.options.markerColor = "orange";
-                    layer.setIcon(incIcon);
-                } else if (feature.properties.LTG2019 <= 4) {
-                    incIcon.options.markerColor = "black";
+                if (feature.properties.LTG2019 <= 2) {
+                    incIcon.options.markerColor = "blue";
+                    console.log(feature.properties.LTG2019);
                     layer.setIcon(incIcon);
                 } else if (feature.properties.LTG2019 <= 3) {
                     incIcon.options.markerColor = "purple";
                     layer.setIcon(incIcon);
+                } else if (feature.properties.LTG2019 <= 4) {
+                    incIcon.options.markerColor = "black";
+                    layer.setIcon(incIcon);
+                } else if (feature.properties.LTG2019 <= 5) {
+                    incIcon.options.markerColor = "orange";
+                    layer.setIcon(incIcon);
                 } else {
-                    incIcon.options.markerColor = "blue";
+                    incIcon.options.markerColor = "red";
                     layer.setIcon(incIcon);
                 }
             } else if (feature.properties.sig == 0) {
-                if (feature.properties.LTG2019 > 5) {
-                    insIcon.options.markerColor = "red";
-                    layer.setIcon(insIcon);
-                } else if (feature.properties.LTG2019 <= 5) {
-                    insIcon.options.markerColor = "orange";
-                    layer.setIcon(insIcon);
-                } else if (feature.properties.LTG2019 <= 4) {
-                    insIcon.options.markerColor = "black";
+                if (feature.properties.LTG2019 <= 2) {
+                    insIcon.options.markerColor = "blue";
+                    // console.log(feature.properties.LTG2019);
                     layer.setIcon(insIcon);
                 } else if (feature.properties.LTG2019 <= 3) {
                     insIcon.options.markerColor = "purple";
                     layer.setIcon(insIcon);
+                } else if (feature.properties.LTG2019 <= 4) {
+                    insIcon.options.markerColor = "black";
+                    layer.setIcon(insIcon);
+                } else if (feature.properties.LTG2019 <= 5) {
+                    insIcon.options.markerColor = "orange";
+                    layer.setIcon(insIcon);
                 } else {
-                    insIcon.options.markerColor = "blue";
+                    insIcon.options.markerColor = "red";
                     layer.setIcon(insIcon);
                 }
                 // layer.setIcon(insIcon);
             } else {
-                if (feature.properties.LTG2019 > 5) {
-                    decIcon.options.markerColor = "red";
-                    layer.setIcon(decIcon);
-                } else if (feature.properties.LTG2019 <= 5) {
-                    decIcon.options.markerColor = "orange";
-                    layer.setIcon(decIcon);
-                } else if (feature.properties.LTG2019 <= 4) {
-                    decIcon.options.markerColor = "black";
+                if (feature.properties.LTG2019 <= 2) {
+                    decIcon.options.markerColor = "blue";
+                    console.log(feature.properties.LTG2019);
                     layer.setIcon(decIcon);
                 } else if (feature.properties.LTG2019 <= 3) {
                     decIcon.options.markerColor = "purple";
                     layer.setIcon(decIcon);
+                } else if (feature.properties.LTG2019 <= 4) {
+                    decIcon.options.markerColor = "black";
+                    layer.setIcon(decIcon);
+                } else if (feature.properties.LTG2019 <= 5) {
+                    decIcon.options.markerColor = "orange";
+                    layer.setIcon(decIcon);
                 } else {
-                    decIcon.options.markerColor = "blue";
+                    decIcon.options.markerColor = "red";
                     layer.setIcon(decIcon);
                 }
-                // layer.setIcon(decIcon);
+                layer.setIcon(decIcon);
             }
 
             // Popups with basic well info and buttons for stats and plot 
