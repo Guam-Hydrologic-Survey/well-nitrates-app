@@ -362,12 +362,26 @@ const yellowIcon = new L.Icon({
   });
 
 // Map icons with shapes 
-// const incIcon = L.AwesomeMarkers.icon({
-//     icon: "fa-caret-up",
-//     prefix: "fa",
-//     markerColor: "red",
-//     iconColor: "white"
-// });
+const incIcon = L.AwesomeMarkers.icon({
+    icon: "fa-caret-up",
+    prefix: "fa",
+    markerColor: "red",
+    iconColor: "white"
+});
+
+const decIcon = L.AwesomeMarkers.icon({
+    icon: "fa-caret-down",
+    prefix: "fa",
+    markerColor: "blue",
+    iconColor: "white"
+})
+
+const insIcon = L.AwesomeMarkers.icon({
+    icon: "fa-circle",
+    prefix: "fa",
+    markerColor: "green",
+    iconColor: "white"
+})
 
 // Gets the data from the JSON file and adds well to the map
 fetch(map_url)
@@ -376,11 +390,11 @@ fetch(map_url)
         const getWellInfo = (feature, layer) => {
             // Conditionals for marker icons
             if (feature.properties.sig == 1) {
-                layer.setIcon(greenIcon);
+                layer.setIcon(incIcon);
             } else if (feature.properties.sig == 0) {
-                layer.setIcon(grayIcon);
+                layer.setIcon(insIcon);
             } else {
-                layer.setIcon(blueIcon);
+                layer.setIcon(decIcon);
             }
 
             // Popups with basic well info and buttons for stats and plot 
