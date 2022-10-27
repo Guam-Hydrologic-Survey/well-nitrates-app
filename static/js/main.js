@@ -1,5 +1,5 @@
 // import * as GeoSearch from 'leaflet-geosearch';
-// import 'node_modules/leaflet-geosearch/dist/geosearch.css';
+// import 'node_modules/leaflet-geosearch';
 // import { SearchControl, OpenStreetMapProvider } from "leaflet-geosearch";
 // import L from "leaflet";
 // import AwesomeMarkers from 'leaflet.awesome-markers';
@@ -60,12 +60,10 @@ layerControl.addTo(map);
 //     provider: new GeoSearch.OpenStreetMapProvider(),
 // });
 
-const search = new SearchControl({
-    style: 'button',
-    provider: new OpenStreetMapProvider(),
-});
-
-map.addControl(search);
+// const search = new SearchControl({
+//     style: 'button',
+//     provider: new OpenStreetMapProvider(),
+// });
 
 // map.addControl(search);
 
