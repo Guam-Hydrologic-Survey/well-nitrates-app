@@ -460,8 +460,10 @@ fetch(map_url)
                 layer.setIcon(decIcon)
             }
 
-            // Popups with basic well info and buttons for stats and plot
+            // Label for well name
             layer.bindTooltip(feature.properties.name, {permanent: true, direction: 'bottom'})
+
+            // Popups with basic well info and buttons for stats and plot
             layer.bindPopup(
                 `
                 <strong>Well</strong>: ${feature.properties.name} 
