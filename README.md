@@ -22,5 +22,3 @@ Read the technical report [here](#).
 - [@Dr Nathan Habana](#)
 
 <br>
-
-[_Documentation for developers_](./DOCS.md)
