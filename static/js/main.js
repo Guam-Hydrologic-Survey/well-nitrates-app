@@ -1,4 +1,6 @@
 // import * as GeoSearch from 'leaflet-geosearch';
+// import 'node_modules/leaflet-geosearch';
+// import { SearchControl, OpenStreetMapProvider } from "leaflet-geosearch";
 // import L from "leaflet";
 // import AwesomeMarkers from 'leaflet.awesome-markers';
 
@@ -50,12 +52,17 @@ const baseLayers = {
     'ESRI World Shaded Relief': ewsr
 }
 
-const layerControl = L.control.layers(null, baseLayers, {position: 'bottomright'});
+const layerControl = L.control.layers(baseLayers, null, {position: 'bottomright'});
 layerControl.addTo(map);
 
 // Search bar 
 // const search = new GeoSearch.GeoSearchControl({
 //     provider: new GeoSearch.OpenStreetMapProvider(),
+// });
+
+// const search = new SearchControl({
+//     style: 'button',
+//     provider: new OpenStreetMapProvider(),
 // });
 
 // map.addControl(search);
@@ -274,9 +281,7 @@ const showStats = () => {
 // }
 
 // Filepaths for map (lat, lon coords) json and data (stats, x-y vals) json 
-const data_url = './static/data/data3.json';
-const map_url_old = './static/data/data4.json'; 
-const map_url = './static/data/data5.json';
+const map_url = './static/data/data6.json';
 
 // Testing single marker to trigger on click event
 // L.marker([13.45409, 144.7594]).addTo(map).on('click', function(e) {
@@ -356,35 +361,119 @@ const yellowIcon = new L.Icon({
     shadowSize: [41, 41]
   });
 
+  
 // Map icons with shapes 
-// const incIcon = L.AwesomeMarkers.icon({
-//     icon: "fa-caret-up",
-//     prefix: "fa",
-//     markerColor: "red",
-//     iconColor: "white"
-// });
+// Change marker color dynamically 
+var incIcon = L.AwesomeMarkers.icon({
+    icon: "fa-caret-up",
+    prefix: "fa",
+    markerColor: "gray",
+    iconColor: "white"
+});
+
+var decIcon = L.AwesomeMarkers.icon({
+    icon: "fa-caret-down",
+    prefix: "fa",
+    markerColor: "gray",
+    iconColor: "white"
+})
+
+var insIcon = L.AwesomeMarkers.icon({
+    icon: "fa-circle",
+    prefix: "fa",
+    markerColor: "gray",
+    iconColor: "white"
+})
 
 // Gets the data from the JSON file and adds well to the map
 fetch(map_url)
     .then(response => response.json())  // Requests for a json file as a response
     .then(geojson => { 
+
         const getWellInfo = (feature, layer) => {
             // Conditionals for marker icons
             if (feature.properties.sig == 1) {
-                layer.setIcon(greenIcon);
+                // const mc = feature.properties.mColor;
+                switch (feature.properties.mColor) {
+                    case "blue":
+                        incIcon.options.markerColor = "blue";
+                        break;
+                    case "light-blue":
+                        incIcon.options.markerColor = "cadetblue";
+                        break;
+                    // case "black":
+                    //     incIcon.options.markerColor = "black";
+                    //     break;
+                    case "orange":
+                        incIcon.options.markerColor = "orange";
+                        break;
+                    case "red":
+                        incIcon.options.markerColor = "red";
+                        break;
+                    case "white":
+                        incIcon.options.markerColor = "gray";
+                        break;
+                    default:
+                        incIcon.options.markerColor = "green";
+                        break;
+                }
+                layer.setIcon(incIcon)
+                // console.log(incIcon.options.markerColor)
             } else if (feature.properties.sig == 0) {
-                layer.setIcon(grayIcon);
+                // insIcon.options.markerColor = "blue";
+
+                switch(feature.properties.LTG2019) {
+                    case 1:
+                        insIcon.options.markerColor = "gray";
+                        break;
+                    case 2:
+                        insIcon.options.markerColor = "purple";
+                        break;
+                    case 3:
+                        insIcon.options.markerColor = "blue";
+                        break;
+                    case 4:
+                        insIcon.options.markerColor = "black";
+                        break;
+                    case 5:
+                        insIcon.options.markerColor = "orange";
+                        break;
+                    case 6:
+                        insIcon.options.markerColor = "red";
+                        break;
+                }
+                layer.setIcon(insIcon);
             } else {
-                layer.setIcon(blueIcon);
+                if (feature.properties.mColor == "blue") {
+                    decIcon.options.markerColor = "blue";
+                } else if (feature.properties.mColor == "light-blue") {
+                    decIcon.options.markerColor = "purple";
+                } else if (feature.properties.mColor == "black") {
+                    decIcon.options.markerColor = "black";
+                } else if (feature.properties.mColor == "orange") {
+                    decIcon.options.markerColor = "orange";
+                } else if (feature.properties.mColor == "red") {
+                    decIcon.options.markerColor = "red";
+                } else {
+                    decIcon.options.markerColor = "gray"
+                }
+                layer.setIcon(decIcon)
             }
 
-            // Popups with basic well info and buttons for stats and plot 
+            // Label for well name
+            layer.bindTooltip(feature.properties.name, {permanent: true, direction: 'bottom'})
+
+            // TODO - setup threshold for tooltip display (e.g., don't show on initial page load, but show on zoom or hover)
+
+            // Popups with basic well info and buttons for stats and plot
             layer.bindPopup(
                 `
                 <strong>Well</strong>: ${feature.properties.name} 
                 <br><strong>Lat:</strong> ${feature.properties.lat} 
                 <br><strong>Lon:</strong> ${feature.properties.lon}
                 <br><strong>Basin:</strong> ${feature.properties.basin}
+                <br><strong>Sig:</strong> ${feature.properties.sig}
+                <br><strong>Marker Color:</strong> ${feature.properties.mColor}
                 <br><br>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="plotWNL()" data-bs-target="#exampleModal">Plot</button>
                 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" onclick="showStats()">Statistics</button>
