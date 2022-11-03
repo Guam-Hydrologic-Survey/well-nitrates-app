@@ -200,7 +200,6 @@ const plotWNL = () => {
             }
         },
         xaxis: {
-            // title: 'Years',
             rangeselector: selectorOptions,
         },
         yaxis: {
@@ -210,11 +209,11 @@ const plotWNL = () => {
 
     var config = {
         toImageButtonOptions: {
-            format: 'png', // one of png, svg, jpeg, webp
+            format: 'png', // png, svg, jpeg, webp
             filename: 'well_plot',
             height: 500,
             width: 700,
-            scale: 1 // Multiply title/legend/axis/canvas sizes by this factor
+            scale: 1 
           }
     };
 
@@ -355,7 +354,6 @@ const showStats = () => {
                 }
             },
             xaxis: {
-                // title: 'Years',
                 // rangeselector: selectorOptions,
                 rangeslider: {}
             },
