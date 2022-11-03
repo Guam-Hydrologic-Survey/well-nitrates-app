@@ -137,29 +137,19 @@ new L.Toolbar2.Control({
     // actions: [resetZoom]
 }).addTo(map);
 
-var lastZoom;
-map.on('zoomend', function() {
-    var currentZoom = map.getZoom();
-    if (currentZoom < 15 && (!lastZoom || lastZoom >= 15)) {
-        map.eachLayer(function(l) {
-            var toolTip = l.getTooltip();
-            if (toolTip) {
-                this.map.closeTooltip(toolTip);
-            }
-        })
-    } 
-    else if (zoom >= 15 && (!lastZoom || lastZoom < 15)) {
-        map.eachLayer(function(l) {
-            if (l.getTooltip) {
-              var toolTip = l.getTooltip();
-              if (toolTip) {
-                this.map.addLayer(toolTip);
-              }
-            }
-          });
+// Hides tooltip based on zoom level 
+map.on('zoomend', function(z) {
+    var zoomLevel = map.getZoom();
+    if (zoomLevel >= 14 ){
+        [].forEach.call(document.querySelectorAll('.leaflet-tooltip'), function (t) {
+            t.style.visibility = 'visible';
+        });
+    } else {
+        [].forEach.call(document.querySelectorAll('.leaflet-tooltip'), function (t) {
+            t.style.visibility = 'hidden';
+        });
     }
-    lastZoom = currentZoom;
-})
+});
 
 // Plots data points from selected well to chart 
 let plotData 
@@ -306,13 +296,8 @@ const showStats = () => {
 // const showData = () => {
 // }
 
-// Filepaths for map (lat, lon coords) json and data (stats, x-y vals) json 
+// Filepath for map (lat, lon coords) json and data (stats, x-y vals) json 
 const map_url = './static/data/data6.json';
-
-// Testing single marker to trigger on click event
-// L.marker([13.45409, 144.7594]).addTo(map).on('click', function(e) {
-//     console.log(e.latlng);
-// });
 
 // Map colored icons 
 const blackIcon = new L.Icon({
