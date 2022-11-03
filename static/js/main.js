@@ -159,6 +159,32 @@ const plotWNL = () => {
         name: 'Well Nitrate Levels'
     };
 
+    var selectorOptions = {
+            buttons: [{
+                step: 'month',
+                stepmode: 'backward',
+                count: 1,
+                label: '1m'
+            }, {
+                step: 'month',
+                stepmode: 'backward',
+                count: 6,
+                label: '6m'
+            }, {
+                step: 'year',
+                stepmode: 'todate',
+                count: 1,
+                label: 'YTD'
+            }, {
+                step: 'year',
+                stepmode: 'backward',
+                count: 1,
+                label: '1y'
+            }, {
+                step: 'all',
+            }],
+        };
+
     // Plot features and layout
     const layout = {
         autosize: false,
@@ -174,7 +200,8 @@ const plotWNL = () => {
             }
         },
         xaxis: {
-            // title: 'Years'
+            // title: 'Years',
+            rangeselector: selectorOptions,
         },
         yaxis: {
             title: 'ppm (mg/L)'
@@ -308,32 +335,6 @@ const showStats = () => {
             mode: 'markers',
             name: 'Well Nitrate Levels'
         };
-
-        // var selectorOptions = {
-        //     buttons: [{
-        //         step: 'month',
-        //         stepmode: 'backward',
-        //         count: 1,
-        //         label: '1m'
-        //     }, {
-        //         step: 'month',
-        //         stepmode: 'backward',
-        //         count: 6,
-        //         label: '6m'
-        //     }, {
-        //         step: 'year',
-        //         stepmode: 'todate',
-        //         count: 1,
-        //         label: 'YTD'
-        //     }, {
-        //         step: 'year',
-        //         stepmode: 'backward',
-        //         count: 1,
-        //         label: '1y'
-        //     }, {
-        //         step: 'all',
-        //     }],
-        // };
 
         // Plot features and layout
         const layout = {
