@@ -39,19 +39,11 @@ const ewi = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Wo
 	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community | DKValerio, MWZapata, JBulaklak, NCHabana 2022'
 }); 
 
-// ESRI World Shaded Relief 
-const ewsr = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile/{z}/{y}/{x}', {
-    maxZoom: baseLayersZoom,
-	attribution: 'Tiles &copy; Esri &mdash; Source: Esri'
-});
-
-
 const baseLayers = {
     'Open Street Map': osm,
     'ESRI World Street Map': ewsp,
     'ESRI World Topo Map': ewtm,
     'ESRI World Imagery': ewi,
-    'ESRI World Shaded Relief': ewsr
 }
 
 const layerControl = L.control.layers(baseLayers, null, {position: 'bottomright'});
@@ -129,13 +121,6 @@ controlBar.addTo(map);
 // Control: Draw a rectangle 
 
 // Control: Draw a circle 
-
-// Control group for toolbar 
-new L.Toolbar2.Control({
-    position: 'bottomright',
-    actions: [resetMapZoom]
-    // actions: [resetZoom]
-}).addTo(map);
 
 // Hides tooltip based on zoom level 
 map.on('zoomend', function(z) {
