@@ -161,6 +161,12 @@ const plotWNL = () => {
 
     // Plot features and layout
     const layout = {
+        autosize: false,
+        height: 600,
+        width: 1100,
+        margin: {
+           
+        },
         title: {
             text: `Nitrate Levels for Well ${plotData.name}`,
             font: {
@@ -168,7 +174,7 @@ const plotWNL = () => {
             }
         },
         xaxis: {
-            title: 'Years'
+            // title: 'Years'
         },
         yaxis: {
             title: 'ppm (mg/L)'
@@ -348,7 +354,7 @@ const showStats = () => {
                 }
             },
             xaxis: {
-                title: 'Years',
+                // title: 'Years',
                 // rangeselector: selectorOptions,
                 rangeslider: {}
             },
