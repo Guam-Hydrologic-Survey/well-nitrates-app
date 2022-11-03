@@ -99,5 +99,5 @@ button {
 
 /* Hides tooltips on page load */
 .leaflet-tooltip {
-    display: none;
+    visibility: hidden;
   }
