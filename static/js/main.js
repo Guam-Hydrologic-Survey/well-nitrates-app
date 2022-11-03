@@ -176,10 +176,16 @@ const plotWNL = () => {
     };
 
     var config = {
-        responsive: true
+        toImageButtonOptions: {
+            format: 'png', // one of png, svg, jpeg, webp
+            filename: 'well_plot',
+            height: 500,
+            width: 700,
+            scale: 1 // Multiply title/legend/axis/canvas sizes by this factor
+          }
     };
 
-    Plotly.newPlot('large-plot', [wnlTrace], layout, {scrollZoom: true, displaylogo: false}, config);
+    Plotly.newPlot('large-plot', [wnlTrace], layout, {scrollZoom: true, displaylogo: false, responsive: true}, config);
 }
 
 // Shows the stats on the left side panel 
@@ -297,6 +303,32 @@ const showStats = () => {
             name: 'Well Nitrate Levels'
         };
 
+        var selectorOptions = {
+            buttons: [{
+                step: 'month',
+                stepmode: 'backward',
+                count: 1,
+                label: '1m'
+            }, {
+                step: 'month',
+                stepmode: 'backward',
+                count: 6,
+                label: '6m'
+            }, {
+                step: 'year',
+                stepmode: 'todate',
+                count: 1,
+                label: 'YTD'
+            }, {
+                step: 'year',
+                stepmode: 'backward',
+                count: 1,
+                label: '1y'
+            }, {
+                step: 'all',
+            }],
+        };
+
         // Plot features and layout
         const layout = {
             title: {
@@ -306,18 +338,23 @@ const showStats = () => {
                 }
             },
             xaxis: {
-                title: 'Years'
+                title: 'Years',
+                rangeselector: selectorOptions,
+                rangeslider: {}
             },
             yaxis: {
-                title: 'ppm (mg/L)'
+                title: 'ppm (mg/L)',
+                fixedrange: true
             }
         };
 
         var config = {
-            responsive: true
+            toImageButtonOptions: {
+                filename: `plot_well_${plotData.name}`
+            }
         };
 
-        Plotly.newPlot('plot', [wnlTrace], layout, {scrollZoom: true, displaylogo: false}, config);
+        Plotly.newPlot('plot', [wnlTrace], layout, {scrollZoom: true, displaylogo: false, responsive: true}, config);
 }
 
 // All in one function to build side panel with both stats and plot for selected well 
