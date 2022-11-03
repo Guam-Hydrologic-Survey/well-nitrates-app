@@ -4,6 +4,8 @@
 // import L from "leaflet";
 // import AwesomeMarkers from 'leaflet.awesome-markers';
 
+// const { tooltip, Tooltip } = require("leaflet");
+
 // Creates Leaflet map 
 const map = L.map('map', {
     center: [13.4453556,144.7043994],
@@ -134,6 +136,20 @@ new L.Toolbar2.Control({
     actions: [resetMapZoom]
     // actions: [resetZoom]
 }).addTo(map);
+
+// Hides tooltip based on zoom level 
+map.on('zoomend', function(z) {
+    var zoomLevel = map.getZoom();
+    if (zoomLevel >= 14 ){
+        [].forEach.call(document.querySelectorAll('.leaflet-tooltip'), function (t) {
+            t.style.visibility = 'visible';
+        });
+    } else {
+        [].forEach.call(document.querySelectorAll('.leaflet-tooltip'), function (t) {
+            t.style.visibility = 'hidden';
+        });
+    }
+});
 
 // Plots data points from selected well to chart 
 let plotData 
@@ -280,13 +296,8 @@ const showStats = () => {
 // const showData = () => {
 // }
 
-// Filepaths for map (lat, lon coords) json and data (stats, x-y vals) json 
+// Filepath for map (lat, lon coords) json and data (stats, x-y vals) json 
 const map_url = './static/data/data6.json';
-
-// Testing single marker to trigger on click event
-// L.marker([13.45409, 144.7594]).addTo(map).on('click', function(e) {
-//     console.log(e.latlng);
-// });
 
 // Map colored icons 
 const blackIcon = new L.Icon({
@@ -463,8 +474,6 @@ fetch(map_url)
             // Label for well name
             layer.bindTooltip(feature.properties.name, {permanent: true, direction: 'bottom'})
 
-            // TODO - setup threshold for tooltip display (e.g., don't show on initial page load, but show on zoom or hover)
-
             // Popups with basic well info and buttons for stats and plot
             layer.bindPopup(
                 `
@@ -472,8 +481,6 @@ fetch(map_url)
                 <br><strong>Lat:</strong> ${feature.properties.lat} 
                 <br><strong>Lon:</strong> ${feature.properties.lon}
                 <br><strong>Basin:</strong> ${feature.properties.basin}
-                <br><strong>Sig:</strong> ${feature.properties.sig}
-                <br><strong>Marker Color:</strong> ${feature.properties.mColor}
                 <br><br>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="plotWNL()" data-bs-target="#exampleModal">Plot</button>
                 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" onclick="showStats()">Statistics</button>
@@ -493,9 +500,3 @@ fetch(map_url)
         layerControl.addOverlay(mapJson, "Wells") 
     })
     .catch(console.error);
-
-// Used to test functionality of Plot button 
-function showMessage(name) {
-    console.log(`Clicked on Statistics btn`);
-    alert(`Clicked on Statistics btn`);
-}

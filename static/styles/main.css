@@ -96,3 +96,8 @@
 button {
     font-style: italic;
 }
+
+/* Hides tooltips on page load */
+.leaflet-tooltip {
+    visibility: hidden;
+  }
