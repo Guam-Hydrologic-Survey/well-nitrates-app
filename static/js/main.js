@@ -111,6 +111,8 @@ var controlBar = L.easyBar([
 controlBar.addTo(map);
 
 // Control: Measure distance and area 
+// var measureControl = new L.Control.Measure();
+// measureControl.addTo(map);
 
 // Control: Drop a pin 
 
