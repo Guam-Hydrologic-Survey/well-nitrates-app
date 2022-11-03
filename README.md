@@ -1,5 +1,7 @@
-# MAppFx: NGLA Well Nitrates 
+<h1 align="center">MAppFx: NGLA Well Nitrates</h1>
 A map of nitrate concentrations in Guam wells based on a [nitrate analysis](https://guamhydrologicsurvey.uog.edu/index.php/interagency-maps/) research project by Jezreelyn Bulaklak. 
+
+<br>
 
 MAppFx is a web page interactive map environment that retrieves an interactive graph of a site upon clickin on a map feature object (be it a point, polygon, or a line). WERI Web MAppFx is a product of WERI through the Guam Hydrologic Survey Program (GU P.L. 24-247) and USGS 104-b, available through the [Guam Hydrologic Survey website](https://guamhydrologicsurvey.uog.edu/). MAppFx is developed by the GHS Information Management Team: Dannika K. U. Valerio, Matt W. Zapata, Leroy F. Heitz, and Nathan C. Habana in collaboration with Brigham Young University Civil Engineering Department: Riley Hales, Gus Williams, and Norm Jones.
 
