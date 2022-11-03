@@ -474,8 +474,6 @@ fetch(map_url)
             // Label for well name
             layer.bindTooltip(feature.properties.name, {permanent: true, direction: 'bottom'})
 
-            // TODO - setup threshold for tooltip display (e.g., don't show on initial page load, but show on zoom or hover)
-
             // Popups with basic well info and buttons for stats and plot
             layer.bindPopup(
                 `
@@ -483,8 +481,6 @@ fetch(map_url)
                 <br><strong>Lat:</strong> ${feature.properties.lat} 
                 <br><strong>Lon:</strong> ${feature.properties.lon}
                 <br><strong>Basin:</strong> ${feature.properties.basin}
-                <br><strong>Sig:</strong> ${feature.properties.sig}
-                <br><strong>Marker Color:</strong> ${feature.properties.mColor}
                 <br><br>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="plotWNL()" data-bs-target="#exampleModal">Plot</button>
                 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" onclick="showStats()">Statistics</button>
@@ -504,9 +500,3 @@ fetch(map_url)
         layerControl.addOverlay(mapJson, "Wells") 
     })
     .catch(console.error);
-
-// Used to test functionality of Plot button 
-function showMessage(name) {
-    console.log(`Clicked on Statistics btn`);
-    alert(`Clicked on Statistics btn`);
-}
