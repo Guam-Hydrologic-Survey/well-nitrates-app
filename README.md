@@ -1,5 +1,15 @@
 <h1 align="center">MAppFx: NGLA Well Nitrates</h1>
+
 A map of nitrate concentrations in Guam wells based on a [nitrate analysis](https://guamhydrologicsurvey.uog.edu/index.php/interagency-maps/) research project by Jezreelyn Bulaklak. 
+
+<br> 
+
+<figure>
+<img src="static/assets/MAppFx Prototype.png">
+    <figcaption align="center">
+        <i><b>Figure 1</b> - Design <a href="https://www.figma.com/proto/ufmyb9WJK5BqjH9o2Uaflk/NGLA-Well-Nitrate-Data---Web-App?page-id=132%3A74&node-id=138%3A12&viewport=312%2C323%2C0.09&scaling=scale-down&starting-point-node-id=138%3A12" target="_blank">prototype</a> of MAppFx: NGLA Well Nitrates.</i>
+    </figcaption>
+</figure>
 
 <br>
 
@@ -8,17 +18,6 @@ MAppFx is a web page interactive map environment that retrieves an interactive g
 This map is based on a GHS data analysis of Guam's production well nitrate samples completed by Jezreelyn Y. Bulaklak and Nathan Habana. A [Scientific Advisory Report](https://www.postguam.com/news/local/study-nitrate-levels-rising-in-water-wells/article_030ad950-27a5-11eb-b457-275e19ec9e17.html) was produced and written by Jezreelyn Bulaklak, Nathan Habana, and John Jenson. 
 
 Data originated from Guam Waterworks Authority as organized and transferred through Mauryn McDonald ([WERI Technical Report 95](https://weri-cdn.uog.edu/wp-content/PDFs/TRs/WERI%20TR%2095%20-%20McDonald%202002.pdf)), and lab records from Jennifer Cruz, N'tasha Perez, Carmen Sian-Denton, and Gary Denton. 
-
-<br>
-
-## NGLA Map Series 
-View the map series on the Guam Hydrologic Survey's website [here](https://guamhydrologicsurvey.uog.edu/index.php/2021/08/23/nitrate-n-and-sources/).
-
-<br>
-
-## WERI Technical Report 
-Read the technical report [here](#).
-
 
 <br>
 
