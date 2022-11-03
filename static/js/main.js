@@ -331,6 +331,16 @@ const showStats = () => {
 
         // Plot features and layout
         const layout = {
+            autosize: false,
+            width: 400,
+            height: 550,
+            margin: {
+                l: 70,
+                r: 20,
+                b: 70,
+                t: 30,
+                pad: 30
+            },
             title: {
                 // text: `Nitrate Levels for Well ${getStats.name}`,
                 font: {
