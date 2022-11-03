@@ -303,31 +303,31 @@ const showStats = () => {
             name: 'Well Nitrate Levels'
         };
 
-        var selectorOptions = {
-            buttons: [{
-                step: 'month',
-                stepmode: 'backward',
-                count: 1,
-                label: '1m'
-            }, {
-                step: 'month',
-                stepmode: 'backward',
-                count: 6,
-                label: '6m'
-            }, {
-                step: 'year',
-                stepmode: 'todate',
-                count: 1,
-                label: 'YTD'
-            }, {
-                step: 'year',
-                stepmode: 'backward',
-                count: 1,
-                label: '1y'
-            }, {
-                step: 'all',
-            }],
-        };
+        // var selectorOptions = {
+        //     buttons: [{
+        //         step: 'month',
+        //         stepmode: 'backward',
+        //         count: 1,
+        //         label: '1m'
+        //     }, {
+        //         step: 'month',
+        //         stepmode: 'backward',
+        //         count: 6,
+        //         label: '6m'
+        //     }, {
+        //         step: 'year',
+        //         stepmode: 'todate',
+        //         count: 1,
+        //         label: 'YTD'
+        //     }, {
+        //         step: 'year',
+        //         stepmode: 'backward',
+        //         count: 1,
+        //         label: '1y'
+        //     }, {
+        //         step: 'all',
+        //     }],
+        // };
 
         // Plot features and layout
         const layout = {
@@ -338,7 +338,7 @@ const showStats = () => {
                 l: 70,
                 r: 20,
                 b: 70,
-                t: 30,
+                t: 20,
                 pad: 30
             },
             title: {
@@ -349,7 +349,7 @@ const showStats = () => {
             },
             xaxis: {
                 title: 'Years',
-                rangeselector: selectorOptions,
+                // rangeselector: selectorOptions,
                 rangeslider: {}
             },
             yaxis: {
