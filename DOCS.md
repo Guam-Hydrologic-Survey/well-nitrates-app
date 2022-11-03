@@ -19,6 +19,15 @@
 
 <br> 
 
+<p align="center">
+<img src="static/assets/MAppFx Well Nitrates v1.0.png" width="800">
+</p>
+<p align="center">
+<i>Figure 1 - Preview of MAppFx version 1.0. </i>
+</p>
+
+<br><br>
+
 ## 🛠 Setup 
 ### Development Environment 
 _Ensure that [Node.js](https://nodejs.org/en/download/) and [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) are installed._
