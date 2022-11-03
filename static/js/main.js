@@ -179,7 +179,7 @@ const plotWNL = () => {
         responsive: true
     };
 
-    Plotly.newPlot('plot', [wnlTrace], layout, {scrollZoom: true, displaylogo: false}, config);
+    Plotly.newPlot('large-plot', [wnlTrace], layout, {scrollZoom: true, displaylogo: false}, config);
 }
 
 // Shows the stats on the left side panel 
@@ -517,7 +517,7 @@ fetch(map_url)
             );
             // On click event on the points
             // Sends data for clicked item to global variable plotData 
-            // layer.on('click', pt => plotData = pt.target.feature.properties) 
+            layer.on('click', pt => plotData = pt.target.feature.properties) 
             layer.on('click', pt => getStats = pt.target.feature.properties)
 
             // // Completes both for plot and stats data 
