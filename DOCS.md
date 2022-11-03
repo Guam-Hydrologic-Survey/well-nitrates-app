@@ -20,7 +20,7 @@
 <br> 
 
 <p align="center">
-<img src="static/assets/MAppFx Well Nitrates v1.0.png" width="800">
+<img src="static/assets/MAppFx Well Nitrates v1.0.png" width="500">
 </p>
 <p align="center">
 <i>Figure 1 - Preview of MAppFx version 1.0. </i>
