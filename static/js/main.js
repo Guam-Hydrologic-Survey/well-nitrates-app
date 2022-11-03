@@ -4,6 +4,8 @@
 // import L from "leaflet";
 // import AwesomeMarkers from 'leaflet.awesome-markers';
 
+// const { tooltip, Tooltip } = require("leaflet");
+
 // Creates Leaflet map 
 const map = L.map('map', {
     center: [13.4453556,144.7043994],
@@ -134,6 +136,30 @@ new L.Toolbar2.Control({
     actions: [resetMapZoom]
     // actions: [resetZoom]
 }).addTo(map);
+
+var lastZoom;
+map.on('zoomend', function() {
+    var currentZoom = map.getZoom();
+    if (currentZoom < 15 && (!lastZoom || lastZoom >= 15)) {
+        map.eachLayer(function(l) {
+            var toolTip = l.getTooltip();
+            if (toolTip) {
+                this.map.closeTooltip(toolTip);
+            }
+        })
+    } 
+    else if (zoom >= 15 && (!lastZoom || lastZoom < 15)) {
+        map.eachLayer(function(l) {
+            if (l.getTooltip) {
+              var toolTip = l.getTooltip();
+              if (toolTip) {
+                this.map.addLayer(toolTip);
+              }
+            }
+          });
+    }
+    lastZoom = currentZoom;
+})
 
 // Plots data points from selected well to chart 
 let plotData 
