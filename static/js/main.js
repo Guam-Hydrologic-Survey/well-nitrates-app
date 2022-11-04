@@ -6,6 +6,8 @@
 
 // const { tooltip, Tooltip } = require("leaflet");
 
+// import * as LeafletSearch from 'leaflet-search';
+
 // Creates Leaflet map 
 const map = L.map('map', {
     center: [13.4453556,144.7043994],
@@ -41,9 +43,9 @@ const ewi = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Wo
 
 const baseLayers = {
     'Open Street Map': osm,
-    'ESRI World Street Map': ewsp,
-    'ESRI World Topo Map': ewtm,
     'ESRI World Imagery': ewi,
+    'ESRI World Topo Map': ewtm,
+    'ESRI World Street Map': ewsp,
 }
 
 const layerControl = L.control.layers(baseLayers, null, {position: 'bottomright'});
@@ -100,13 +102,13 @@ var trashBtn = L.easyButton('<i class="bi bi-trash3-fill"></i>', function() {
     console.log('Clicked on trash btn')
 });
 
-var controlBar = L.easyBar([
+const controlBar = L.easyBar([
     resetZoomBtn,
     drawBtn,
     undoBtn,
     redoBtn,
     trashBtn
-])
+], { position: 'bottomright'})
 
 controlBar.addTo(map);
 
