@@ -317,10 +317,11 @@ const showStats = () => {
             <h4>Well Nitrate Levels for Well ${getStats.name}</h4>
             <hr>
             <div id="plot"></div>
-            <button type="button" class="btn btn-primary text-right" data-bs-toggle="modal" onclick="plotWNL()" data-bs-target="#exampleModal">
-                <i class="bi bi-arrows-angle-expand"></i> Enlarge Plot
-            </button>
-
+            <div class="plot-btn-container">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="plotWNL()" data-bs-target="#exampleModal">
+                    <i class="bi bi-arrows-angle-expand"></i> Enlarge Plot
+                </button>
+            </div>
         `
         // Array to hold date objects
         const x_dates_conv = [];
@@ -567,7 +568,7 @@ fetch(map_url)
                 <br><strong>Lon:</strong> ${feature.properties.lon}
                 <br><strong>Basin:</strong> ${feature.properties.basin}
                 <br><br>
-                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" onclick="showStats()">Statistics</button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" onclick="showStats()">More Info</button>
                 `
             );
             // On click event on the points
