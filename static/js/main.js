@@ -100,13 +100,13 @@ var trashBtn = L.easyButton('<i class="bi bi-trash3-fill"></i>', function() {
     console.log('Clicked on trash btn')
 });
 
-var controlBar = L.easyBar([
+const controlBar = L.easyBar([
     resetZoomBtn,
     drawBtn,
     undoBtn,
     redoBtn,
     trashBtn
-])
+], { position: 'bottomright'})
 
 controlBar.addTo(map);
 
