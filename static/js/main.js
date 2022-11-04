@@ -41,9 +41,9 @@ const ewi = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Wo
 
 const baseLayers = {
     'Open Street Map': osm,
-    'ESRI World Street Map': ewsp,
-    'ESRI World Topo Map': ewtm,
     'ESRI World Imagery': ewi,
+    'ESRI World Topo Map': ewtm,
+    'ESRI World Street Map': ewsp,
 }
 
 const layerControl = L.control.layers(baseLayers, null, {position: 'bottomright'});
