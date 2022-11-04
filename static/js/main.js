@@ -159,8 +159,40 @@ const plotWNL = () => {
         name: 'Well Nitrate Levels'
     };
 
+    var selectorOptions = {
+            buttons: [{
+                step: 'month',
+                stepmode: 'backward',
+                count: 1,
+                label: '1m'
+            }, {
+                step: 'month',
+                stepmode: 'backward',
+                count: 6,
+                label: '6m'
+            }, {
+                step: 'year',
+                stepmode: 'todate',
+                count: 1,
+                label: 'YTD'
+            }, {
+                step: 'year',
+                stepmode: 'backward',
+                count: 1,
+                label: '1y'
+            }, {
+                step: 'all',
+            }],
+        };
+
     // Plot features and layout
     const layout = {
+        autosize: false,
+        height: 600,
+        width: 1100,
+        margin: {
+           
+        },
         title: {
             text: `Nitrate Levels for Well ${plotData.name}`,
             font: {
@@ -168,7 +200,7 @@ const plotWNL = () => {
             }
         },
         xaxis: {
-            title: 'Years'
+            rangeselector: selectorOptions,
         },
         yaxis: {
             title: 'ppm (mg/L)'
@@ -176,10 +208,16 @@ const plotWNL = () => {
     };
 
     var config = {
-        responsive: true
+        toImageButtonOptions: {
+            format: 'png', // png, svg, jpeg, webp
+            filename: 'well_plot',
+            height: 500,
+            width: 700,
+            scale: 1 
+          }
     };
 
-    Plotly.newPlot('plot', [wnlTrace], layout, {scrollZoom: true, displaylogo: false}, config);
+    Plotly.newPlot('large-plot', [wnlTrace], layout, {scrollZoom: true, displaylogo: false, responsive: true}, config);
 }
 
 // Shows the stats on the left side panel 
@@ -275,7 +313,63 @@ const showStats = () => {
                     </div>
                 </div>
             </div>
+            <br><br><br>
+            <h4>Well Nitrate Levels for Well ${getStats.name}</h4>
+            <hr>
+            <div id="plot"></div>
         `
+        // Array to hold date objects
+        const x_dates_conv = [];
+
+        // Converted date strings from x_vals to JS date objects 
+        for (let i = 0; i < getStats.x_vals.length; i++) {
+            x_dates_conv[i] = new Date(getStats.x_vals[i]);
+        };
+
+        // Plots x,y coordinates 
+        const wnlTrace = {
+            x: x_dates_conv,
+            y: getStats.y_vals,
+            type: 'scatter', 
+            mode: 'markers',
+            name: 'Well Nitrate Levels'
+        };
+
+        // Plot features and layout
+        const layout = {
+            autosize: false,
+            width: 400,
+            height: 550,
+            margin: {
+                l: 70,
+                r: 20,
+                b: 70,
+                t: 20,
+                pad: 30
+            },
+            title: {
+                // text: `Nitrate Levels for Well ${getStats.name}`,
+                font: {
+                    size: 20
+                }
+            },
+            xaxis: {
+                // rangeselector: selectorOptions,
+                rangeslider: {}
+            },
+            yaxis: {
+                title: 'ppm (mg/L)',
+                fixedrange: true
+            }
+        };
+
+        var config = {
+            toImageButtonOptions: {
+                filename: `plot_well_${plotData.name}`
+            }
+        };
+
+        Plotly.newPlot('plot', [wnlTrace], layout, {scrollZoom: true, displaylogo: false, responsive: true}, config);
 }
 
 // All in one function to build side panel with both stats and plot for selected well 
