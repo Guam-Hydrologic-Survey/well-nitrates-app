@@ -8,9 +8,11 @@
 
 // import * as LeafletSearch from 'leaflet-search';
 
+const center = [13.5435056,144.7478083];
+
 // Creates Leaflet map 
 const map = L.map('map', {
-    center: [13.4453556,144.7043994],
+    center: center,
     zoom: 12,
     zoomControl: false,
 })
@@ -78,12 +80,12 @@ var resetMapZoom = L.Toolbar2.Action.extend({
         }
     },
     addHooks: function() {
-        map.setView([13.4453556,144.7043994], 12);
+        map.setView(center, 12);
     }
 });
 
 var resetZoomBtn = L.easyButton('<i class="bi bi-map"></i>', function() {
-    map.setView([13.4453556,144.7043994], 12);
+    map.setView(center, 12);
 });
 
 var drawBtn = L.easyButton('<i class="bi bi-pencil-fill"></i>', function() {
