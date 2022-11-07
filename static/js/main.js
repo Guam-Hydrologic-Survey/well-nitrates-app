@@ -43,19 +43,6 @@ const baseLayers = {
 const layerControl = L.control.layers(baseLayers, null, {position: 'bottomright'});
 layerControl.addTo(map);
 
-// Search bar 
-// const search = new GeoSearch.GeoSearchControl({
-//     provider: new GeoSearch.OpenStreetMapProvider(),
-// });
-
-// const search = new SearchControl({
-//     style: 'button',
-//     provider: new OpenStreetMapProvider(),
-// });
-
-// map.addControl(search);
-
-
 L.control.zoom({
     // options: topleft, topright, bottomleft, bottomright
     position: 'bottomright'
