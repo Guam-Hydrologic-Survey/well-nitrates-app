@@ -216,6 +216,16 @@ const plotWNL = () => {
             }],
         };
 
+    // const selectorLabels = [
+    //     {
+    //         text: 'Step Options: ',
+    //         x: 0,
+    //         y: 1.085, 
+    //         align: 'left',
+    //         showarrow: false
+    //     }
+    // ]
+    
     // Plot features and layout
     const layout = {
         autosize: false,
@@ -235,7 +245,8 @@ const plotWNL = () => {
         },
         yaxis: {
             title: 'ppm (mg/L)'
-        }
+        },
+        annotations: selectorLabels,
     };
 
     var config = {
