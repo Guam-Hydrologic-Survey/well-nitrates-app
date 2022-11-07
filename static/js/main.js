@@ -246,7 +246,7 @@ const plotWNL = () => {
         yaxis: {
             title: 'ppm (mg/L)'
         },
-        annotations: selectorLabels,
+        // annotations: selectorLabels,
     };
 
     var config = {
