@@ -62,18 +62,6 @@ L.control.zoom({
 }).addTo(map);
 
 // Control: Reset map view (goes to initial map zoom on page load)
-var resetMapZoom = L.Toolbar2.Action.extend({ 
-    options: {
-        toolbarIcon: {
-            html: '&#xF425;', // '&#x2302;', 
-            tooltip: 'Reset Map View'
-        }
-    },
-    addHooks: function() {
-        map.setView(center, 12);
-    }
-});
-
 var resetZoomBtn = L.easyButton('<i class="bi bi-map"></i>', function() {
     map.setView(center, 12);
 });
