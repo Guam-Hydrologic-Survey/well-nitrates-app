@@ -6,9 +6,13 @@
 
 // const { tooltip, Tooltip } = require("leaflet");
 
+// import * as LeafletSearch from 'leaflet-search';
+
+const center = [13.5435056,144.7478083];
+
 // Creates Leaflet map 
 const map = L.map('map', {
-    center: [13.4453556,144.7043994],
+    center: center,
     zoom: 12,
     zoomControl: false,
 })
@@ -39,19 +43,11 @@ const ewi = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Wo
 	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community | DKValerio, MWZapata, JBulaklak, NCHabana 2022'
 }); 
 
-// ESRI World Shaded Relief 
-const ewsr = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile/{z}/{y}/{x}', {
-    maxZoom: baseLayersZoom,
-	attribution: 'Tiles &copy; Esri &mdash; Source: Esri'
-});
-
-
 const baseLayers = {
     'Open Street Map': osm,
-    'ESRI World Street Map': ewsp,
-    'ESRI World Topo Map': ewtm,
     'ESRI World Imagery': ewi,
-    'ESRI World Shaded Relief': ewsr
+    'ESRI World Topo Map': ewtm,
+    'ESRI World Street Map': ewsp,
 }
 
 const layerControl = L.control.layers(baseLayers, null, {position: 'bottomright'});
@@ -84,12 +80,12 @@ var resetMapZoom = L.Toolbar2.Action.extend({
         }
     },
     addHooks: function() {
-        map.setView([13.4453556,144.7043994], 12);
+        map.setView(center, 12);
     }
 });
 
 var resetZoomBtn = L.easyButton('<i class="bi bi-map"></i>', function() {
-    map.setView([13.4453556,144.7043994], 12);
+    map.setView(center, 12);
 });
 
 var drawBtn = L.easyButton('<i class="bi bi-pencil-fill"></i>', function() {
@@ -108,17 +104,19 @@ var trashBtn = L.easyButton('<i class="bi bi-trash3-fill"></i>', function() {
     console.log('Clicked on trash btn')
 });
 
-var controlBar = L.easyBar([
+const controlBar = L.easyBar([
     resetZoomBtn,
     drawBtn,
     undoBtn,
     redoBtn,
     trashBtn
-])
+], { position: 'bottomright'})
 
 controlBar.addTo(map);
 
 // Control: Measure distance and area 
+// var measureControl = new L.Control.Measure();
+// measureControl.addTo(map);
 
 // Control: Drop a pin 
 
@@ -129,13 +127,6 @@ controlBar.addTo(map);
 // Control: Draw a rectangle 
 
 // Control: Draw a circle 
-
-// Control group for toolbar 
-new L.Toolbar2.Control({
-    position: 'bottomright',
-    actions: [resetMapZoom]
-    // actions: [resetZoom]
-}).addTo(map);
 
 // Hides tooltip based on zoom level 
 map.on('zoomend', function(z) {
@@ -150,6 +141,16 @@ map.on('zoomend', function(z) {
         });
     }
 });
+
+// Title card 
+// const titleBounds = [[13.624078, 144.362341], [13.574357, 144.361311]]
+// const imgURL = 'https://github.com/WERI-GHS/well-nitrates-app/blob/17872d8c9cb12c10d543cd578e94f886d4fcb57d/static/assets/WERI%20MAppFx%20Well%20Nitrates%20Title%20Card.PNG';
+// const titleCard = L.imageOverlay(imgURL, titleBounds);
+// titleCard.addTo(map);
+
+var imageUrl = 'https://ghs-cdn.uog.edu/wp-content/uploads/2022/11/WERI-MAppFx-Well-Nitrates-Title-Card.png',
+    imageBounds = [[13.626601, 144.427853], [13.567203, 144.429570]];
+L.imageOverlay(imageUrl, imageBounds).addTo(map);
 
 // Plots data points from selected well to chart 
 let plotData 
@@ -172,27 +173,95 @@ const plotWNL = () => {
         name: 'Well Nitrate Levels'
     };
 
+    var selectorOptions = {
+            buttons: [{
+                step: 'year',
+                stepmode: 'backward',
+                count: 1,
+                label: '1y'
+            }, {
+                step: 'year',
+                stepmode: 'backward',
+                count: 5,
+                label: '5y'
+            }, {
+                step: 'year',
+                stepmode: 'todate',
+                count: 10,
+                label: '10y'
+            }, {
+                step: 'year',
+                stepmode: 'backward',
+                count: 20,
+                label: '20y'
+            }, 
+            {
+                step: 'year',
+                stepmode: 'backward',
+                count: 30,
+                label: '30y'
+            }, 
+            {
+                step: 'year',
+                stepmode: 'backward',
+                count: 40,
+                label: '40y'
+            },
+            {
+                step: 'year',
+                stepmode: 'backward',
+                count: 50,
+                label: '50y'
+            },
+            {
+                step: 'all',
+            }],
+        };
+
+    // const selectorLabels = [
+    //     {
+    //         text: 'Step Options: ',
+    //         x: 0,
+    //         y: 1.085, 
+    //         align: 'left',
+    //         showarrow: false
+    //     }
+    // ]
+    
     // Plot features and layout
     const layout = {
+        autosize: false,
+        height: 600,
+        width: 1100,
+        margin: {
+           
+        },
         title: {
-            text: `Nitrate Levels for Well ${plotData.name}`,
+            text: `<b>Nitrate Levels for Well ${plotData.name}</b>`,
             font: {
                 size: 20
             }
         },
         xaxis: {
-            title: 'Years'
+            rangeselector: selectorOptions,
         },
         yaxis: {
             title: 'ppm (mg/L)'
-        }
+        },
+        // annotations: selectorLabels,
     };
 
     var config = {
-        responsive: true
+        toImageButtonOptions: {
+            format: 'png', // png, svg, jpeg, webp
+            filename: 'well_plot',
+            height: 500,
+            width: 700,
+            scale: 1 
+          }
     };
 
-    Plotly.newPlot('plot', [wnlTrace], layout, {scrollZoom: true, displaylogo: false}, config);
+    Plotly.newPlot('large-plot', [wnlTrace], layout, {scrollZoom: true, displaylogo: false, responsive: true}, config);
 }
 
 // Shows the stats on the left side panel 
@@ -288,7 +357,68 @@ const showStats = () => {
                     </div>
                 </div>
             </div>
+            <br><br><br>
+            <h4>Well Nitrate Levels for Well ${getStats.name}</h4>
+            <hr>
+            <div id="plot"></div>
+            <div class="plot-btn-container">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="plotWNL()" data-bs-target="#exampleModal">
+                    <i class="bi bi-arrows-angle-expand"></i> Enlarge Plot
+                </button>
+            </div>
         `
+        // Array to hold date objects
+        const x_dates_conv = [];
+
+        // Converted date strings from x_vals to JS date objects 
+        for (let i = 0; i < getStats.x_vals.length; i++) {
+            x_dates_conv[i] = new Date(getStats.x_vals[i]);
+        };
+
+        // Plots x,y coordinates 
+        const wnlTrace = {
+            x: x_dates_conv,
+            y: getStats.y_vals,
+            type: 'scatter', 
+            mode: 'markers',
+            name: 'Well Nitrate Levels'
+        };
+
+        // Plot features and layout
+        const layout = {
+            autosize: false,
+            width: 400,
+            height: 550,
+            margin: {
+                l: 70,
+                r: 20,
+                b: 70,
+                t: 20,
+                pad: 30
+            },
+            title: {
+                // text: `Nitrate Levels for Well ${getStats.name}`,
+                font: {
+                    size: 20
+                }
+            },
+            xaxis: {
+                // rangeselector: selectorOptions,
+                rangeslider: {}
+            },
+            yaxis: {
+                title: 'ppm (mg/L)',
+                fixedrange: true
+            }
+        };
+
+        var config = {
+            toImageButtonOptions: {
+                filename: `plot_well_${plotData.name}`
+            }
+        };
+
+        Plotly.newPlot('plot', [wnlTrace], layout, {scrollZoom: true, displaylogo: false, responsive: true}, config);
 }
 
 // All in one function to build side panel with both stats and plot for selected well 
@@ -482,8 +612,7 @@ fetch(map_url)
                 <br><strong>Lon:</strong> ${feature.properties.lon}
                 <br><strong>Basin:</strong> ${feature.properties.basin}
                 <br><br>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="plotWNL()" data-bs-target="#exampleModal">Plot</button>
-                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" onclick="showStats()">Statistics</button>
+                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" onclick="showStats()">More Info</button>
                 `
             );
             // On click event on the points
