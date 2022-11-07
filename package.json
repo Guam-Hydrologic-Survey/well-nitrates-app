@@ -1,16 +1,10 @@
 {
+  "homepage": "https://guam-hydrologic-survey.github.io/well-nitrates-app/",
+  "name": "mappfx-well-nitrates",
   "dependencies": {
-    "bootstrap": "^5.2.2",
-    "bootstrap-icons": "^1.9.1",
-    "grunt": "^1.5.3",
-    "leaflet": "^1.9.1",
-    "leaflet-easybutton": "^2.4.0",
-    "leaflet-geosearch": "^3.7.0",
-    "leaflet-layerjson": "^0.3.4",
-    "leaflet-search": "^3.0.3",
-    "leaflet-toolbar": "^0.4.0-alpha.2",
-    "leaflet.awesome-markers": "^2.0.5",
-    "leaflet.markercluster": "^1.5.3",
     "plotly.js-dist": "^2.14.0"
+  },
+  "scripts": {
+
   }
 }

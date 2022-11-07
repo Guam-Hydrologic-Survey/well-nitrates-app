@@ -1,13 +1,3 @@
-// import * as GeoSearch from 'leaflet-geosearch';
-// import 'node_modules/leaflet-geosearch';
-// import { SearchControl, OpenStreetMapProvider } from "leaflet-geosearch";
-// import L from "leaflet";
-// import AwesomeMarkers from 'leaflet.awesome-markers';
-
-// const { tooltip, Tooltip } = require("leaflet");
-
-// import * as LeafletSearch from 'leaflet-search';
-
 const center = [13.5435056,144.7478083];
 
 // Creates Leaflet map 
@@ -53,37 +43,12 @@ const baseLayers = {
 const layerControl = L.control.layers(baseLayers, null, {position: 'bottomright'});
 layerControl.addTo(map);
 
-// Search bar 
-// const search = new GeoSearch.GeoSearchControl({
-//     provider: new GeoSearch.OpenStreetMapProvider(),
-// });
-
-// const search = new SearchControl({
-//     style: 'button',
-//     provider: new OpenStreetMapProvider(),
-// });
-
-// map.addControl(search);
-
-
 L.control.zoom({
     // options: topleft, topright, bottomleft, bottomright
     position: 'bottomright'
 }).addTo(map);
 
 // Control: Reset map view (goes to initial map zoom on page load)
-var resetMapZoom = L.Toolbar2.Action.extend({ 
-    options: {
-        toolbarIcon: {
-            html: '&#xF425;', // '&#x2302;', 
-            tooltip: 'Reset Map View'
-        }
-    },
-    addHooks: function() {
-        map.setView(center, 12);
-    }
-});
-
 var resetZoomBtn = L.easyButton('<i class="bi bi-map"></i>', function() {
     map.setView(center, 12);
 });
@@ -114,20 +79,6 @@ const controlBar = L.easyBar([
 
 controlBar.addTo(map);
 
-// Control: Measure distance and area 
-// var measureControl = new L.Control.Measure();
-// measureControl.addTo(map);
-
-// Control: Drop a pin 
-
-// Control: Draw a line 
-
-// Control: Draw a polygon 
-
-// Control: Draw a rectangle 
-
-// Control: Draw a circle 
-
 // Hides tooltip based on zoom level 
 map.on('zoomend', function(z) {
     var zoomLevel = map.getZoom();
@@ -141,12 +92,6 @@ map.on('zoomend', function(z) {
         });
     }
 });
-
-// Title card 
-// const titleBounds = [[13.624078, 144.362341], [13.574357, 144.361311]]
-// const imgURL = 'https://github.com/WERI-GHS/well-nitrates-app/blob/17872d8c9cb12c10d543cd578e94f886d4fcb57d/static/assets/WERI%20MAppFx%20Well%20Nitrates%20Title%20Card.PNG';
-// const titleCard = L.imageOverlay(imgURL, titleBounds);
-// titleCard.addTo(map);
 
 var imageUrl = 'https://ghs-cdn.uog.edu/wp-content/uploads/2022/11/WERI-MAppFx-Well-Nitrates-Title-Card.png',
     imageBounds = [[13.626601, 144.427853], [13.567203, 144.429570]];
@@ -217,16 +162,6 @@ const plotWNL = () => {
                 step: 'all',
             }],
         };
-
-    // const selectorLabels = [
-    //     {
-    //         text: 'Step Options: ',
-    //         x: 0,
-    //         y: 1.085, 
-    //         align: 'left',
-    //         showarrow: false
-    //     }
-    // ]
     
     // Plot features and layout
     const layout = {
@@ -248,7 +183,6 @@ const plotWNL = () => {
         yaxis: {
             title: 'ppm (mg/L)'
         },
-        // annotations: selectorLabels,
     };
 
     var config = {
@@ -420,11 +354,6 @@ const showStats = () => {
 
         Plotly.newPlot('plot', [wnlTrace], layout, {scrollZoom: true, displaylogo: false, responsive: true}, config);
 }
-
-// All in one function to build side panel with both stats and plot for selected well 
-// let getData
-// const showData = () => {
-// }
 
 // Filepath for map (lat, lon coords) json and data (stats, x-y vals) json 
 const map_url = './static/data/data6.json';
@@ -620,8 +549,6 @@ fetch(map_url)
             layer.on('click', pt => plotData = pt.target.feature.properties) 
             layer.on('click', pt => getStats = pt.target.feature.properties)
 
-            // // Completes both for plot and stats data 
-            // layer.on('click', pt => getData = pt.target.feature.properties)
         }
 
         // Places points on the map and calls on getWellInfo function (right above) to show pop-ups 
