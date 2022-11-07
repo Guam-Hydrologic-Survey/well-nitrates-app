@@ -140,6 +140,16 @@ map.on('zoomend', function(z) {
     }
 });
 
+// Title card 
+// const titleBounds = [[13.624078, 144.362341], [13.574357, 144.361311]]
+// const imgURL = 'https://github.com/WERI-GHS/well-nitrates-app/blob/17872d8c9cb12c10d543cd578e94f886d4fcb57d/static/assets/WERI%20MAppFx%20Well%20Nitrates%20Title%20Card.PNG';
+// const titleCard = L.imageOverlay(imgURL, titleBounds);
+// titleCard.addTo(map);
+
+var imageUrl = 'https://ghs-cdn.uog.edu/wp-content/uploads/2022/11/WERI-MAppFx-Well-Nitrates-Title-Card.png',
+    imageBounds = [[13.626601, 144.427853], [13.567203, 144.429570]];
+L.imageOverlay(imageUrl, imageBounds).addTo(map);
+
 // Plots data points from selected well to chart 
 let plotData 
 const plotWNL = () => {
