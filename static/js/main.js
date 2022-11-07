@@ -173,26 +173,45 @@ const plotWNL = () => {
 
     var selectorOptions = {
             buttons: [{
-                step: 'month',
-                stepmode: 'backward',
-                count: 1,
-                label: '1m'
-            }, {
-                step: 'month',
-                stepmode: 'backward',
-                count: 6,
-                label: '6m'
-            }, {
-                step: 'year',
-                stepmode: 'todate',
-                count: 1,
-                label: 'YTD'
-            }, {
                 step: 'year',
                 stepmode: 'backward',
                 count: 1,
                 label: '1y'
             }, {
+                step: 'year',
+                stepmode: 'backward',
+                count: 5,
+                label: '5y'
+            }, {
+                step: 'year',
+                stepmode: 'todate',
+                count: 10,
+                label: '10y'
+            }, {
+                step: 'year',
+                stepmode: 'backward',
+                count: 20,
+                label: '20y'
+            }, 
+            {
+                step: 'year',
+                stepmode: 'backward',
+                count: 30,
+                label: '30y'
+            }, 
+            {
+                step: 'year',
+                stepmode: 'backward',
+                count: 40,
+                label: '40y'
+            },
+            {
+                step: 'year',
+                stepmode: 'backward',
+                count: 50,
+                label: '50y'
+            },
+            {
                 step: 'all',
             }],
         };
