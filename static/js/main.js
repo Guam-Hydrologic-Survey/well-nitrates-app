@@ -1,5 +1,10 @@
 const center = [13.5435056,144.7478083];
 
+// current screen size 
+var w = window.innerWidth;
+var h = window.innerHeight;
+console.log("w = " + w + ", h = " + h);
+
 // Creates Leaflet map 
 const map = L.map('map', {
     center: center,
