@@ -98,9 +98,9 @@ map.on('zoomend', function(z) {
     }
 });
 
-var imageUrl = 'https://ghs-cdn.uog.edu/wp-content/uploads/2022/11/WERI-MAppFx-Well-Nitrates-Title-Card.png',
-    imageBounds = [[13.626601, 144.427853], [13.567203, 144.429570]];
-L.imageOverlay(imageUrl, imageBounds).addTo(map);
+// var imageUrl = '../assets/WERI MAppFx Well Nitrates Title Card.PNG',
+//     imageBounds = [[13.626601, 144.427853], [13.567203, 144.429570]];
+// L.imageOverlay(imageUrl, imageBounds).addTo(map);
 
 // Plots data points from selected well to chart 
 let plotData 
