@@ -100,31 +100,52 @@ map.on('zoomend', function(z) {
     }
 });
 
-// var drawnItems = new L.FeatureGroup();
+var drawnFeatures = new L.FeatureGroup();
 
-// drawnItems.on("click", function(e) {
-//     console.log("drawnItems");
-//     console.log(e);
-// });
+drawnFeatures.on("click", function(e) {
+    console.log("drawnFeatures");
+    console.log(e);
+});
 
-// map.addLayer(drawnItems);
+map.addLayer(drawnFeatures);
 
-// var drawControl = new L.Control.Draw({
-//     position: "topright",
-//     draw: {
-//         polyline: true,
-//         polygon: {
-//             allowIntersection: false;
-//         },
-//         shapeOptions: {
-//             clickable: true
-//         }
-//     },
-//     edit: {
-//         feature: drawnItems, 
-//         remove: true
-//     }
-// });
+var drawControl = new L.Control.Draw({
+    // position: "topright",
+    edit: {
+        featureGroup: drawnFeatures,
+        remove: true
+    },
+    draw: {
+        polygon: {
+         shapeOptions: {
+          color: 'purple'
+         },
+        //  allowIntersection: false,
+        //  drawError: {
+        //   color: 'orange',
+        //   timeout: 1000
+        //  },
+        },
+        polyline: {
+         shapeOptions: {
+          color: 'red'
+         },
+        },
+        rect: {
+         shapeOptions: {
+          color: 'green'
+         },
+        },
+        circle: {
+         shapeOptions: {
+          color: 'steelblue'
+         },
+        },
+       },
+
+});
+
+map.addControl(drawControl);
 
 // map.addControl(drawControl);
 
