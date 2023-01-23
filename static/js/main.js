@@ -1,3 +1,5 @@
+// import "leaflet-draw";
+
 const center = [13.5435056,144.7478083];
 
 // current screen size 
@@ -97,6 +99,34 @@ map.on('zoomend', function(z) {
         });
     }
 });
+
+// var drawnItems = new L.FeatureGroup();
+
+// drawnItems.on("click", function(e) {
+//     console.log("drawnItems");
+//     console.log(e);
+// });
+
+// map.addLayer(drawnItems);
+
+// var drawControl = new L.Control.Draw({
+//     position: "topright",
+//     draw: {
+//         polyline: true,
+//         polygon: {
+//             allowIntersection: false;
+//         },
+//         shapeOptions: {
+//             clickable: true
+//         }
+//     },
+//     edit: {
+//         feature: drawnItems, 
+//         remove: true
+//     }
+// });
+
+// map.addControl(drawControl);
 
 // var imageUrl = '../assets/WERI MAppFx Well Nitrates Title Card.PNG',
 //     imageBounds = [[13.626601, 144.427853], [13.567203, 144.429570]];
