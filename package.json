@@ -3,8 +3,10 @@
   "name": "mappfx-well-nitrates",
   "dependencies": {
     "leaflet-draw": "^1.0.4",
+    "leaflet-measure": "^3.1.0",
     "plotly.js": "^2.18.0",
     "plotly.js-dist": "^2.14.0"
   },
+  "type": "module",
   "scripts": {}
 }
