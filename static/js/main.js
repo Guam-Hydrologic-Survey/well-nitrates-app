@@ -121,10 +121,6 @@ map.on(L.Draw.Event.CREATED, function(event) {
 
 // map.addControl(drawControl);
 
-// var imageUrl = '../assets/WERI MAppFx Well Nitrates Title Card.PNG',
-//     imageBounds = [[13.626601, 144.427853], [13.567203, 144.429570]];
-// L.imageOverlay(imageUrl, imageBounds).addTo(map);
-
 // Plots data points from selected well to chart 
 let plotData 
 const plotWNL = () => {
