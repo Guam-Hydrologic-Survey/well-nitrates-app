@@ -72,47 +72,52 @@ map.on('zoomend', function(z) {
     }
 });
 
+// Draw control bar
 var drawnFeatures = new L.FeatureGroup();
-
 map.addLayer(drawnFeatures);
 
 var drawControl = new L.Control.Draw({
-    // position: "topright",
-    edit: {
-        featureGroup: drawnFeatures,
-        remove: true
-    },
+    position: "bottomright",
     draw: {
+        polyline: true,
         polygon: {
-         shapeOptions: {
-          color: 'purple'
-         },
-        //  allowIntersection: false,
-        //  drawError: {
-        //   color: 'orange',
-        //   timeout: 1000
-        //  },
-        },
-        polyline: {
-         shapeOptions: {
-          color: 'red'
-         },
-        },
-        rect: {
-         shapeOptions: {
-          color: 'green'
-         },
+            allowIntersection: false,
+            showArea: true,
+            showLength: true,
+            shapeOptions: {
+                color: "purple",
+                clickable: true
+            }
         },
         circle: {
-         shapeOptions: {
-          color: 'steelblue'
-         },
+            shapeOptions: {
+                shapeOptions: {
+                    color: "blue",
+                    clickable: true
+                }
+            }
         },
-       },
-
+        circlemarker: false,
+        rectangle: {
+            shapeOptions: {
+                color: "red",
+                clickable: true
+            }
+        },
+        marker: false
+    },
+    edit: {
+        featureGroup: drawnFeatures,
+        remove: true,
+    }
 });
 
 map.addControl(drawControl);
+
+map.on(L.Draw.Event.CREATED, function(event) {
+    var layer = event.layer;
+    drawnFeatures.addLayer(layer);
+})
 
 // map.addControl(drawControl);
 
