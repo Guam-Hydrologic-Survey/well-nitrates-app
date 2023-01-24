@@ -58,37 +58,6 @@ L.control.zoom({
 
 L.control.scale({ position: 'bottomleft'}).addTo(map);
 
-// Control: Reset map view (goes to initial map zoom on page load)
-var resetZoomBtn = L.easyButton('<i class="bi bi-map"></i>', function() {
-    map.setView(center, 12);
-});
-
-var drawBtn = L.easyButton('<i class="bi bi-pencil-fill"></i>', function() {
-    console.log('Clicked on draw btn')
-});
-
-var undoBtn = L.easyButton('<i class="bi bi-arrow-counterclockwise"></i>', function() {
-    console.log('Clicked on undo btn')
-});
-
-var redoBtn = L.easyButton('<i class="bi bi-arrow-clockwise"></i>', function() {
-    console.log('Clicked on redo btn')
-});
-
-var trashBtn = L.easyButton('<i class="bi bi-trash3-fill"></i>', function() {
-    console.log('Clicked on trash btn')
-});
-
-const controlBar = L.easyBar([
-    resetZoomBtn,
-    drawBtn,
-    undoBtn,
-    redoBtn,
-    trashBtn
-], { position: 'bottomright'})
-
-controlBar.addTo(map);
-
 // Hides tooltip based on zoom level 
 map.on('zoomend', function(z) {
     var zoomLevel = map.getZoom();
@@ -104,11 +73,6 @@ map.on('zoomend', function(z) {
 });
 
 var drawnFeatures = new L.FeatureGroup();
-
-drawnFeatures.on("click", function(e) {
-    console.log("drawnFeatures");
-    console.log(e);
-});
 
 map.addLayer(drawnFeatures);
 
