@@ -1,4 +1,4 @@
-// import "leaflet-draw";
+
 
 const center = [13.5435056,144.7478083];
 
@@ -12,6 +12,7 @@ const map = L.map('map', {
     center: center,
     zoom: 12,
     zoomControl: false,
+    measureControl: true,
 })
 
 const baseLayersZoom = 19;
@@ -54,6 +55,8 @@ L.control.zoom({
     // options: topleft, topright, bottomleft, bottomright
     position: 'bottomright'
 }).addTo(map);
+
+L.control.scale({ position: 'bottomleft'}).addTo(map);
 
 // Control: Reset map view (goes to initial map zoom on page load)
 var resetZoomBtn = L.easyButton('<i class="bi bi-map"></i>', function() {
