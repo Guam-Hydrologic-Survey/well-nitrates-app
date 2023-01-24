@@ -114,6 +114,7 @@ var drawControl = new L.Control.Draw({
 
 map.addControl(drawControl);
 
+// TODO - add drawing layer to layer group; allow to toggle on and off (instead of clearing map of drawings)
 map.on(L.Draw.Event.CREATED, function(event) {
     var layer = event.layer;
     drawnFeatures.addLayer(layer);
