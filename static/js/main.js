@@ -79,7 +79,12 @@ map.addLayer(drawnFeatures);
 var drawControl = new L.Control.Draw({
     position: "bottomright",
     draw: {
-        polyline: true,
+        polyline: {
+            allowIntersection: true,
+            shapeOptions: {
+                color: "orange"
+            }
+        },
         polygon: {
             allowIntersection: false,
             showArea: true,
@@ -100,7 +105,7 @@ var drawControl = new L.Control.Draw({
         circlemarker: false,
         rectangle: {
             shapeOptions: {
-                color: "red",
+                color: "green",
                 clickable: true
             }
         },
@@ -588,7 +593,12 @@ fetch(map_url)
             propertyName: 'name',
             casesensitive: false,
             // position: 'bottomleft'
-            zoom: 16,
+            // zoom: 16,
+            // moveToLocation: ,
+            moveToLocation: function(latlng, title, map) {
+                console.log(latlng);
+                map.setView(latlng, 16);
+            },
             textPlaceholder: 'Well Name...',
             textErr: 'Sorry, could not find well.',
             autoResize: true,
@@ -598,6 +608,7 @@ fetch(map_url)
                 circle: {
                     weight: 6,
                     radius: 30,
+                    color: 'red',
                 }
             }
         });
