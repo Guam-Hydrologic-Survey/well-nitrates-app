@@ -597,6 +597,10 @@ fetch(map_url)
             }
         });
 
+        searchControl.on("search:locationfound", function(e) {
+            e.layer.openPopup();
+        });
+
         map.addControl(searchControl);
     })
     .catch(console.error);
