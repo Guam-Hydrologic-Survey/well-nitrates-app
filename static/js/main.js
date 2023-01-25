@@ -582,6 +582,7 @@ fetch(map_url)
         const searchControl = new L.Control.Search({
             layer: mapJson,
             propertyName: 'name',
+            position: 'bottomleft'
         });
 
         map.addControl(searchControl);
