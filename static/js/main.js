@@ -120,8 +120,6 @@ map.on(L.Draw.Event.CREATED, function(event) {
     drawnFeatures.addLayer(layer);
 })
 
-// map.addControl(drawControl);
-
 // Plots data points from selected well to chart 
 let plotData 
 const plotWNL = () => {
@@ -579,5 +577,14 @@ fetch(map_url)
         // Places points on the map and calls on getWellInfo function (right above) to show pop-ups 
         const mapJson = L.geoJSON(geojson, {onEachFeature: getWellInfo}).addTo(map);
         layerControl.addOverlay(mapJson, "Wells") 
+
+        // Control search 
+        const searchControl = new L.Control.Search({
+            layer: mapJson,
+            propertyName: 'name',
+        });
+
+        map.addControl(searchControl);
     })
     .catch(console.error);
+
