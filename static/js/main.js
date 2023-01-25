@@ -582,7 +582,19 @@ fetch(map_url)
         const searchControl = new L.Control.Search({
             layer: mapJson,
             propertyName: 'name',
-            position: 'bottomleft'
+            casesensitive: false,
+            // position: 'bottomleft'
+            zoom: 16,
+            textPlaceholder: 'Well Name...',
+            textErr: 'Sorry, could not find well.',
+            autoResize: true,
+            marker: {
+                icon: false,
+                animate: false,
+                circle: {
+                    radius: 30,
+                }
+            }
         });
 
         map.addControl(searchControl);
