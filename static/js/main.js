@@ -120,6 +120,10 @@ map.on(L.Draw.Event.CREATED, function(event) {
     drawnFeatures.addLayer(layer);
 })
 
+// Measure control 
+// var measureControl = new L.Control.Measure();
+// measureControl.addTo(map);
+
 // Plots data points from selected well to chart 
 let plotData 
 const plotWNL = () => {
@@ -592,6 +596,7 @@ fetch(map_url)
                 icon: false,
                 animate: false,
                 circle: {
+                    weight: 6,
                     radius: 30,
                 }
             }
