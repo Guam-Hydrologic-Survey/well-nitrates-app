@@ -593,10 +593,7 @@ fetch(map_url)
             propertyName: 'name',
             casesensitive: false,
             // position: 'bottomleft'
-            // zoom: 16,
-            // moveToLocation: ,
             moveToLocation: function(latlng, title, map) {
-                console.log(latlng);
                 map.flyTo(latlng, 16);
             },
             textPlaceholder: 'Well Name...',
