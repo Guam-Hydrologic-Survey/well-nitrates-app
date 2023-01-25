@@ -597,7 +597,7 @@ fetch(map_url)
             // moveToLocation: ,
             moveToLocation: function(latlng, title, map) {
                 console.log(latlng);
-                map.setView(latlng, 16);
+                map.flyTo(latlng, 16);
             },
             textPlaceholder: 'Well Name...',
             textErr: 'Sorry, could not find well.',
