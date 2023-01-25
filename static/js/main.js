@@ -104,6 +104,8 @@ var drawControl = new L.Control.Draw({
         },
         circlemarker: false,
         rectangle: {
+            showArea: true,
+            showLength: true,
             shapeOptions: {
                 color: "green",
                 clickable: true
