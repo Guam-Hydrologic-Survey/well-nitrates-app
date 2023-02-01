@@ -7,15 +7,15 @@
 <br>
 
 ## 📖  _Table of Contents_
-1. [Setup](#setup) 
+1. [Setup](#🛠-setup) 
     - [Development Environment](#development-environment)
-    - [Libraries](#libraries) 
-    - [Packages and Dependencies](#packages-and-dependencies)
-2. [Deployment](#deployment)
+    - [Libraries](#📚-libraries) 
+    - [Packages and Dependencies](#📦-packages-and-dependencies)
+2. [Deployment](#🚀-deployment)
     - [Local Development Server](#run-a-local-development-server) 
     - [Start and Build](#start-and-build)
-3. [Index](#index) 
-4. [Author](#author)
+3. [Index](#🗂-index) 
+4. [Author](#👩‍💻-author)
 
 <br> 
 

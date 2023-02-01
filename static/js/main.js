@@ -1,10 +1,18 @@
+
+
 const center = [13.5435056,144.7478083];
+
+// current screen size 
+var w = window.innerWidth;
+var h = window.innerHeight;
+console.log("w = " + w + ", h = " + h);
 
 // Creates Leaflet map 
 const map = L.map('map', {
     center: center,
     zoom: 12,
     zoomControl: false,
+    measureControl: true,
 })
 
 const baseLayersZoom = 19;
@@ -48,36 +56,7 @@ L.control.zoom({
     position: 'bottomright'
 }).addTo(map);
 
-// Control: Reset map view (goes to initial map zoom on page load)
-var resetZoomBtn = L.easyButton('<i class="bi bi-map"></i>', function() {
-    map.setView(center, 12);
-});
-
-var drawBtn = L.easyButton('<i class="bi bi-pencil-fill"></i>', function() {
-    console.log('Clicked on draw btn')
-});
-
-var undoBtn = L.easyButton('<i class="bi bi-arrow-counterclockwise"></i>', function() {
-    console.log('Clicked on undo btn')
-});
-
-var redoBtn = L.easyButton('<i class="bi bi-arrow-clockwise"></i>', function() {
-    console.log('Clicked on redo btn')
-});
-
-var trashBtn = L.easyButton('<i class="bi bi-trash3-fill"></i>', function() {
-    console.log('Clicked on trash btn')
-});
-
-const controlBar = L.easyBar([
-    resetZoomBtn,
-    drawBtn,
-    undoBtn,
-    redoBtn,
-    trashBtn
-], { position: 'bottomright'})
-
-controlBar.addTo(map);
+L.control.scale({ position: 'bottomleft'}).addTo(map);
 
 // Hides tooltip based on zoom level 
 map.on('zoomend', function(z) {
@@ -93,9 +72,64 @@ map.on('zoomend', function(z) {
     }
 });
 
-var imageUrl = 'https://ghs-cdn.uog.edu/wp-content/uploads/2022/11/WERI-MAppFx-Well-Nitrates-Title-Card.png',
-    imageBounds = [[13.626601, 144.427853], [13.567203, 144.429570]];
-L.imageOverlay(imageUrl, imageBounds).addTo(map);
+// Draw control bar
+var drawnFeatures = new L.FeatureGroup();
+map.addLayer(drawnFeatures);
+
+var drawControl = new L.Control.Draw({
+    position: "bottomright",
+    draw: {
+        polyline: {
+            allowIntersection: true,
+            shapeOptions: {
+                color: "orange"
+            }
+        },
+        polygon: {
+            allowIntersection: false,
+            showArea: true,
+            showLength: true,
+            shapeOptions: {
+                color: "purple",
+                clickable: true
+            }
+        },
+        circle: {
+            shapeOptions: {
+                shapeOptions: {
+                    color: "blue",
+                    clickable: true
+                }
+            }
+        },
+        circlemarker: false,
+        rectangle: {
+            showArea: true,
+            showLength: true,
+            shapeOptions: {
+                color: "green",
+                clickable: true
+            }
+        },
+        marker: false
+    },
+    edit: {
+        featureGroup: drawnFeatures,
+        remove: true,
+    }
+});
+
+map.addControl(drawControl);
+
+// TODO - add drawing layer to layer group; allow to toggle on and off (instead of clearing map of drawings)
+map.on(L.Draw.Event.CREATED, function(event) {
+    var layer = event.layer;
+    drawnFeatures.addLayer(layer);
+})
+
+// Measure control 
+// var measureControl = new L.Control.Measure();
+// measureControl.addTo(map);
 
 // Plots data points from selected well to chart 
 let plotData 
@@ -554,5 +588,35 @@ fetch(map_url)
         // Places points on the map and calls on getWellInfo function (right above) to show pop-ups 
         const mapJson = L.geoJSON(geojson, {onEachFeature: getWellInfo}).addTo(map);
         layerControl.addOverlay(mapJson, "Wells") 
+
+        // Control search 
+        const searchControl = new L.Control.Search({
+            layer: mapJson,
+            propertyName: 'name',
+            casesensitive: false,
+            // position: 'bottomleft'
+            moveToLocation: function(latlng, title, map) {
+                map.flyTo(latlng, 16);
+            },
+            textPlaceholder: 'Well Name...',
+            textErr: 'Sorry, could not find well.',
+            autoResize: true,
+            marker: {
+                icon: false,
+                animate: false,
+                circle: {
+                    weight: 6,
+                    radius: 30,
+                    color: 'red',
+                }
+            }
+        });
+
+        searchControl.on("search:locationfound", function(e) {
+            e.layer.openPopup();
+        });
+
+        map.addControl(searchControl);
     })
     .catch(console.error);
+
