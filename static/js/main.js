@@ -585,5 +585,33 @@ fetch(map_url)
         // Places points on the map and calls on getWellInfo function (right above) to show pop-ups 
         const mapJson = L.geoJSON(geojson, {onEachFeature: getWellInfo}).addTo(map);
         layerControl.addOverlay(mapJson, "Wells") 
+
+        // Control search  
+        const searchControl = new L.Control.Search({ 
+            layer: mapJson, 
+            propertyName: 'name', 
+            casesensitive: false, 
+            moveToLocation: function(latlng, title, map) { 
+                map.flyTo(latlng, 16); 
+            }, 
+            textPlaceholder: 'Well Name...', 
+            textErr: 'Sorry, could not find well.', 
+            autoResize: true, 
+            marker: { 
+                icon: false, 
+                animate: false, 
+                circle: { 
+                    weight: 6, 
+                    radius: 30, 
+                    color: 'red', 
+                } 
+            } 
+        }); 
+
+        searchControl.on("search:locationfound", function(e) { 
+            e.layer.openPopup(); 
+        }); 
+
+        map.addControl(searchControl);
     })
     .catch(console.error);
