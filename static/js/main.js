@@ -93,9 +93,60 @@ map.on('zoomend', function(z) {
     }
 });
 
-var imageUrl = 'https://ghs-cdn.uog.edu/wp-content/uploads/2022/11/WERI-MAppFx-Well-Nitrates-Title-Card.png',
-    imageBounds = [[13.626601, 144.427853], [13.567203, 144.429570]];
-L.imageOverlay(imageUrl, imageBounds).addTo(map);
+// Draw control bar
+var drawnFeatures = new L.FeatureGroup();
+map.addLayer(drawnFeatures);
+
+var drawControl = new L.Control.Draw({
+    position: "bottomright",
+    draw: {
+        polyline: {
+            allowIntersection: true,
+            shapeOptions: {
+                color: "orange"
+            }
+        },
+        polygon: {
+            allowIntersection: false,
+            showArea: true,
+            showLength: true,
+            shapeOptions: {
+                color: "purple",
+                clickable: true
+            }
+        },
+        circle: {
+            shapeOptions: {
+                shapeOptions: {
+                    color: "blue",
+                    clickable: true
+                }
+            }
+        },
+        circlemarker: false,
+        rectangle: {
+            showArea: true,
+            showLength: true,
+            shapeOptions: {
+                color: "green",
+                clickable: true
+            }
+        },
+        marker: false
+    },
+    edit: {
+        featureGroup: drawnFeatures,
+        remove: true,
+    }
+});
+
+map.addControl(drawControl);
+
+// TODO - add drawing layer to layer group; allow to toggle on and off (instead of clearing map of drawings)
+map.on(L.Draw.Event.CREATED, function(event) {
+    var layer = event.layer;
+    drawnFeatures.addLayer(layer);
+})
 
 // Plots data points from selected well to chart 
 let plotData 
