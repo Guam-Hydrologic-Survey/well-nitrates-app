@@ -1,18 +1,10 @@
-
-
 const center = [13.5435056,144.7478083];
-
-// current screen size 
-var w = window.innerWidth;
-var h = window.innerHeight;
-console.log("w = " + w + ", h = " + h);
 
 // Creates Leaflet map 
 const map = L.map('map', {
     center: center,
     zoom: 12,
     zoomControl: false,
-    measureControl: true,
 })
 
 const baseLayersZoom = 19;
@@ -56,7 +48,16 @@ L.control.zoom({
     position: 'bottomright'
 }).addTo(map);
 
-L.control.scale({ position: 'bottomleft'}).addTo(map);
+// Control: Reset map view (goes to initial map zoom on page load)
+var resetZoomBtn = L.easyButton('<i class="bi bi-map"></i>', function() {
+    map.setView(center, 12);
+});
+
+const controlBar = L.easyBar([
+    resetZoomBtn,
+], { position: 'bottomright'})
+
+controlBar.addTo(map);
 
 // Hides tooltip based on zoom level 
 map.on('zoomend', function(z) {
@@ -126,10 +127,6 @@ map.on(L.Draw.Event.CREATED, function(event) {
     var layer = event.layer;
     drawnFeatures.addLayer(layer);
 })
-
-// Measure control 
-// var measureControl = new L.Control.Measure();
-// measureControl.addTo(map);
 
 // Plots data points from selected well to chart 
 let plotData 
@@ -660,34 +657,32 @@ fetch(map_url)
         }).addTo(map);
         layerControl.addOverlay(mapJson, "Wells") 
 
-        // Control search 
-        const searchControl = new L.Control.Search({
-            layer: mapJson,
-            propertyName: 'name',
-            casesensitive: false,
-            // position: 'bottomleft'
-            moveToLocation: function(latlng, title, map) {
-                map.flyTo(latlng, 16);
-            },
-            textPlaceholder: 'Well Name...',
-            textErr: 'Sorry, could not find well.',
-            autoResize: true,
-            marker: {
-                icon: false,
-                animate: false,
-                circle: {
-                    weight: 6,
-                    radius: 30,
-                    color: 'red',
-                }
-            }
-        });
+        // Control search  
+        const searchControl = new L.Control.Search({ 
+            layer: mapJson, 
+            propertyName: 'name', 
+            casesensitive: false, 
+            moveToLocation: function(latlng, title, map) { 
+                map.flyTo(latlng, 16); 
+            }, 
+            textPlaceholder: 'Well Name...', 
+            textErr: 'Sorry, could not find well.', 
+            autoResize: true, 
+            marker: { 
+                icon: false, 
+                animate: false, 
+                circle: { 
+                    weight: 6, 
+                    radius: 30, 
+                    color: 'red', 
+                } 
+            } 
+        }); 
 
-        searchControl.on("search:locationfound", function(e) {
-            e.layer.openPopup();
-        });
+        searchControl.on("search:locationfound", function(e) { 
+            e.layer.openPopup(); 
+        }); 
 
         map.addControl(searchControl);
     })
     .catch(console.error);
-
