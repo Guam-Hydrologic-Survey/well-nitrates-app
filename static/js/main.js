@@ -146,7 +146,7 @@ const plotWNL = () => {
         y: plotData.y_vals,
         type: 'scatter', 
         mode: 'markers',
-        name: 'Well Nitrate Levels'
+        name: 'Well Nitrate-N Levels'
     };
 
     var selectorOptions = {
@@ -323,7 +323,7 @@ const showStats = () => {
                 </div>
             </div>
             <br><br><br>
-            <h4>Well Nitrate Levels for Well ${getStats.name}</h4>
+            <h4>Well Nitrate-N Levels for Well ${getStats.name}</h4>
             <hr>
             <div id="plot"></div>
             <div class="plot-btn-container">
@@ -346,7 +346,7 @@ const showStats = () => {
             y: getStats.y_vals,
             type: 'scatter', 
             mode: 'markers',
-            name: 'Well Nitrate Levels'
+            name: 'Well Nitrate-N Levels'
         };
 
         // Plot features and layout
