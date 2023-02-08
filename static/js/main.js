@@ -203,7 +203,7 @@ const plotWNL = () => {
            
         },
         title: {
-            text: `<b>Nitrate Levels for Well ${plotData.name}</b>`,
+            text: `<b>Nitrate-N Levels for Well ${plotData.name}</b>`,
             font: {
                 size: 20
             }
