@@ -480,12 +480,12 @@ function getColor(c) {
   
 // Map icons with shapes 
 // Change marker color dynamically 
-var incIcon = L.AwesomeMarkers.icon({
-    icon: "fa-caret-up",
-    prefix: "fa",
-    markerColor: "gray",
-    iconColor: "white"
-});
+// var incIcon = L.AwesomeMarkers.icon({
+//     icon: "fa-caret-up",
+//     prefix: "fa",
+//     markerColor: "gray",
+//     iconColor: "white"
+// });
 
 var decIcon = L.AwesomeMarkers.icon({
     icon: "fa-caret-down",
@@ -509,7 +509,13 @@ fetch(map_url)
         const getWellInfo = (feature, layer) => {
             // Conditionals for marker icons
             if (feature.properties.sig == 1) {
-                const mc = feature.properties.mColor;
+                var incIcon = L.AwesomeMarkers.icon({
+                    icon: "fa-caret-up",
+                    prefix: "fa",
+                    markerColor: getColor(feature.properties.LTG2019),
+                    iconColor: "white"
+                });
+                // const mc = feature.properties.mColor;
                 // switch (feature.properties.mColor) {
                 //     case "blue":
                 //         incIcon.options.markerColor = "blue";
