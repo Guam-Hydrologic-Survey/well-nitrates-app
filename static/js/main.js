@@ -471,11 +471,16 @@ const yellowIcon = new L.Icon({
 
   
 function getColor(c) {
-    return c > 5 ? "#F50000" : //red
-        c <= 5 ? "#FFAA00" :    //orange
-        c <= 4 ? "#000000" :    //black
-        c <= 3 ? "#7A8EF5" :    //purple
-        c <= 2 ? "#73DFFF" : "white";   //light blue, fallback as white
+    // return c > 5 ? "#F50000" : //red
+    //     c <= 5 ? "#FFAA00" :    //orange
+    //     c <= 4 ? "#000000" :    //black
+    //     c <= 3 ? "#7A8EF5" :    //purple
+    //     c <= 2 ? "#73DFFF" : "white";   //light blue, fallback as white
+    return c <= 2 ? "#73DFFF" : 	// light-blue
+	c <= 3 ? "#7A8EF5" :	// purple
+	c <= 4 ? "#000000" :	// black
+	c <= 5 ? "#FFAA00" :	// orange
+	c > 5 ? "#F50000" : "white"; //red, fallback as white
 }
   
 // Map icons with shapes 
