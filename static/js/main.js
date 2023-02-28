@@ -471,16 +471,16 @@ const yellowIcon = new L.Icon({
 
   
 function getColor(c) {
-    // return c > 5 ? "#F50000" : //red
-    //     c <= 5 ? "#FFAA00" :    //orange
-    //     c <= 4 ? "#000000" :    //black
-    //     c <= 3 ? "#7A8EF5" :    //purple
-    //     c <= 2 ? "#73DFFF" : "white";   //light blue, fallback as white
-    return c <= 2 ? "#73DFFF" : 	// light-blue
-	c <= 3 ? "#7A8EF5" :	// purple
-	c <= 4 ? "#000000" :	// black
-	c <= 5 ? "#FFAA00" :	// orange
-	c > 5 ? "#F50000" : "white"; //red, fallback as white
+    return c > 5 ? "#F50000" : //red
+        c <= 5 ? "#FFAA00" :    //orange
+        c <= 4 ? "#000000" :    //black
+        c <= 3 ? "#7A8EF5" :    //purple
+        c <= 2 ? "#73DFFF" : "white";   //light blue, fallback as white
+//     return c <= 2 ? "#73DFFF" : 	// light-blue
+// 	c <= 3 ? "#7A8EF5" :	// purple
+// 	c <= 4 ? "#000000" :	// black
+// 	c <= 5 ? "#FFAA00" :	// orange
+// 	c > 5 ? "#F50000" : "white"; //red, fallback as white
 }
   
 // Map icons with shapes 
@@ -491,20 +491,6 @@ function getColor(c) {
 //     markerColor: "gray",
 //     iconColor: "white"
 // });
-
-var decIcon = L.AwesomeMarkers.icon({
-    icon: "fa-caret-down",
-    prefix: "fa",
-    markerColor: "gray",
-    iconColor: "white"
-})
-
-var insIcon = L.AwesomeMarkers.icon({
-    icon: "fa-circle",
-    prefix: "fa",
-    markerColor: "gray",
-    iconColor: "white"
-})
 
 // Gets the data from the JSON file and adds well to the map
 fetch(map_url)
@@ -569,6 +555,12 @@ fetch(map_url)
                 //         insIcon.options.markerColor = "red";
                 //         break;
                 // }
+                var insIcon = L.AwesomeMarkers.icon({
+                    icon: "fa-circle",
+                    prefix: "fa",
+                    markerColor: getColor(feature.properties.LTG2019),
+                    iconColor: "white"
+                })
                 layer.setIcon(insIcon);
             } else {
                 // if (feature.properties.mColor == "blue") {
@@ -584,6 +576,12 @@ fetch(map_url)
                 // } else {
                 //     decIcon.options.markerColor = "gray"
                 // }
+                var decIcon = L.AwesomeMarkers.icon({
+                    icon: "fa-caret-down",
+                    prefix: "fa",
+                    markerColor: getColor(feature.properties.LTG2019),
+                    iconColor: "white"
+                })
                 layer.setIcon(decIcon)
             }
 
