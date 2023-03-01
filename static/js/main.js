@@ -396,11 +396,18 @@ const showStats = () => {
 // Filepath for map (lat, lon coords) json and data (stats, x-y vals) json 
 const map_url = './static/data/data6.json';
   
-function getColor(sig) {
-    return sig <= 5 ? "#FFAA00" :    //orange
-        sig <= 4 ? "#000000" :    //black
-        sig <= 3 ? "#7A8EF5" :    //purple
-        sig <= 2 ? "#73DFFF" : "F50000";   //light blue, fallback as red (c > 5)
+function getColor(mColor) {
+    console.log(mColor);
+    return mColor == "orange" ? "#FFAA00" :    //orange
+        mColor == "black" ? "#000000" :    //black
+        mColor == "blue" ? "#7A8EF5" :    //purple
+        mColor == "light-blue" ? "#73DFFF" : "F50000";   //light blue, fallback as red (mColor > 5)
+}
+
+function style(feature) {
+    return {
+        color: getColor(feature.properties.LTG2019)
+    }
 }
 
 // Gets the data from the JSON file and adds well to the map
@@ -430,12 +437,6 @@ fetch(map_url)
 
         }
 
-        function style(feature) {
-            return {
-                color: getColor(feature.properties.LTG2019)
-            }
-        }
-
         // Places points on the map and calls on getWellInfo function (right above) to show pop-ups 
         const mapJson = L.geoJSON(geojson, {
             style,
@@ -451,7 +452,7 @@ fetch(map_url)
                     var incIcon = L.AwesomeMarkers.icon({
                         icon: "fa-caret-up",
                         prefix: "fa",
-                        markerColor: "red", // getColor(feature.properties.LTG2019),
+                        markerColor: getColor(feature.properties.mColor),
                         iconColor: "white"
                     });
                     iconStyle = incIcon;
