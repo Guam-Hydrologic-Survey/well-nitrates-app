@@ -408,15 +408,6 @@ function getColor(c) {
 // 	c <= 5 ? "#FFAA00" :	// orange
 // 	c > 5 ? "#F50000" : "white"; //red, fallback as white
 }
-  
-// Map icons with shapes 
-// Change marker color dynamically 
-// var incIcon = L.AwesomeMarkers.icon({
-//     icon: "fa-caret-up",
-//     prefix: "fa",
-//     markerColor: "gray",
-//     iconColor: "white"
-// });
 
 // Gets the data from the JSON file and adds well to the map
 fetch(map_url)
