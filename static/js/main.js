@@ -414,34 +414,6 @@ fetch(map_url)
     .then(geojson => { 
 
         const getWellInfo = (feature, layer) => {
-            // // Conditionals for marker icons
-            // if (feature.properties.sig == 1) {
-            //     var incIcon = L.AwesomeMarkers.icon({
-            //         icon: "fa-caret-up",
-            //         prefix: "fa",
-            //         markerColor: getColor(feature.properties.LTG2019),
-            //         iconColor: "white"
-            //     });
-            //     layer.setIcon(incIcon);
-            // } else if (feature.properties.sig == 0) {
-            //     var insIcon = L.AwesomeMarkers.icon({
-            //         icon: "fa-circle",
-            //         prefix: "fa",
-            //         markerColor: getColor(feature.properties.LTG2019),
-            //         iconColor: "white"
-            //     })
-            //     console.log(feature.properties.sig);
-            //     layer.setIcon(insIcon);
-            // } else {
-            //     var decIcon = L.AwesomeMarkers.icon({
-            //         icon: "fa-caret-down",
-            //         prefix: "fa",
-            //         markerColor: getColor(feature.properties.LTG2019),
-            //         iconColor: "white"
-            //     })
-            //     layer.setIcon(decIcon)
-            // }
-
             // Label for well name
             layer.bindTooltip(feature.properties.name, {permanent: true, direction: 'bottom'})
 
@@ -472,6 +444,41 @@ fetch(map_url)
         // Places points on the map and calls on getWellInfo function (right above) to show pop-ups 
         const mapJson = L.geoJSON(geojson, {
             style,
+            pointToLayer: function (feature, latlng) {
+                // const iconOptions = ["fa-caret-up", "fa-circle", "fa-caret-down"]
+                // var iconStyle = L.AwesomeMarkers.icon({
+                //     icon: "fa-caret-up",
+                //     prefix: "fa",
+                //     markerColor: "green", // getColor(feature.properties.LTG2019),
+                //     iconColor: "white"
+                // });
+                if (feature.properties.sig == 1) {
+                    var incIcon = L.AwesomeMarkers.icon({
+                        icon: "fa-caret-up",
+                        prefix: "fa",
+                        markerColor: "red", // getColor(feature.properties.LTG2019),
+                        iconColor: "white"
+                    });
+                    iconStyle = incIcon;
+                } else if (feature.properties.sig == 0) {
+                    var insIcon = L.AwesomeMarkers.icon({
+                        icon: "fa-circle",
+                        prefix: "fa",
+                        markerColor: "gray", // getColor(feature.properties.LTG2019),
+                        iconColor: "white"
+                    });
+                    iconStyle = insIcon;
+                } else {
+                    var decIcon = L.AwesomeMarkers.icon({
+                        icon: "fa-caret-down",
+                        prefix: "fa",
+                        markerColor: "gray", // getColor(feature.properties.LTG2019),
+                        iconColor: "white"
+                    });
+                    iconStyle = decIcon;
+                }
+                return L.marker(latlng, {icon: iconStyle});
+            }, 
             onEachFeature: getWellInfo}).addTo(map);
         layerControl.addOverlay(mapJson, "Wells") 
 
