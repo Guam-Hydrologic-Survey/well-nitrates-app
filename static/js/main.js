@@ -401,11 +401,6 @@ function getColor(sig) {
         sig <= 4 ? "#000000" :    //black
         sig <= 3 ? "#7A8EF5" :    //purple
         sig <= 2 ? "#73DFFF" : "F50000";   //light blue, fallback as red (c > 5)
-//     return c <= 2 ? "#73DFFF" : 	// light-blue
-// 	c <= 3 ? "#7A8EF5" :	// purple
-// 	c <= 4 ? "#000000" :	// black
-// 	c <= 5 ? "#FFAA00" :	// orange
-// 	c > 5 ? "#F50000" : "white"; //red, fallback as white
 }
 
 // Gets the data from the JSON file and adds well to the map
