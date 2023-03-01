@@ -440,13 +440,13 @@ fetch(map_url)
         const mapJson = L.geoJSON(geojson, {
             style,
             pointToLayer: function (feature, latlng) {
-                // const iconOptions = ["fa-caret-up", "fa-circle", "fa-caret-down"]
-                // var iconStyle = L.AwesomeMarkers.icon({
-                //     icon: "fa-caret-up",
-                //     prefix: "fa",
-                //     markerColor: "green", // getColor(feature.properties.LTG2019),
-                //     iconColor: "white"
-                // });
+                const iconOptions = ["fa-caret-up", "fa-circle", "fa-caret-down"]
+                var iconStyle = L.AwesomeMarkers.icon({
+                    icon: iconOptions[1],
+                    prefix: "fa",
+                    markerColor: "gray", // getColor(feature.properties.LTG2019),
+                    iconColor: "white"
+                });
                 if (feature.properties.sig == 1) {
                     var incIcon = L.AwesomeMarkers.icon({
                         icon: "fa-caret-up",
