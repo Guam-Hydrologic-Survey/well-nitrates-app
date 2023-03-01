@@ -396,11 +396,11 @@ const showStats = () => {
 // Filepath for map (lat, lon coords) json and data (stats, x-y vals) json 
 const map_url = './static/data/data6.json';
   
-function getColor(c) {
-    return c <= 5 ? "#FFAA00" :    //orange
-        c <= 4 ? "#000000" :    //black
-        c <= 3 ? "#7A8EF5" :    //purple
-        c <= 2 ? "#73DFFF" : "F50000";   //light blue, fallback as red (c > 5)
+function getColor(sig) {
+    return sig <= 5 ? "#FFAA00" :    //orange
+        sig <= 4 ? "#000000" :    //black
+        sig <= 3 ? "#7A8EF5" :    //purple
+        sig <= 2 ? "#73DFFF" : "F50000";   //light blue, fallback as red (c > 5)
 //     return c <= 2 ? "#73DFFF" : 	// light-blue
 // 	c <= 3 ? "#7A8EF5" :	// purple
 // 	c <= 4 ? "#000000" :	// black
