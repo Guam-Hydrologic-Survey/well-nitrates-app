@@ -397,11 +397,10 @@ const showStats = () => {
 const map_url = './static/data/data6.json';
   
 function getColor(c) {
-    return c > 5 ? "#F50000" : //red
-        c <= 5 ? "#FFAA00" :    //orange
+    return c <= 5 ? "#FFAA00" :    //orange
         c <= 4 ? "#000000" :    //black
         c <= 3 ? "#7A8EF5" :    //purple
-        c <= 2 ? "#73DFFF" : "white";   //light blue, fallback as white
+        c <= 2 ? "#73DFFF" : "F50000";   //light blue, fallback as red ( c > 5)
 //     return c <= 2 ? "#73DFFF" : 	// light-blue
 // 	c <= 3 ? "#7A8EF5" :	// purple
 // 	c <= 4 ? "#000000" :	// black
@@ -423,55 +422,8 @@ fetch(map_url)
                     markerColor: getColor(feature.properties.LTG2019),
                     iconColor: "white"
                 });
-                // const mc = feature.properties.mColor;
-                // switch (feature.properties.mColor) {
-                //     case "blue":
-                //         incIcon.options.markerColor = "blue";
-                //         break;
-                //     case "light-blue":
-                //         incIcon.options.markerColor = "cadetblue";
-                //         break;
-                //     // case "black":
-                //     //     incIcon.options.markerColor = "black";
-                //     //     break;
-                //     case "orange":
-                //         incIcon.options.markerColor = "orange";
-                //         break;
-                //     case "red":
-                //         incIcon.options.markerColor = "red";
-                //         break;
-                //     case "white":
-                //         incIcon.options.markerColor = "gray";
-                //         break;
-                //     default:
-                //         incIcon.options.markerColor = "green";
-                //         break;
-                // }
                 layer.setIcon(incIcon);
-                // console.log(incIcon.options.markerColor);
             } else if (feature.properties.sig == 0) {
-                // insIcon.options.markerColor = "blue";
-
-                // switch(feature.properties.LTG2019) {
-                //     case 1:
-                //         insIcon.options.markerColor = "gray";
-                //         break;
-                //     case 2:
-                //         insIcon.options.markerColor = "purple";
-                //         break;
-                //     case 3:
-                //         insIcon.options.markerColor = "blue";
-                //         break;
-                //     case 4:
-                //         insIcon.options.markerColor = "black";
-                //         break;
-                //     case 5:
-                //         insIcon.options.markerColor = "orange";
-                //         break;
-                //     case 6:
-                //         insIcon.options.markerColor = "red";
-                //         break;
-                // }
                 var insIcon = L.AwesomeMarkers.icon({
                     icon: "fa-circle",
                     prefix: "fa",
@@ -480,19 +432,6 @@ fetch(map_url)
                 })
                 layer.setIcon(insIcon);
             } else {
-                // if (feature.properties.mColor == "blue") {
-                //     decIcon.options.markerColor = "blue";
-                // } else if (feature.properties.mColor == "light-blue") {
-                //     decIcon.options.markerColor = "purple";
-                // } else if (feature.properties.mColor == "black") {
-                //     decIcon.options.markerColor = "black";
-                // } else if (feature.properties.mColor == "orange") {
-                //     decIcon.options.markerColor = "orange";
-                // } else if (feature.properties.mColor == "red") {
-                //     decIcon.options.markerColor = "red";
-                // } else {
-                //     decIcon.options.markerColor = "gray"
-                // }
                 var decIcon = L.AwesomeMarkers.icon({
                     icon: "fa-caret-down",
                     prefix: "fa",
