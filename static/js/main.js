@@ -400,7 +400,7 @@ function getColor(c) {
     return c <= 5 ? "#FFAA00" :    //orange
         c <= 4 ? "#000000" :    //black
         c <= 3 ? "#7A8EF5" :    //purple
-        c <= 2 ? "#73DFFF" : "F50000";   //light blue, fallback as red ( c > 5)
+        c <= 2 ? "#73DFFF" : "F50000";   //light blue, fallback as red (c > 5)
 //     return c <= 2 ? "#73DFFF" : 	// light-blue
 // 	c <= 3 ? "#7A8EF5" :	// purple
 // 	c <= 4 ? "#000000" :	// black
@@ -414,32 +414,33 @@ fetch(map_url)
     .then(geojson => { 
 
         const getWellInfo = (feature, layer) => {
-            // Conditionals for marker icons
-            if (feature.properties.sig == 1) {
-                var incIcon = L.AwesomeMarkers.icon({
-                    icon: "fa-caret-up",
-                    prefix: "fa",
-                    markerColor: getColor(feature.properties.LTG2019),
-                    iconColor: "white"
-                });
-                layer.setIcon(incIcon);
-            } else if (feature.properties.sig == 0) {
-                var insIcon = L.AwesomeMarkers.icon({
-                    icon: "fa-circle",
-                    prefix: "fa",
-                    markerColor: getColor(feature.properties.LTG2019),
-                    iconColor: "white"
-                })
-                layer.setIcon(insIcon);
-            } else {
-                var decIcon = L.AwesomeMarkers.icon({
-                    icon: "fa-caret-down",
-                    prefix: "fa",
-                    markerColor: getColor(feature.properties.LTG2019),
-                    iconColor: "white"
-                })
-                layer.setIcon(decIcon)
-            }
+            // // Conditionals for marker icons
+            // if (feature.properties.sig == 1) {
+            //     var incIcon = L.AwesomeMarkers.icon({
+            //         icon: "fa-caret-up",
+            //         prefix: "fa",
+            //         markerColor: getColor(feature.properties.LTG2019),
+            //         iconColor: "white"
+            //     });
+            //     layer.setIcon(incIcon);
+            // } else if (feature.properties.sig == 0) {
+            //     var insIcon = L.AwesomeMarkers.icon({
+            //         icon: "fa-circle",
+            //         prefix: "fa",
+            //         markerColor: getColor(feature.properties.LTG2019),
+            //         iconColor: "white"
+            //     })
+            //     console.log(feature.properties.sig);
+            //     layer.setIcon(insIcon);
+            // } else {
+            //     var decIcon = L.AwesomeMarkers.icon({
+            //         icon: "fa-caret-down",
+            //         prefix: "fa",
+            //         markerColor: getColor(feature.properties.LTG2019),
+            //         iconColor: "white"
+            //     })
+            //     layer.setIcon(decIcon)
+            // }
 
             // Label for well name
             layer.bindTooltip(feature.properties.name, {permanent: true, direction: 'bottom'})
