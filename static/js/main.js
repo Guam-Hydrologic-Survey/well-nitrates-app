@@ -495,6 +495,40 @@ fetch(map_url)
             onEachFeature: getWellInfo}).addTo(map);
         layerControl.addOverlay(sigIncWells, "Significantly Increasing");
 
+        const sigDecWells = L.geoJSON(geojson, {
+            filter: function(feature, layer) {
+                return (feature.properties.sig) == -1;
+            }, 
+            pointToLayer: function(feature, latlng) {
+                const iconOptions = ["fa-caret-up", "fa-circle", "fa-caret-down"];
+                var iconStyle = L.AwesomeMarkers.icon({
+                    icon: iconOptions[2],
+                    prefix: "fa",
+                    markerColor: "gray", // getColor(feature.properties.LTG2019),
+                    iconColor: "white"
+                });
+                return L.marker(latlng, {icon: iconStyle});
+            }, 
+            onEachFeature: getWellInfo}).addTo(map);
+        layerControl.addOverlay(sigDecWells, "Significantly Decreasing");
+        
+        const insWells = L.geoJSON(geojson, {
+            filter: function(feature, layer) {
+                return (feature.properties.sig) == 0;
+            }, 
+            pointToLayer: function(feature, latlng) {
+                const iconOptions = ["fa-caret-up", "fa-circle", "fa-caret-down"];
+                var iconStyle = L.AwesomeMarkers.icon({
+                    icon: iconOptions[1],
+                    prefix: "fa",
+                    markerColor: "green", // getColor(feature.properties.LTG2019),
+                    iconColor: "white"
+                });
+                return L.marker(latlng, {icon: iconStyle});
+            }, 
+            onEachFeature: getWellInfo}).addTo(map);
+        layerControl.addOverlay(insWells, "Insignificant");
+
         // Control search  
         const searchControl = new L.Control.Search({ 
             layer: mapJson, 
