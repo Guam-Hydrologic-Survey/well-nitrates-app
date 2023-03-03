@@ -554,27 +554,12 @@ fetch(map_url)
                 return (feature.properties.sig) == 0;
             }, 
             pointToLayer: function(feature, latlng) {
-                // const iconOptions = ["fa-caret-up", "fa-circle", "fa-caret-down"];
-                // var iconStyle = L.AwesomeMarkers.icon({
-                //     icon: iconOptions[1],
-                //     prefix: "fa",
-                //     markerColor: "white", // getColor(feature.properties.LTG2019),
-                //     iconColor: getColor(feature.properties.LTG2019)
-                // });
-
-                // var iconStyle = L.circleMarker(latlng, {
-                //     radius: 10,
-                //     color: getColor(feature.properties.LTG2019),
-                //     opacity: 1,
-                // });
-                // return L.marker(latlng, {icon: iconStyle});
                 return L.circleMarker(latlng, {
                     radius: 8, 
                     fillColor: getColor(feature.properties.LTG2019),
                     weight: 1,
                     fillOpacity: .75,
                     color: "black",
-                    // fill: true,
                     opacity: 1.0,
                 })
             }, 
