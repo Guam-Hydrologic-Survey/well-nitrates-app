@@ -397,7 +397,6 @@ const showStats = () => {
 const map_url = './static/data/data6.json';
   
 function getColor(sig) {
-    // console.log(sig); 
     const colors = [
         {
             name: "orange",
@@ -428,28 +427,18 @@ function getColor(sig) {
     var c;
     if (sig > 5) {
         c = colors[4].hex;
-       // console.log(c);
     } else {
         if (sig == 5) {
             c = colors[0].hex;
-            // console.log(c);
         } else if (sig == 4) {
             c = colors[1].hex;
-            // console.log(c);
         } else if (sig == 3) {
             c = colors[2].hex;
-            // console.log(c);
         } else {
             c = colors[3].hex;
-            // console.log(c);
         }
     }
-    // console.log(c);
     return c; 
-    // return sig <= 5 ? "#FFAA00" :    //orange
-    //     sig <= 4 ? "#000000" :    //black
-    //     sig <= 3 ? "#7A8EF5" :    //purple
-    //     sig <= 2 ? "#73DFFF" : "F50000";   //light blue, fallback as red (sig > 5)
 }
 
 // function style(feature) {
