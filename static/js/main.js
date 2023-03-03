@@ -437,46 +437,63 @@ fetch(map_url)
 
         }
 
-        // Places points on the map and calls on getWellInfo function (right above) to show pop-ups 
-        const mapJson = L.geoJSON(geojson, {
-            style,
-            pointToLayer: function (feature, latlng) {
-                const iconOptions = ["fa-caret-up", "fa-circle", "fa-caret-down"]
+        // // Places points on the map and calls on getWellInfo function (right above) to show pop-ups 
+        // const mapJson = L.geoJSON(geojson, {
+        //     style,
+        //     pointToLayer: function (feature, latlng) {
+        //         const iconOptions = ["fa-caret-up", "fa-circle", "fa-caret-down"]
+        //         var iconStyle = L.AwesomeMarkers.icon({
+        //             icon: iconOptions[1],
+        //             prefix: "fa",
+        //             markerColor: "gray", // getColor(feature.properties.LTG2019),
+        //             iconColor: "white"
+        //         });
+        //         if (feature.properties.sig == 1) {
+        //             var incIcon = L.AwesomeMarkers.icon({
+        //                 icon: "fa-caret-up",
+        //                 prefix: "fa",
+        //                 markerColor: getColor(feature.properties.mColor),
+        //                 iconColor: "white"
+        //             });
+        //             iconStyle = incIcon;
+        //         } else if (feature.properties.sig == 0) {
+        //             var insIcon = L.AwesomeMarkers.icon({
+        //                 icon: "fa-circle",
+        //                 prefix: "fa",
+        //                 markerColor: "gray", // getColor(feature.properties.LTG2019),
+        //                 iconColor: "white"
+        //             });
+        //             iconStyle = insIcon;
+        //         } else {
+        //             var decIcon = L.AwesomeMarkers.icon({
+        //                 icon: "fa-caret-down",
+        //                 prefix: "fa",
+        //                 markerColor: "gray", // getColor(feature.properties.LTG2019),
+        //                 iconColor: "white"
+        //             });
+        //             iconStyle = decIcon;
+        //         }
+        //         return L.marker(latlng, {icon: iconStyle});
+        //     }, 
+        //     onEachFeature: getWellInfo}).addTo(map);
+        // layerControl.addOverlay(mapJson, "Wells") 
+
+        const sigIncWells = L.geoJSON(geojson, {
+            filter: function(feature, layer) {
+                return (feature.properties.sig) == 1;
+            }, 
+            pointToLayer: function(feature, latlng) {
+                const iconOptions = ["fa-caret-up", "fa-circle", "fa-caret-down"];
                 var iconStyle = L.AwesomeMarkers.icon({
-                    icon: iconOptions[1],
+                    icon: iconOptions[0],
                     prefix: "fa",
-                    markerColor: "gray", // getColor(feature.properties.LTG2019),
+                    markerColor: getColor(feature.properties.LTG2019),
                     iconColor: "white"
                 });
-                if (feature.properties.sig == 1) {
-                    var incIcon = L.AwesomeMarkers.icon({
-                        icon: "fa-caret-up",
-                        prefix: "fa",
-                        markerColor: getColor(feature.properties.mColor),
-                        iconColor: "white"
-                    });
-                    iconStyle = incIcon;
-                } else if (feature.properties.sig == 0) {
-                    var insIcon = L.AwesomeMarkers.icon({
-                        icon: "fa-circle",
-                        prefix: "fa",
-                        markerColor: "gray", // getColor(feature.properties.LTG2019),
-                        iconColor: "white"
-                    });
-                    iconStyle = insIcon;
-                } else {
-                    var decIcon = L.AwesomeMarkers.icon({
-                        icon: "fa-caret-down",
-                        prefix: "fa",
-                        markerColor: "gray", // getColor(feature.properties.LTG2019),
-                        iconColor: "white"
-                    });
-                    iconStyle = decIcon;
-                }
                 return L.marker(latlng, {icon: iconStyle});
             }, 
             onEachFeature: getWellInfo}).addTo(map);
-        layerControl.addOverlay(mapJson, "Wells") 
+        layerControl.addOverlay(sigIncWells, "Significantly Increasing");
 
         // Control search  
         const searchControl = new L.Control.Search({ 
