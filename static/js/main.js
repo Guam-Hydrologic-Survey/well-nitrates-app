@@ -558,7 +558,7 @@ fetch(map_url)
                     radius: 8, 
                     fillColor: getColor(feature.properties.LTG2019),
                     weight: 1,
-                    fillOpacity: .75,
+                    fillOpacity: .80,
                     color: "black",
                     opacity: 1.0,
                 })
