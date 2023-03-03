@@ -396,19 +396,67 @@ const showStats = () => {
 // Filepath for map (lat, lon coords) json and data (stats, x-y vals) json 
 const map_url = './static/data/data6.json';
   
-function getColor(mColor) {
-    console.log(mColor);
-    return mColor == "orange" ? "#FFAA00" :    //orange
-        mColor == "black" ? "#000000" :    //black
-        mColor == "blue" ? "#7A8EF5" :    //purple
-        mColor == "light-blue" ? "#73DFFF" : "F50000";   //light blue, fallback as red (mColor > 5)
+function getColor(sig) {
+    // console.log(sig); 
+    const colors = [
+        {
+            name: "orange",
+            hex: "#FFAA00",
+            range: "<= 5"
+        },
+        {
+            name: "black",
+            hex: "#000000",
+            range: "<= 4"
+        },
+        {
+            name: "blue",
+            hex: "#7A8EF5",
+            range: "<= 3"
+        },
+        {
+            name: "light-blue",
+            hex: "#73DFFF", 
+            range: "<= 2"
+        },
+        {
+            name: "red",
+            hex: "F50000", 
+            range: "> 5"
+        }
+    ]
+    var c;
+    if (sig > 5) {
+        c = colors[4].hex;
+       // console.log(c);
+    } else {
+        if (sig == 5) {
+            c = colors[0].hex;
+            // console.log(c);
+        } else if (sig == 4) {
+            c = colors[1].hex;
+            // console.log(c);
+        } else if (sig == 3) {
+            c = colors[2].hex;
+            // console.log(c);
+        } else {
+            c = colors[3].hex;
+            // console.log(c);
+        }
+    }
+    // console.log(c);
+    return c; 
+    // return sig <= 5 ? "#FFAA00" :    //orange
+    //     sig <= 4 ? "#000000" :    //black
+    //     sig <= 3 ? "#7A8EF5" :    //purple
+    //     sig <= 2 ? "#73DFFF" : "F50000";   //light blue, fallback as red (sig > 5)
 }
 
-function style(feature) {
-    return {
-        color: getColor(feature.properties.LTG2019)
-    }
-}
+// function style(feature) {
+//     return {
+//         color: getColor(feature.properties.LTG2019)
+//     }
+// }
 
 // Gets the data from the JSON file and adds well to the map
 fetch(map_url)
@@ -487,8 +535,8 @@ fetch(map_url)
                 var iconStyle = L.AwesomeMarkers.icon({
                     icon: iconOptions[0],
                     prefix: "fa",
-                    markerColor: getColor(feature.properties.LTG2019),
-                    iconColor: "white"
+                    markerColor: "white", // getColor(feature.properties.LTG2019),
+                    iconColor: getColor(feature.properties.LTG2019)
                 });
                 return L.marker(latlng, {icon: iconStyle});
             }, 
@@ -504,8 +552,8 @@ fetch(map_url)
                 var iconStyle = L.AwesomeMarkers.icon({
                     icon: iconOptions[2],
                     prefix: "fa",
-                    markerColor: "gray", // getColor(feature.properties.LTG2019),
-                    iconColor: "white"
+                    markerColor: "white", // getColor(feature.properties.LTG2019),
+                    iconColor: getColor(feature.properties.LTG2019)
                 });
                 return L.marker(latlng, {icon: iconStyle});
             }, 
@@ -521,13 +569,15 @@ fetch(map_url)
                 var iconStyle = L.AwesomeMarkers.icon({
                     icon: iconOptions[1],
                     prefix: "fa",
-                    markerColor: "green", // getColor(feature.properties.LTG2019),
-                    iconColor: "white"
+                    markerColor: "white", // getColor(feature.properties.LTG2019),
+                    iconColor: getColor(feature.properties.LTG2019)
                 });
                 return L.marker(latlng, {icon: iconStyle});
             }, 
             onEachFeature: getWellInfo}).addTo(map);
         layerControl.addOverlay(insWells, "Insignificant");
+
+        // const mapJson = L.layerGroup([sigIncWells, sigDecWells, insWells]).addLayer().addTo(map);
 
         // // Control search  
         // const searchControl = new L.Control.Search({ 
