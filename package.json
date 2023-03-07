@@ -3,6 +3,7 @@
   "name": "mappfx-well-nitrates",
   "dependencies": {
     "i": "^0.3.7",
+    "leaflet-svg-shape-markers": "^1.4.0",
     "plotly.js-dist": "^2.14.0"
   },
   "scripts": {}
