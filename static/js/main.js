@@ -1,3 +1,5 @@
+// import 'leaflet-svg-shape-markers';
+
 const center = [13.5435056,144.7478083];
 
 // Creates Leaflet map 
@@ -596,3 +598,8 @@ fetch(map_url)
         // map.addControl(searchControl);
     })
     .catch(console.error);
+
+    var square = L.shapeMarker([13.45409, 144.7594], {
+        shape: "square",
+        radius: 20
+    }).addTo(map);
