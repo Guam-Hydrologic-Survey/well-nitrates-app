@@ -502,11 +502,13 @@ fetch(map_url)
             }, 
             pointToLayer: function(feature, latlng) {
                 const iconOptions = ["fa-caret-up", "fa-circle", "fa-caret-down"];
-                var iconStyle = L.AwesomeMarkers.icon({
-                    icon: iconOptions[0],
-                    prefix: "fa",
-                    markerColor: "white", // getColor(feature.properties.LTG2019),
-                    iconColor: getColor(feature.properties.LTG2019)
+                var iconStyle = L.divIcon({
+                    html: `
+                    <svg viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M500 0 L0 1000 L1000 1000 Z" fill="${getColor(feature.properties.LTG2019)}"></path>
+                    </svg>
+                    `,
+                    // <path d="M0 0 L50 100 L100 0 Z" fill="${getColor(feature.properties.LTG2019)}"></path>
                 });
                 return L.marker(latlng, {icon: iconStyle});
             }, 
