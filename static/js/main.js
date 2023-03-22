@@ -71,7 +71,7 @@ controlBar.addTo(map);
 // Hides tooltip based on zoom level 
 map.on('zoomend', function(z) {
     var zoomLevel = map.getZoom();
-    if (zoomLevel >= 14 ){
+    if (zoomLevel >= 15 ){
         [].forEach.call(document.querySelectorAll('.leaflet-tooltip'), function (t) {
             t.style.visibility = 'visible';
         });
@@ -456,7 +456,7 @@ fetch(map_url)
 
         const getWellInfo = (feature, layer) => {
             // Label for well name
-            layer.bindTooltip(feature.properties.name, {permanent: true, direction: 'bottom'})
+            layer.bindTooltip(feature.properties.name, {permanent: true, direction: 'bottom', offset: [0,8]})
 
             // Popups with basic well info and buttons for stats and plot
             layer.bindPopup(
