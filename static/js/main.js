@@ -553,34 +553,35 @@ fetch(map_url)
             onEachFeature: getWellInfo}).addTo(map);
         layerControl.addOverlay(insWells, "Insignificant");
 
-        const mapJson = L.layerGroup([sigIncWells, sigDecWells, insWells]).addLayer().addTo(map);
-        console.log(mapJson);
+        const mapJson = L.layerGroup([sigIncWells, sigDecWells, insWells]).addTo(map);
+        
+        // Control search  
+        const searchControl = new L.Control.Search({ 
+            layer: mapJson, 
+            propertyName: 'name', 
+            casesensitive: false, 
+            textPlaceholder: 'Well Name...', 
+            textErr: 'Sorry, could not find well.', 
+            autoResize: true, 
+            moveToLocation: function(latlng, title, map) { 
+                map.flyTo(latlng, 16); 
+            }, 
+            marker: { 
+                icon: false, 
+                animate: false, 
+                circle: { 
+                    weight: 6, 
+                    radius: 30, 
+                    color: 'red', 
+                } 
+            },
+            hideMarkerOnCollapse: true,
+            autoCollapseTime: 1200,
+        }); 
 
-        // // Control search  
-        // const searchControl = new L.Control.Search({ 
-        //     layer: mapJson, 
-        //     propertyName: 'name', 
-        //     casesensitive: false, 
-        //     moveToLocation: function(latlng, title, map) { 
-        //         map.flyTo(latlng, 16); 
-        //     }, 
-        //     textPlaceholder: 'Well Name...', 
-        //     textErr: 'Sorry, could not find well.', 
-        //     autoResize: true, 
-        //     marker: { 
-        //         icon: false, 
-        //         animate: false, 
-        //         circle: { 
-        //             weight: 6, 
-        //             radius: 30, 
-        //             color: 'red', 
-        //         } 
-        //     } 
-        // }); 
-
-        // searchControl.on("search:locationfound", function(e) { 
-        //     e.layer.openPopup(); 
-        // }); 
-        // map.addControl(searchControl);
+        searchControl.on("search:locationfound", function(e) { 
+            e.layer.openPopup(); 
+        }); 
+        map.addControl(searchControl);
     })
     .catch(console.error);
