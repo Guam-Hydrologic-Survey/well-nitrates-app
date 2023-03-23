@@ -590,18 +590,24 @@ fetch(map_url)
     })
     .catch(console.error);
 
-    // var legend = L.control({
-    //     position: "topleft",
-    // });
+var legend = L.control({
+    position: "bottomleft",
+});
 
-    // legend.onAdd = function (map) {
-    //     var div = L.DomUtil.create('div', 'legend'),
-    //         significance = [-1, 0, 1],
-    //         labels = ["Significantly Decreasing", "Insignificant", "Significantlt Increasing"];
-    //     for (var i = 0; i < significance.length; i++) {
-    //         div.innerHTML += "<p>" + significance[i] + " - <i> " + labels[i] + "</i></p>";
-    //     }
-    //     return div;
-    // }
+legend.onAdd = function (map) {
+    var div = L.DomUtil.create('div', 'legend'),
+        significance = [-1, 0, 1],
+        labels = ["Significantly Decreasing", "Insignificant", "Significantly Increasing"];
 
-    // legend.addTo(map);
+    div.innerHTML += "<h4><b>Legend</b></h4><hr>";
+
+    for (var i = 0; i < significance.length; i++) {
+        div.innerHTML += "<p><b>" + significance[i] + "</b> : <i> " + labels[i] + "</i></p>";
+    }
+
+    div.innerHTML += "<hr>";
+
+    return div;
+}
+
+legend.addTo(map);
