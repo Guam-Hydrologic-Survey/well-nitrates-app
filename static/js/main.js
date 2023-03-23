@@ -554,7 +554,6 @@ fetch(map_url)
         layerControl.addOverlay(insWells, "Insignificant");
 
         const mapJson = L.layerGroup([sigIncWells, sigDecWells, insWells]).addTo(map);
-        console.log(mapJson);
         
         // Control search  
         const searchControl = new L.Control.Search({ 
@@ -590,3 +589,19 @@ fetch(map_url)
         map.addControl(searchControl);
     })
     .catch(console.error);
+
+    // var legend = L.control({
+    //     position: "topleft",
+    // });
+
+    // legend.onAdd = function (map) {
+    //     var div = L.DomUtil.create('div', 'legend'),
+    //         significance = [-1, 0, 1],
+    //         labels = ["Significantly Decreasing", "Insignificant", "Significantlt Increasing"];
+    //     for (var i = 0; i < significance.length; i++) {
+    //         div.innerHTML += "<p>" + significance[i] + " - <i> " + labels[i] + "</i></p>";
+    //     }
+    //     return div;
+    // }
+
+    // legend.addTo(map);
