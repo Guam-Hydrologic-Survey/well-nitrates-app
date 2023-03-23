@@ -491,7 +491,6 @@ fetch(map_url)
             // Sends data for clicked item to global variable plotData 
             layer.on('click', pt => plotData = pt.target.feature.properties) 
             layer.on('click', pt => getStats = pt.target.feature.properties)
-
         }
 
         const sigIncWells = L.geoJSON(geojson, {
