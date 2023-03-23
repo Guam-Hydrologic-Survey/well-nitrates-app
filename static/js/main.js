@@ -554,6 +554,7 @@ fetch(map_url)
         layerControl.addOverlay(insWells, "Insignificant");
 
         const mapJson = L.layerGroup([sigIncWells, sigDecWells, insWells]).addTo(map);
+        console.log(mapJson);
         
         // Control search  
         const searchControl = new L.Control.Search({ 
@@ -563,6 +564,10 @@ fetch(map_url)
             textPlaceholder: 'Well Name...', 
             textErr: 'Sorry, could not find well.', 
             autoResize: true, 
+            // buildTip: function(well, village) {
+            //     var type = village.layer.feature.properties.village;
+            //     return '<a href="#" class="'+type+'">'+well+' <b>'+type+'</b></a>'
+            // },
             moveToLocation: function(latlng, title, map) { 
                 map.flyTo(latlng, 16); 
             }, 
