@@ -477,7 +477,7 @@ fetch(map_url)
 
         const getWellInfo = (feature, layer) => {
             // Label for well name
-            layer.bindTooltip(feature.properties.name, {permanent: true, direction: 'bottom', offset: [0,8]})
+            layer.bindTooltip(feature.properties.name, {permanent: true, direction: 'bottom', offset: [0,10]})
 
             // Popups with basic well info and buttons for stats and plot
             layer.bindPopup(
