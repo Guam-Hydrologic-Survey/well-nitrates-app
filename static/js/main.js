@@ -50,6 +50,17 @@ const baseLayers = {
 const layerControl = L.control.layers(baseLayers, null, {position: 'bottomright'});
 layerControl.addTo(map);
 
+const mapTitle = L.control({position: 'topleft'});
+
+mapTitle.onAdd =  function(map) {
+    this._div = L.DomUtil.create('div', 'mapTitle'); 
+    // this._div.innerHTML = "<h4>WERI MAppFx: Production Well Nitrates<br>Northern Guam Lens Aquifer</h4>";
+    this._div.innerHTML = '<img src="./static/assets/WERI MAppFx Well Nitrates Title Card-White_Bold.png" height="150">';
+    return this._div;
+};
+
+mapTitle.addTo(map);
+
 L.control.zoom({
     // options: topleft, topright, bottomleft, bottomright
     position: 'bottomright'
