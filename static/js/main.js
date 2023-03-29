@@ -69,7 +69,7 @@ L.control.zoom({
 // Control: Reset map view (goes to initial map zoom on page load)
 var resetZoomBtn = L.easyButton('<i class="bi bi-map"></i>', function() {
     map.setView(center, 12);
-});
+}, "Reset map view");
 
 const controlBar = L.easyBar([
     resetZoomBtn,
