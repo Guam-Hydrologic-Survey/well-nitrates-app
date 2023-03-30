@@ -9,10 +9,34 @@
     width: 100%;
 }
 
+.mapTitle {
+    padding: 6px 8px;
+    /* font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px; */
+}
+.mapTitle h4 {
+    margin: 0 0 5px;
+    color: #777;
+}
+
 .modal-body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.offcanvas-size-sm {
+    --bs-offcanvas-width: min(95vw, 200px) !important;
+}
+
+#legend > p, img {
+    /* padding-left: 30px; */ 
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* .offcanvas-body {
@@ -104,4 +128,25 @@ button {
 
 .plot-btn-container {
     float: right;
+}
+
+.legend {
+    padding: 5px;
+    font: 12px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    line-height: 8px;
+    color: #555;
+}
+
+.legend p {
+    /* line-height: 3px; */
+    /* margin-bottom: 10px; */
+}
+
+.legend h4 {
+    font-size: 14px;
+    text-align: center;
 }

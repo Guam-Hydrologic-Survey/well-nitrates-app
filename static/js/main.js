@@ -33,15 +33,33 @@ const ewi = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Wo
 	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community | DKValerio, MWZapata, JBulaklak, NCHabana 2022'
 }); 
 
+// ESRI World Gray Canvas 
+var ewgc = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+	attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ | DKValerio, MWZapata, JBulaklak, NCHabana 2022',
+	maxZoom: 16
+});
+
 const baseLayers = {
     'Open Street Map': osm,
     'ESRI World Imagery': ewi,
     'ESRI World Topo Map': ewtm,
     'ESRI World Street Map': ewsp,
+    'ESRI World Gray Canvas': ewgc,
 }
 
 const layerControl = L.control.layers(baseLayers, null, {position: 'bottomright'});
 layerControl.addTo(map);
+
+const mapTitle = L.control({position: 'topleft'});
+
+mapTitle.onAdd =  function(map) {
+    this._div = L.DomUtil.create('div', 'mapTitle'); 
+    // this._div.innerHTML = "<h4>WERI MAppFx: Production Well Nitrates<br>Northern Guam Lens Aquifer</h4>";
+    this._div.innerHTML = '<img src="./static/assets/WERI MAppFx Well Nitrates Title Card-White_Bold.png" height="150">';
+    return this._div;
+};
+
+mapTitle.addTo(map);
 
 L.control.zoom({
     // options: topleft, topright, bottomleft, bottomright
@@ -62,7 +80,7 @@ controlBar.addTo(map);
 // Hides tooltip based on zoom level 
 map.on('zoomend', function(z) {
     var zoomLevel = map.getZoom();
-    if (zoomLevel >= 14 ){
+    if (zoomLevel >= 15 ){
         [].forEach.call(document.querySelectorAll('.leaflet-tooltip'), function (t) {
             t.style.visibility = 'visible';
         });
@@ -122,11 +140,14 @@ var drawControl = new L.Control.Draw({
 
 map.addControl(drawControl);
 
-// TODO - add drawing layer to layer group; allow to toggle on and off (instead of clearing map of drawings)
 map.on(L.Draw.Event.CREATED, function(event) {
     var layer = event.layer;
     drawnFeatures.addLayer(layer);
-})
+});
+
+if (map.hasLayer(drawnFeatures)) {
+    layerControl.addOverlay(drawnFeatures, "Drawings");
+}
 
 // Plots data points from selected well to chart 
 let plotData 
@@ -388,103 +409,51 @@ const showStats = () => {
 
 // Filepath for map (lat, lon coords) json and data (stats, x-y vals) json 
 const map_url = './static/data/data6.json';
-
-// Map colored icons 
-const blackIcon = new L.Icon({
-    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-black.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
-  });
-
-const blueIcon = new L.Icon({
-    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
-  });
-
-const grayIcon = new L.Icon({
-    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-grey.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
-  });
-
-const greenIcon = new L.Icon({
-    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
-  });
-
-const orangeIcon = new L.Icon({
-    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
-  });
-
-const redIcon = new L.Icon({
-    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
-  });
-
-const violetIcon = new L.Icon({
-    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
-  });
-
-const yellowIcon = new L.Icon({
-    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-yellow.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
-  });
-
   
-// Map icons with shapes 
-// Change marker color dynamically 
-var incIcon = L.AwesomeMarkers.icon({
-    icon: "fa-caret-up",
-    prefix: "fa",
-    markerColor: "gray",
-    iconColor: "white"
-});
-
-var decIcon = L.AwesomeMarkers.icon({
-    icon: "fa-caret-down",
-    prefix: "fa",
-    markerColor: "gray",
-    iconColor: "white"
-})
-
-var insIcon = L.AwesomeMarkers.icon({
-    icon: "fa-circle",
-    prefix: "fa",
-    markerColor: "gray",
-    iconColor: "white"
-})
+function getColor(sig) {
+    const colors = [
+        {
+            name: "orange",
+            hex: "#FFAA00",
+            range: "<= 5"
+        },
+        {
+            name: "black",
+            hex: "#000000",
+            range: "<= 4"
+        },
+        {
+            name: "blue",
+            hex: "#7A8EF5",
+            range: "<= 3"
+        },
+        {
+            name: "light-blue",
+            hex: "#73DFFF", 
+            range: "<= 2"
+        },
+        {
+            name: "red",
+            hex: "F50000", 
+            range: "> 5"
+        }
+    ]
+    var c;
+    if (sig > 5) {
+        c = colors[4].hex;
+    } else {
+        if (sig == 5) {
+            c = colors[0].hex;
+        } else if (sig == 4) {
+            c = colors[1].hex;
+        } else if (sig == 3) {
+            c = colors[2].hex;
+        } else {
+            c = colors[3].hex;
+        }
+    }
+    return c; 
+}
 
 // Gets the data from the JSON file and adds well to the map
 fetch(map_url)
@@ -492,77 +461,8 @@ fetch(map_url)
     .then(geojson => { 
 
         const getWellInfo = (feature, layer) => {
-            // Conditionals for marker icons
-            if (feature.properties.sig == 1) {
-                // const mc = feature.properties.mColor;
-                switch (feature.properties.mColor) {
-                    case "blue":
-                        incIcon.options.markerColor = "blue";
-                        break;
-                    case "light-blue":
-                        incIcon.options.markerColor = "cadetblue";
-                        break;
-                    // case "black":
-                    //     incIcon.options.markerColor = "black";
-                    //     break;
-                    case "orange":
-                        incIcon.options.markerColor = "orange";
-                        break;
-                    case "red":
-                        incIcon.options.markerColor = "red";
-                        break;
-                    case "white":
-                        incIcon.options.markerColor = "gray";
-                        break;
-                    default:
-                        incIcon.options.markerColor = "green";
-                        break;
-                }
-                layer.setIcon(incIcon)
-                // console.log(incIcon.options.markerColor)
-            } else if (feature.properties.sig == 0) {
-                // insIcon.options.markerColor = "blue";
-
-                switch(feature.properties.LTG2019) {
-                    case 1:
-                        insIcon.options.markerColor = "gray";
-                        break;
-                    case 2:
-                        insIcon.options.markerColor = "purple";
-                        break;
-                    case 3:
-                        insIcon.options.markerColor = "blue";
-                        break;
-                    case 4:
-                        insIcon.options.markerColor = "black";
-                        break;
-                    case 5:
-                        insIcon.options.markerColor = "orange";
-                        break;
-                    case 6:
-                        insIcon.options.markerColor = "red";
-                        break;
-                }
-                layer.setIcon(insIcon);
-            } else {
-                if (feature.properties.mColor == "blue") {
-                    decIcon.options.markerColor = "blue";
-                } else if (feature.properties.mColor == "light-blue") {
-                    decIcon.options.markerColor = "purple";
-                } else if (feature.properties.mColor == "black") {
-                    decIcon.options.markerColor = "black";
-                } else if (feature.properties.mColor == "orange") {
-                    decIcon.options.markerColor = "orange";
-                } else if (feature.properties.mColor == "red") {
-                    decIcon.options.markerColor = "red";
-                } else {
-                    decIcon.options.markerColor = "gray"
-                }
-                layer.setIcon(decIcon)
-            }
-
             // Label for well name
-            layer.bindTooltip(feature.properties.name, {permanent: true, direction: 'bottom'})
+            layer.bindTooltip(feature.properties.name, {permanent: true, direction: 'bottom', offset: [0,10]})
 
             // Popups with basic well info and buttons for stats and plot
             layer.bindPopup(
@@ -572,31 +472,94 @@ fetch(map_url)
                 <br><strong>Lon:</strong> ${feature.properties.lon}
                 <br><strong>Basin:</strong> ${feature.properties.basin}
                 <br><br>
-                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" onclick="showStats()">More Info</button>
+                <div class="d-flex justify-content-center">
+                    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" onclick="showStats()" id="marker-more-info">More Info</button>
+                </div>
                 `
             );
+
             // On click event on the points
             // Sends data for clicked item to global variable plotData 
             layer.on('click', pt => plotData = pt.target.feature.properties) 
             layer.on('click', pt => getStats = pt.target.feature.properties)
-
         }
 
-        // Places points on the map and calls on getWellInfo function (right above) to show pop-ups 
-        const mapJson = L.geoJSON(geojson, {onEachFeature: getWellInfo}).addTo(map);
-        layerControl.addOverlay(mapJson, "Wells") 
+        const sigIncWells = L.geoJSON(geojson, {
+            filter: function(feature, layer) {
+                return (feature.properties.sig) == 1;
+            }, 
+            pointToLayer: function(feature, latlng) {
+                var iconStyle = L.divIcon({
+                    html: `
+                    <svg height="100%" width="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <g fill="${getColor(feature.properties.LTG2019)}" stroke="black">
+                            <path stroke-width="5" d="M50 0 L0 100 L100 100 Z"></path>
+                        </g>
+                    </svg>
+                    `,
+                    className: "",
+                    iconSize: [18, 18]
+                });
+                return L.marker(latlng, {icon: iconStyle});
+            }, 
+            onEachFeature: getWellInfo}).addTo(map);
+        layerControl.addOverlay(sigIncWells, "Significantly Increasing");
 
+        const sigDecWells = L.geoJSON(geojson, {
+            filter: function(feature, layer) {
+                return (feature.properties.sig) == -1;
+            }, 
+            pointToLayer: function(feature, latlng) {
+                var iconStyle = L.divIcon({
+                    html: `
+                    <svg height="100%" width="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <g fill="${getColor(feature.properties.LTG2019)}" stroke="black">
+                            <path stroke-width="5" d="M0 0 L50 100 L100 0 Z"></path>
+                        </g>
+                    </svg>
+                    `,
+                    className: "",
+                    iconSize: [18, 18]
+                });
+                return L.marker(latlng, {icon: iconStyle});
+            }, 
+            onEachFeature: getWellInfo}).addTo(map);
+        layerControl.addOverlay(sigDecWells, "Significantly Decreasing");
+        
+        const insWells = L.geoJSON(geojson, {
+            filter: function(feature, layer) {
+                return (feature.properties.sig) == 0;
+            }, 
+            pointToLayer: function(feature, latlng) {
+                return L.circleMarker(latlng, {
+                    radius: 8, 
+                    fillColor: getColor(feature.properties.LTG2019),
+                    weight: 1,
+                    fillOpacity: 1.0,
+                    color: "black",
+                    opacity: 1.0,
+                })
+            }, 
+            onEachFeature: getWellInfo}).addTo(map);
+        layerControl.addOverlay(insWells, "Insignificant");
+
+        const mapJson = L.layerGroup([sigIncWells, sigDecWells, insWells]).addTo(map);
+        
         // Control search  
         const searchControl = new L.Control.Search({ 
             layer: mapJson, 
             propertyName: 'name', 
             casesensitive: false, 
-            moveToLocation: function(latlng, title, map) { 
-                map.flyTo(latlng, 16); 
-            }, 
             textPlaceholder: 'Well Name...', 
             textErr: 'Sorry, could not find well.', 
             autoResize: true, 
+            // buildTip: function(well, village) {
+            //     var type = village.layer.feature.properties.village;
+            //     return '<a href="#" class="'+type+'">'+well+' <b>'+type+'</b></a>'
+            // },
+            moveToLocation: function(latlng, title, map) { 
+                map.flyTo(latlng, 16); 
+            }, 
             marker: { 
                 icon: false, 
                 animate: false, 
@@ -605,13 +568,15 @@ fetch(map_url)
                     radius: 30, 
                     color: 'red', 
                 } 
-            } 
+            },
+            hideMarkerOnCollapse: true,
+            autoCollapseTime: 1200,
         }); 
 
         searchControl.on("search:locationfound", function(e) { 
             e.layer.openPopup(); 
         }); 
-
         map.addControl(searchControl);
     })
     .catch(console.error);
+
