@@ -407,6 +407,20 @@ const showStats = () => {
         Plotly.newPlot('plot', [wnlTrace], layout, {scrollZoom: true, displaylogo: false, responsive: true}, config);
 }
 
+var statsOffcanvas = document.getElementById('offcanvasWithBothOptions');
+var legendOffcanvas = document.getElementById('legend');
+
+const title = document.getElementsByClassName("mapTitle");
+
+legendOffcanvas.addEventListener('show.bs.offcanvas', function () {
+    // document.getElementsByClassName("mapTitle").style.visibility = "hidden";
+    console.log(title);
+})
+
+legendOffcanvas.addEventListener('hidden.bs.offcanvas', function () {
+    // document.getElementsByClassName("mapTitle").style.visibility = "visible";
+})
+
 // Filepath for map (lat, lon coords) json and data (stats, x-y vals) json 
 const map_url = './static/data/data6.json';
   
@@ -473,10 +487,11 @@ fetch(map_url)
                 <br><strong>Basin:</strong> ${feature.properties.basin}
                 <br><br>
                 <div class="d-flex justify-content-center">
-                    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" onclick="showStats()">More Info</button>
+                    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" onclick="showStats()" id="marker-more-info">More Info</button>
                 </div>
                 `
             );
+
             // On click event on the points
             // Sends data for clicked item to global variable plotData 
             layer.on('click', pt => plotData = pt.target.feature.properties) 
@@ -578,3 +593,4 @@ fetch(map_url)
         map.addControl(searchControl);
     })
     .catch(console.error);
+
