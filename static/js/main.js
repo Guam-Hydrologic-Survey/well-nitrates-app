@@ -407,20 +407,6 @@ const showStats = () => {
         Plotly.newPlot('plot', [wnlTrace], layout, {scrollZoom: true, displaylogo: false, responsive: true}, config);
 }
 
-var statsOffcanvas = document.getElementById('offcanvasWithBothOptions');
-var legendOffcanvas = document.getElementById('legend');
-
-const title = document.getElementsByClassName("mapTitle");
-
-legendOffcanvas.addEventListener('show.bs.offcanvas', function () {
-    // document.getElementsByClassName("mapTitle").style.visibility = "hidden";
-    console.log(title);
-})
-
-legendOffcanvas.addEventListener('hidden.bs.offcanvas', function () {
-    // document.getElementsByClassName("mapTitle").style.visibility = "visible";
-})
-
 // Filepath for map (lat, lon coords) json and data (stats, x-y vals) json 
 const map_url = './static/data/data6.json';
   
