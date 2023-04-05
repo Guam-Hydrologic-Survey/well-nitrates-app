@@ -65,6 +65,8 @@ mapTitle.onAdd =  function(map) {
 
 mapTitle.addTo(map);
 
+var sidebar = L.control.sidebar('sidebar').addTo(map);
+
 L.control.fullscreen({
     position: 'bottomright',
     title: 'Toggle fullscreen mode',
