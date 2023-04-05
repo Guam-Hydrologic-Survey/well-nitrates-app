@@ -39,8 +39,8 @@
     <script src="./static/lib/control.fullscreen/Control.FullScreen.js"></script>
 
     <!-- Leaflet Sidebar -->
-    <link rel="stylesheet" href="sidebar-v2/css/ol3-sidebar.css">
-    <script type="text/javascript" src="sidebar-v2/js/ol3-sidebar.js"></script>
+    <link rel="stylesheet" href="./static/lib/leaflet-sidebar/leaflet-sidebar.css">
+    <script type="text/javascript" src="./static/lib/leaflet-sidebar/leaflet-sidebar.js"></script>
 
     <!-- Leaflet Search Control -->
     <script src="https://cdn.jsdelivr.net/gh/stefanocudini/leaflet-search@master/src/leaflet-search.js"></script>
@@ -102,8 +102,30 @@
       </div>
     </div>
 
+    <!-- Leaflet Sidebar -->
+    <div id="sidebar" class="sidebar collapsed">
+      <!-- navigation tabs -->
+      <div class="sidebar-tabs">
+        <ul role="tablist">
+          <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
+        </ul>
+      </div>
+
+      <!-- tab panes -->
+      <div class="sidebar-content">
+        <div class="sidebar-pane" id="home">
+          <h1 class="sidebar-header">
+            Pane header text
+            <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+          </h1>
+
+          <p>Pane text</p>
+        </div>
+      </div>
+    </div>
+
     <!-- Leaflet Map -->
-    <div id="map"></div>
+    <div id="map" class="sidebar-map"></div>
 
     <!-- Bootstrap Modal for Plot -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
