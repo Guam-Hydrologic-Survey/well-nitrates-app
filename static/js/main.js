@@ -266,7 +266,7 @@ const plotWNL = () => {
 // Second row: Additional statistics wrapped in an accordion 
 let getStats
 const showStats = () => {
-    document.getElementById("sidebar").innerHTML =
+    document.getElementById("stats-sidebar").innerHTML =
         `
             <div>
                 <h4>Well ${getStats.name}</h4>
@@ -590,4 +590,3 @@ fetch(map_url)
         map.addControl(searchControl);
     })
     .catch(console.error);
-
