@@ -5,6 +5,10 @@ const map = L.map('map', {
     center: center,
     zoom: 12,
     zoomControl: false,
+    // fullscreenControl: true, 
+    // fullscreenControlOptions: {
+    //     position: 'topleft'
+    // }
 })
 
 const baseLayersZoom = 19;
@@ -60,6 +64,13 @@ mapTitle.onAdd =  function(map) {
 };
 
 mapTitle.addTo(map);
+
+L.control.fullscreen({
+    position: 'bottomright',
+    title: 'Toggle fullscreen mode',
+    titleCancel: 'Exit fullscreen mode',
+    forceSeparateButton: false,
+}).addTo(map);
 
 L.control.zoom({
     // options: topleft, topright, bottomleft, bottomright
