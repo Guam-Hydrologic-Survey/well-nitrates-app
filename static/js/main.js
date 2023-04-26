@@ -272,7 +272,7 @@ const showStats = () => {
         `
             <div>
                 <h4>Well ${getStats.name}</h4>
-                <p class="stats-location">${getStats.lat}, ${getStats.lon}</p>
+                <p class="stats-location">${getStats.lat.toFixed(3)}, ${getStats.lon.toFixed(3)}</p>
                 <p class="stats-location">${getStats.basin} Basin</p>
                 <hr/>
             </div>
@@ -291,13 +291,13 @@ const showStats = () => {
                     <br>
                 </div>
                 <div class="stats-col">
-                    <p class="stats-num">${getStats.average}</p>
+                    <p class="stats-num">${getStats.average.toFixed(3)}</p>
                     <p class="stats-num">${getStats.min}</p>
                     <p class="stats-num">${getStats.max}</p>
                     <p class="stats-num">${getStats.mode}</p>
-                    <p class="stats-num">${getStats.slope}</p>
-                    <p class="stats-num">${getStats.intercept}</p>
-                    <p class="stats-num">${getStats.std_dev}</p>
+                    <p class="stats-num">${getStats.slope.toFixed(3)}</p>
+                    <p class="stats-num">${getStats.intercept.toFixed(3)}</p>
+                    <p class="stats-num">${getStats.std_dev.toFixed(3)}</p>
                     <p class="stats-num">${getStats.deg_of_free}</p>
                     <br>
                 </div>
@@ -333,23 +333,23 @@ const showStats = () => {
                                 <p class="stats-text-full">Annual Frequency</p>
                             </div>
                             <div class="stats-col">
-                                <p class="stats-num-full">${getStats.rcrit}</p>
-                                <p class="stats-num-full">${getStats.rcalc_mo}</p>
-                                <p class="stats-num-full">${getStats.rcalc_new}</p>
-                                <p class="stats-num-full">${getStats.EA}</p>
-                                <p class="stats-num-full">${getStats.EA_X2}</p>
+                                <p class="stats-num-full">${getStats.rcrit.toFixed(3)}</p>
+                                <p class="stats-num-full">${getStats.rcalc_mo.toFixed(3)}</p>
+                                <p class="stats-num-full">${getStats.rcalc_new.toFixed(3)}</p>
+                                <p class="stats-num-full">${getStats.EA.toFixed(3)}</p>
+                                <p class="stats-num-full">${getStats.EA_X2.toFixed(3)}</p>
                                 <p class="stats-num-full">${getStats.base_year}</p>
                                 <p class="stats-num-full">${getStats.end_year}</p>
-                                <p class="stats-num-full">${getStats.top1}</p>
-                                <p class="stats-num-full">${getStats.top2}</p>
-                                <p class="stats-num-full">${getStats.bottom1}</p>
-                                <p class="stats-num-full">${getStats.bottom2}</p>
-                                <p class="stats-num-full">${getStats.inc_10_Yrs}</p>
-                                <p class="stats-num-full">${getStats.inc_20_Yrs}</p>
-                                <p class="stats-num-full">${getStats.x_yrs_1ppm}</p>
+                                <p class="stats-num-full">${getStats.top1.toFixed(3)}</p>
+                                <p class="stats-num-full">${getStats.top2.toFixed(3)}</p>
+                                <p class="stats-num-full">${getStats.bottom1.toFixed(3)}</p>
+                                <p class="stats-num-full">${getStats.bottom2.toFixed(3)}</p>
+                                <p class="stats-num-full">${getStats.inc_10_Yrs.toFixed(3)}</p>
+                                <p class="stats-num-full">${getStats.inc_20_Yrs.toFixed(3)}</p>
+                                <p class="stats-num-full">${getStats.x_yrs_1ppm.toFixed(3)}</p>
                                 <p class="stats-num-full">${getStats.sig}</p>
                                 <p class="stats-num-full">${getStats.MoP}</p>
-                                <p class="stats-num-full">${getStats.annual_freq}</p>
+                                <p class="stats-num-full">${getStats.annual_freq.toFixed(3)}</p>
                             </div>
                         </div>
                     </div>
@@ -481,8 +481,8 @@ fetch(map_url)
             layer.bindPopup(
                 `
                 <strong>Well</strong>: ${feature.properties.name} 
-                <br><strong>Lat:</strong> ${feature.properties.lat} 
-                <br><strong>Lon:</strong> ${feature.properties.lon}
+                <br><strong>Lat:</strong> ${feature.properties.lat.toFixed(3)} 
+                <br><strong>Lon:</strong> ${feature.properties.lon.toFixed(3)}
                 <br><strong>Basin:</strong> ${feature.properties.basin}
                 <br><br>
                 <div class="d-flex justify-content-center">
