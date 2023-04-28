@@ -153,12 +153,6 @@ var drawControl = new L.Control.Draw({
 
 
 map.addControl(drawControl);
-
-var fullscreenControl = L.control.fullscreen({
-    position: 'bottomright'
-});
-
-map.addControl(fullscreenControl);
 map.on(L.Draw.Event.CREATED, function(event) {
     var layer = event.layer;
     drawnFeatures.addLayer(layer);
