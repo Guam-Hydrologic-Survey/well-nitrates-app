@@ -325,7 +325,7 @@ const showStats = () => {
                                 <p class="stats-text-full">Top 2</p>
                                 <p class="stats-text-full">Bottom 1</p>
                                 <p class="stats-text-full">Bottom 2</p>
-                                <p class="stats-text-full">Increase in 10 Years</p>F
+                                <p class="stats-text-full">Increase in 10 Years</p>
                                 <p class="stats-text-full">Increase in 20 Years</p>
                                 <p class="stats-text-full">1ppm in X Years</p>
                                 <p class="stats-text-full">Significance</p>
@@ -333,23 +333,23 @@ const showStats = () => {
                                 <p class="stats-text-full">Annual Frequency</p>
                             </div>
                             <div class="stats-col">
-                                <p class="stats-num-full">${getStats.rcrit}</p>
-                                <p class="stats-num-full">${getStats.rcalc_mo}</p>
-                                <p class="stats-num-full">${getStats.rcalc_new}</p>
-                                <p class="stats-num-full">${getStats.EA}</p>
-                                <p class="stats-num-full">${getStats.EA_X2}</p>
+                                <p class="stats-num-full">${getStats.rcrit.toFixed(3)}</p>
+                                <p class="stats-num-full">${getStats.rcalc_mo}</p>              
+                                <p class="stats-num-full">${getStats.rcalc_new.toFixed(3)}</p>
+                                <p class="stats-num-full">${getStats.EA.toFixed(3)}</p>
+                                <p class="stats-num-full">${getStats.EA_X2.toFixed(3)}</p>
                                 <p class="stats-num-full">${getStats.base_year}</p>
                                 <p class="stats-num-full">${getStats.end_year}</p>
-                                <p class="stats-num-full">${getStats.top1}</p>
-                                <p class="stats-num-full">${getStats.top2}</p>
-                                <p class="stats-num-full">${getStats.bottom1}</p>
-                                <p class="stats-num-full">${getStats.bottom2}</p>
-                                <p class="stats-num-full">${getStats.inc_10_Yrs}</p>
-                                <p class="stats-num-full">${getStats.inc_20_Yrs}</p>
-                                <p class="stats-num-full">${getStats.x_yrs_1ppm}</p>
+                                <p class="stats-num-full">${getStats.top1.toFixed(3)}</p>
+                                <p class="stats-num-full">${getStats.top2.toFixed(3)}</p>
+                                <p class="stats-num-full">${getStats.bottom1.toFixed(3)}</p>
+                                <p class="stats-num-full">${getStats.bottom2.toFixed(3)}</p>
+                                <p class="stats-num-full">${getStats.inc_10_Yrs.toFixed(3)}</p>
+                                <p class="stats-num-full">${getStats.inc_20_Yrs.toFixed(3)}</p>
+                                <p class="stats-num-full">${getStats.x_yrs_1ppm.toFixed(3)}</p>
                                 <p class="stats-num-full">${getStats.sig}</p>
                                 <p class="stats-num-full">${getStats.MoP}</p>
-                                <p class="stats-num-full">${getStats.annual_freq}</p>
+                                <p class="stats-num-full">${getStats.annual_freq.toFixed(3)}</p>
                             </div>
                         </div>
                     </div>
@@ -481,8 +481,8 @@ fetch(map_url)
             layer.bindPopup(
                 `
                 <strong>Well</strong>: ${feature.properties.name} 
-                <br><strong>Lat:</strong> ${feature.properties.lat} 
-                <br><strong>Lon:</strong> ${feature.properties.lon}
+                <br><strong>Lat:</strong> ${feature.properties.lat.toFixed(3)} 
+                <br><strong>Lon:</strong> ${feature.properties.lon.toFixed(3)}
                 <br><strong>Basin:</strong> ${feature.properties.basin}
                 <br><br>
                 <div class="d-flex justify-content-center">
