@@ -65,7 +65,7 @@ mapTitle.onAdd =  function(map) {
 
 mapTitle.addTo(map);
 
-var sidebar = L.control.sidebar('sidebar').addTo(map);
+// var sidebar = L.control.sidebar('sidebar').addTo(map);
 
 L.control.fullscreen({
     position: 'bottomright',
@@ -272,7 +272,7 @@ const showStats = () => {
         `
             <div>
                 <h4>Well ${getStats.name}</h4>
-                <p class="stats-location">${getStats.lat}, ${getStats.lon}</p>
+                <p class="stats-location">${getStats.lat.toFixed(3)}, ${getStats.lon.toFixed(3)}</p>
                 <p class="stats-location">${getStats.basin} Basin</p>
                 <hr/>
             </div>
@@ -291,13 +291,13 @@ const showStats = () => {
                     <br>
                 </div>
                 <div class="stats-col">
-                    <p class="stats-num">${getStats.average}</p>
+                    <p class="stats-num">${getStats.average.toFixed(3)}</p>
                     <p class="stats-num">${getStats.min}</p>
                     <p class="stats-num">${getStats.max}</p>
                     <p class="stats-num">${getStats.mode}</p>
-                    <p class="stats-num">${getStats.slope}</p>
-                    <p class="stats-num">${getStats.intercept}</p>
-                    <p class="stats-num">${getStats.std_dev}</p>
+                    <p class="stats-num">${getStats.slope.toFixed(6)}</p>
+                    <p class="stats-num">${getStats.intercept.toFixed(3)}</p>
+                    <p class="stats-num">${getStats.std_dev.toFixed(3)}</p>
                     <p class="stats-num">${getStats.deg_of_free}</p>
                     <br>
                 </div>
@@ -325,7 +325,7 @@ const showStats = () => {
                                 <p class="stats-text-full">Top 2</p>
                                 <p class="stats-text-full">Bottom 1</p>
                                 <p class="stats-text-full">Bottom 2</p>
-                                <p class="stats-text-full">Increase in 10 Years</p>
+                                <p class="stats-text-full">Increase in 10 Years</p>F
                                 <p class="stats-text-full">Increase in 20 Years</p>
                                 <p class="stats-text-full">1ppm in X Years</p>
                                 <p class="stats-text-full">Significance</p>
@@ -493,8 +493,15 @@ fetch(map_url)
 
             // On click event on the points
             // Sends data for clicked item to global variable plotData 
-            layer.on('click', pt => plotData = pt.target.feature.properties) 
-            layer.on('click', pt => getStats = pt.target.feature.properties)
+            // layer.on('click', pt => plotData = pt.target.feature.properties) 
+            // layer.on('click', pt => getStats = pt.target.feature.properties)
+
+            layer.on('click', pt => {
+                plotData = pt.target.feature.properties;
+                getStats = pt.target.feature.properties;
+                console.log(`Clicked on well: ${getStats.name}`);
+            })
+            
         }
 
         const sigIncWells = L.geoJSON(geojson, {
@@ -592,3 +599,5 @@ fetch(map_url)
         map.addControl(searchControl);
     })
     .catch(console.error);
+
+    
