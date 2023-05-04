@@ -505,9 +505,6 @@ fetch(map_url)
 
             // On click event on the points
             // Sends data for clicked item to global variable plotData 
-            // layer.on('click', pt => plotData = pt.target.feature.properties) 
-            // layer.on('click', pt => getStats = pt.target.feature.properties)
-
             layer.on('click', pt => {
                 plotData = pt.target.feature.properties;
                 getStats = pt.target.feature.properties;
