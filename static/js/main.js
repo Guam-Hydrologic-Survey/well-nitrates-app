@@ -268,6 +268,18 @@ const plotWNL = () => {
 // Second row: Additional statistics wrapped in an accordion 
 let getStats
 const showStats = () => {
+     //well properties w/ either data type of string or decimals
+    rcalc_mo = getStats.rcalc_mo;
+    annual_freq = getStats.annual_freq;
+
+    // array twoType formats data to 3 decimals place
+    const twoType = [rcalc_mo, annual_freq];
+    for (i = 0; i < twoType.length; i ++){
+        if (typeof twoType[i] === 'number'){
+            twoType[i] = twoType[i].toFixed(3);
+        }
+    }
+
     document.getElementById("stats-sidebar").innerHTML =
         `
             <div>
@@ -332,9 +344,9 @@ const showStats = () => {
                                 <p class="stats-text-full">MoP</p>
                                 <p class="stats-text-full">Annual Frequency</p>
                             </div>
-                            <div class="stats-col">
+                            <div class="stats-col">                
                                 <p class="stats-num-full">${getStats.rcrit.toFixed(3)}</p>
-                                <p class="stats-num-full">${getStats.rcalc_mo}</p>              
+                                <p class="stats-num-full">${twoType[0]}</p>              
                                 <p class="stats-num-full">${getStats.rcalc_new.toFixed(3)}</p>
                                 <p class="stats-num-full">${getStats.EA.toFixed(3)}</p>
                                 <p class="stats-num-full">${getStats.EA_X2.toFixed(3)}</p>
@@ -349,7 +361,7 @@ const showStats = () => {
                                 <p class="stats-num-full">${getStats.x_yrs_1ppm.toFixed(3)}</p>
                                 <p class="stats-num-full">${getStats.sig}</p>
                                 <p class="stats-num-full">${getStats.MoP}</p>
-                                <p class="stats-num-full">${getStats.annual_freq.toFixed(3)}</p>
+                                <p class="stats-num-full">${twoType[1]}</p>
                             </div>
                         </div>
                     </div>
@@ -499,7 +511,6 @@ fetch(map_url)
             layer.on('click', pt => {
                 plotData = pt.target.feature.properties;
                 getStats = pt.target.feature.properties;
-                console.log(`Clicked on well: ${getStats.name}`);
             })
             
         }
