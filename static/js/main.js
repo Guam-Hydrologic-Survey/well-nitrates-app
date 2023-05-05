@@ -5,6 +5,10 @@ const map = L.map('map', {
     center: center,
     zoom: 12,
     zoomControl: false,
+    // fullscreenControl: true, 
+    // fullscreenControlOptions: {
+    //     position: 'topleft'
+    // }
 })
 
 const baseLayersZoom = 19;
@@ -54,12 +58,20 @@ const mapTitle = L.control({position: 'topleft'});
 
 mapTitle.onAdd =  function(map) {
     this._div = L.DomUtil.create('div', 'mapTitle'); 
-    // this._div.innerHTML = "<h4>WERI MAppFx: Production Well Nitrates<br>Northern Guam Lens Aquifer</h4>";
     this._div.innerHTML = '<img src="./static/assets/WERI MAppFx Well Nitrates Title Card-White_Bold.png" height="150">';
     return this._div;
 };
 
 mapTitle.addTo(map);
+
+// var sidebar = L.control.sidebar('sidebar').addTo(map);
+
+L.control.fullscreen({
+    position: 'bottomright',
+    title: 'Toggle fullscreen mode',
+    titleCancel: 'Exit fullscreen mode',
+    forceSeparateButton: false,
+}).addTo(map);
 
 L.control.zoom({
     // options: topleft, topright, bottomleft, bottomright
@@ -255,11 +267,24 @@ const plotWNL = () => {
 // Second row: Additional statistics wrapped in an accordion 
 let getStats
 const showStats = () => {
-    document.getElementById("sidebar").innerHTML =
+    
+     //well properties w/ either data type of string or decimals
+    rcalc_mo = getStats.rcalc_mo;
+    annual_freq = getStats.annual_freq;
+
+    // array twoType formats data to 3 decimals place
+    const twoType = [rcalc_mo, annual_freq];
+    for (i = 0; i < twoType.length; i ++){
+        if (typeof twoType[i] === 'number'){
+            twoType[i] = twoType[i].toFixed(3);
+        }
+    }
+
+    document.getElementById("stats-sidebar").innerHTML =
         `
             <div>
                 <h4>Well ${getStats.name}</h4>
-                <p class="stats-location">${getStats.lat}, ${getStats.lon}</p>
+                <p class="stats-location">${getStats.lat.toFixed(3)}, ${getStats.lon.toFixed(3)}</p>
                 <p class="stats-location">${getStats.basin} Basin</p>
                 <hr/>
             </div>
@@ -278,13 +303,13 @@ const showStats = () => {
                     <br>
                 </div>
                 <div class="stats-col">
-                    <p class="stats-num">${getStats.average}</p>
+                    <p class="stats-num">${getStats.average.toFixed(3)}</p>
                     <p class="stats-num">${getStats.min}</p>
                     <p class="stats-num">${getStats.max}</p>
                     <p class="stats-num">${getStats.mode}</p>
-                    <p class="stats-num">${getStats.slope}</p>
-                    <p class="stats-num">${getStats.intercept}</p>
-                    <p class="stats-num">${getStats.std_dev}</p>
+                    <p class="stats-num">${getStats.slope.toFixed(6)}</p>
+                    <p class="stats-num">${getStats.intercept.toFixed(3)}</p>
+                    <p class="stats-num">${getStats.std_dev.toFixed(3)}</p>
                     <p class="stats-num">${getStats.deg_of_free}</p>
                     <br>
                 </div>
@@ -319,24 +344,24 @@ const showStats = () => {
                                 <p class="stats-text-full">MoP</p>
                                 <p class="stats-text-full">Annual Frequency</p>
                             </div>
-                            <div class="stats-col">
-                                <p class="stats-num-full">${getStats.rcrit}</p>
-                                <p class="stats-num-full">${getStats.rcalc_mo}</p>
-                                <p class="stats-num-full">${getStats.rcalc_new}</p>
-                                <p class="stats-num-full">${getStats.EA}</p>
-                                <p class="stats-num-full">${getStats.EA_X2}</p>
+                            <div class="stats-col">                
+                                <p class="stats-num-full">${getStats.rcrit.toFixed(3)}</p>
+                                <p class="stats-num-full">${twoType[0]}</p>              
+                                <p class="stats-num-full">${getStats.rcalc_new.toFixed(3)}</p>
+                                <p class="stats-num-full">${getStats.EA.toFixed(3)}</p>
+                                <p class="stats-num-full">${getStats.EA_X2.toFixed(3)}</p>
                                 <p class="stats-num-full">${getStats.base_year}</p>
                                 <p class="stats-num-full">${getStats.end_year}</p>
-                                <p class="stats-num-full">${getStats.top1}</p>
-                                <p class="stats-num-full">${getStats.top2}</p>
-                                <p class="stats-num-full">${getStats.bottom1}</p>
-                                <p class="stats-num-full">${getStats.bottom2}</p>
-                                <p class="stats-num-full">${getStats.inc_10_Yrs}</p>
-                                <p class="stats-num-full">${getStats.inc_20_Yrs}</p>
-                                <p class="stats-num-full">${getStats.x_yrs_1ppm}</p>
+                                <p class="stats-num-full">${getStats.top1.toFixed(3)}</p>
+                                <p class="stats-num-full">${getStats.top2.toFixed(3)}</p>
+                                <p class="stats-num-full">${getStats.bottom1.toFixed(3)}</p>
+                                <p class="stats-num-full">${getStats.bottom2.toFixed(3)}</p>
+                                <p class="stats-num-full">${getStats.inc_10_Yrs.toFixed(3)}</p>
+                                <p class="stats-num-full">${getStats.inc_20_Yrs.toFixed(3)}</p>
+                                <p class="stats-num-full">${getStats.x_yrs_1ppm.toFixed(3)}</p>
                                 <p class="stats-num-full">${getStats.sig}</p>
                                 <p class="stats-num-full">${getStats.MoP}</p>
-                                <p class="stats-num-full">${getStats.annual_freq}</p>
+                                <p class="stats-num-full">${twoType[1]}</p>
                             </div>
                         </div>
                     </div>
@@ -468,8 +493,8 @@ fetch(map_url)
             layer.bindPopup(
                 `
                 <strong>Well</strong>: ${feature.properties.name} 
-                <br><strong>Lat:</strong> ${feature.properties.lat} 
-                <br><strong>Lon:</strong> ${feature.properties.lon}
+                <br><strong>Lat:</strong> ${feature.properties.lat.toFixed(3)} 
+                <br><strong>Lon:</strong> ${feature.properties.lon.toFixed(3)}
                 <br><strong>Basin:</strong> ${feature.properties.basin}
                 <br><br>
                 <div class="d-flex justify-content-center">
@@ -480,8 +505,11 @@ fetch(map_url)
 
             // On click event on the points
             // Sends data for clicked item to global variable plotData 
-            layer.on('click', pt => plotData = pt.target.feature.properties) 
-            layer.on('click', pt => getStats = pt.target.feature.properties)
+            layer.on('click', pt => {
+                plotData = pt.target.feature.properties;
+                getStats = pt.target.feature.properties;
+            })
+            
         }
 
         const sigIncWells = L.geoJSON(geojson, {
@@ -553,10 +581,6 @@ fetch(map_url)
             textPlaceholder: 'Well Name...', 
             textErr: 'Sorry, could not find well.', 
             autoResize: true, 
-            // buildTip: function(well, village) {
-            //     var type = village.layer.feature.properties.village;
-            //     return '<a href="#" class="'+type+'">'+well+' <b>'+type+'</b></a>'
-            // },
             moveToLocation: function(latlng, title, map) { 
                 map.flyTo(latlng, 16); 
             }, 
@@ -579,4 +603,4 @@ fetch(map_url)
         map.addControl(searchControl);
     })
     .catch(console.error);
-
+    
