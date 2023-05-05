@@ -58,7 +58,6 @@ const mapTitle = L.control({position: 'topleft'});
 
 mapTitle.onAdd =  function(map) {
     this._div = L.DomUtil.create('div', 'mapTitle'); 
-    // this._div.innerHTML = "<h4>WERI MAppFx: Production Well Nitrates<br>Northern Guam Lens Aquifer</h4>";
     this._div.innerHTML = '<img src="./static/assets/WERI MAppFx Well Nitrates Title Card-White_Bold.png" height="150">';
     return this._div;
 };
@@ -268,6 +267,7 @@ const plotWNL = () => {
 // Second row: Additional statistics wrapped in an accordion 
 let getStats
 const showStats = () => {
+    
      //well properties w/ either data type of string or decimals
     rcalc_mo = getStats.rcalc_mo;
     annual_freq = getStats.annual_freq;
@@ -581,10 +581,6 @@ fetch(map_url)
             textPlaceholder: 'Well Name...', 
             textErr: 'Sorry, could not find well.', 
             autoResize: true, 
-            // buildTip: function(well, village) {
-            //     var type = village.layer.feature.properties.village;
-            //     return '<a href="#" class="'+type+'">'+well+' <b>'+type+'</b></a>'
-            // },
             moveToLocation: function(latlng, title, map) { 
                 map.flyTo(latlng, 16); 
             }, 
@@ -607,5 +603,4 @@ fetch(map_url)
         map.addControl(searchControl);
     })
     .catch(console.error);
-
     
