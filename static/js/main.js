@@ -597,8 +597,16 @@ fetch(map_url)
             autoCollapseTime: 1200,
         }); 
 
+        // On click event on the points
+            // Sends data for clicked item to global variable plotData 
+            // layer.on('click', pt => {
+            //     plotData = pt.target.feature.properties;
+            //     getStats = pt.target.feature.properties;
+            // })
         searchControl.on("search:locationfound", function(e) { 
             e.layer.openPopup(); 
+            plotData = e.layer.feature.properties;
+            getStats = e.layer.feature.properties;
         }); 
         map.addControl(searchControl);
     })
