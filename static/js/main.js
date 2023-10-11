@@ -597,8 +597,11 @@ fetch(map_url)
             autoCollapseTime: 1200,
         }); 
 
+
         searchControl.on("search:locationfound", function(e) { 
             e.layer.openPopup(); 
+            plotData = e.layer.feature.properties;
+            getStats = e.layer.feature.properties;
         }); 
         map.addControl(searchControl);
     })
