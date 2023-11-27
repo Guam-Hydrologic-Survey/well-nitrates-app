@@ -66,12 +66,12 @@ mapTitle.addTo(map);
 
 // var sidebar = L.control.sidebar('sidebar').addTo(map);
 
-L.control.fullscreen({
-    position: 'bottomright',
-    title: 'Toggle fullscreen mode',
-    titleCancel: 'Exit fullscreen mode',
-    forceSeparateButton: false,
-}).addTo(map);
+// L.control.fullscreen({
+//     position: 'bottomright',
+//     title: 'Toggle fullscreen mode',
+//     titleCancel: 'Exit fullscreen mode',
+//     forceSeparateButton: false,
+// }).addTo(map);
 
 L.control.zoom({
     // options: topleft, topright, bottomleft, bottomright
