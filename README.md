@@ -17,16 +17,19 @@ This map is based on a GHS data analysis of Guam's production well nitrate sampl
 
 Data originated from Guam Waterworks Authority as organized and transferred through Mauryn McDonald ([WERI Technical Report 95](https://weri-cdn.uog.edu/wp-content/PDFs/TRs/WERI%20TR%2095%20-%20McDonald%202002.pdf)), and lab records from Jennifer Cruz, N'tasha Perez, Carmen Sian-Denton, and Gary Denton. 
 
-<br>
+> __Keywords:__ WERI MAppFx, data visualization, online information transfer, Northern Guam Lens Aquifer, nitrates 
+
+## WERI Technical Report No. 180 
+Published as a technical report on February 2023 and is available through the WERI website's _Reports & Publications_ section, [here](https://weri.uog.edu/reports-and-publications/). It is also available on the Guam Hydrologic Survey website, [here](https://guamhydrologicsurvey.uog.edu/index.php/2023/02/28/mappfx-production-well-nitrates-northern-guam-lens-aquifer-v2/). 
 
 ## Authors 
 
-- [@Dannika Valerio](#)
-- [@Matt Zapata](#)
-- [@Jezreelyn Bulaklak](#)
-- [@Dr Nathan Habana](#)
+DK Valerio ‧ MW Zapata ‧ NC Habana 
 
-<br>
+## Contributors 
+
+_Code:_ DK Valerio ‧ MW Zapata <br>
+_Data Analysis:_ J Bulaklak ‧ NC Habana 
 
 ## References
 - McDonald, M. Q. (2002) _Nitrate-Nitrogen Concentrations in the Northern Guam Lens and Potential Nitrogen Sources._ WERI Technical Report 95, WERI UOG, Mangilao, Guam.
