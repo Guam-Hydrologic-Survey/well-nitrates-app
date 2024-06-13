@@ -28,8 +28,15 @@ DK Valerio ‧ MW Zapata ‧ NC Habana
 
 ## Contributors 
 
-_Code:_ DK Valerio ‧ MW Zapata <br>
-_Data Analysis:_ J Bulaklak ‧ NC Habana 
+_UI Design_: DK Valerio ‧ NC Habana <br>
+_Code:_ DK Valerio ‧ MW Zapata <br> 
+_Data Analysis:_ J Bulaklak ‧ NC Habana <br>
+_Data Aggregation:_ MW Zapata ‧ NC Habana 
+
+## Acknowledgements 
+
+Brigham Young University Civil Engineering Department 
+Riley Hales, Gus Williams, and Norm Jones
 
 ## References
 - McDonald, M. Q. (2002) _Nitrate-Nitrogen Concentrations in the Northern Guam Lens and Potential Nitrogen Sources._ WERI Technical Report 95, WERI UOG, Mangilao, Guam.
