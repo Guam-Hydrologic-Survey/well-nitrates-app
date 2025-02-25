@@ -53,6 +53,10 @@
     height: 200px;
 } */
 
+.ghs-map-library-links {
+    font-style: normal;
+}
+
 .bs-btn-group {
     margin: 20px;
 }
@@ -139,11 +143,6 @@ button {
     border-radius: 5px;
     line-height: 8px;
     color: #555;
-}
-
-.legend p {
-    /* line-height: 3px; */
-    /* margin-bottom: 10px; */
 }
 
 .legend h4 {
