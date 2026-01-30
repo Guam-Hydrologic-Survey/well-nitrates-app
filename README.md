@@ -26,12 +26,12 @@ Published as a technical report on February 2023 and is available through the WE
 
 DK Valerio ‧ MW Zapata ‧ NC Habana 
 
-## Contributors 
+## Developers and Contributors 
 
 _UI Design_: DK Valerio ‧ NC Habana <br>
 _Code:_ DK Valerio ‧ MW Zapata <br> 
 _Data Analysis:_ J Bulaklak ‧ NC Habana <br>
-_Data Aggregation:_ MW Zapata ‧ NC Habana 
+_Data Aggregation and Updates:_ SM Quintanilla ‧ MCSnaer ‧ MW Zapata ‧ NC Habana 
 
 ## Acknowledgements 
 
