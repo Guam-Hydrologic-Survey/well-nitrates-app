@@ -422,7 +422,7 @@ const showStats = () => {
 }
 
 // Filepath for map (lat, lon coords) json and data (stats, x-y vals) json 
-const map_url = './static/data/data6.json';
+const map_url = './static/data/data7.json';
   
 function getColor(sig) {
     const colors = [
