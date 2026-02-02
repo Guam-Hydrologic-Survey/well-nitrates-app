@@ -2,6 +2,7 @@
 /test
 /python 
 /node_modules
+/local*
 
 # -------------- For Visual Studio Code 
 .vscode/*

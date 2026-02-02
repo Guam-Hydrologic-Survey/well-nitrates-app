@@ -1,9 +1,0 @@
-{
-  "homepage": "https://guam-hydrologic-survey.github.io/well-nitrates-app/",
-  "name": "mappfx-well-nitrates",
-  "dependencies": {
-    "i": "^0.3.7",
-    "plotly.js-dist": "^2.14.0"
-  },
-  "scripts": {}
-}
