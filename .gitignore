@@ -2,8 +2,7 @@
 /test
 /python 
 /node_modules
-/old-site
-/new-site
+/local*
 
 # -------------- For Visual Studio Code 
 .vscode/*
