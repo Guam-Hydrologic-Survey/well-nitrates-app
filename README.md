@@ -4,7 +4,7 @@ A map of nitrate concentrations in Guam wells based on a [nitrate analysis](http
 
 <br> 
 
-<img src="static/assets/MAppFx Prototype.png">
+<img src="src/assets/MAppFx Prototype.png">
 <p align="center">
     <i><b>Figure 1</b> - Design <a href="https://www.figma.com/proto/ufmyb9WJK5BqjH9o2Uaflk/NGLA-Well-Nitrate-Data---Web-App?page-id=132%3A74&node-id=138%3A12&viewport=312%2C323%2C0.09&scaling=scale-down&starting-point-node-id=138%3A12" target="_blank">prototype</a> of MAppFx: NGLA Well Nitrates.</i>
 </p>
