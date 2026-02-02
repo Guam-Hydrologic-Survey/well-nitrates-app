@@ -109,8 +109,8 @@ export function About(element) {
                 WERI Map Series
               </button>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="https://guamhydrologicsurvey.uog.edu/mappfx-library/" title="MAppFx Library on GHS">MAppFx Library</a></li>
-                <li><a class="dropdown-item" href="https://guamhydrologicsurvey.uog.edu/web-mapps/" title="Web MApps Library on GHS">Web MApps</a></li>
+                <li><a class="dropdown-item" href="https://guamhydrologicsurvey.uog.edu/mappfx-library/" title="MAppFx Library on GHS" target="_blank" rel="noreferrer noopener">MAppFx Library</a></li>
+                <li><a class="dropdown-item" href="https://guamhydrologicsurvey.uog.edu/web-mapps/" title="Web MApps Library on GHS" target="_blank" rel="noreferrer noopener">Web MApps</a></li>
               </ul>
             </div>
           </div>
