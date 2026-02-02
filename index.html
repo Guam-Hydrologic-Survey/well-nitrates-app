@@ -1,191 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>NGLA Production Well Nitrates | WERI MAppFx</title>
-    <link rel="shortcut icon" href="./static/assets/WERI-Logo.ico" type="image/x-icon">
+  <title>MAppFx: NGLA Production Well Nitrates | WERI</title>
+  <link rel="shortcut icon" href="./src/assets/WERI-Logo.ico" type="image/x-icon">
 
-     <!-- Leaflet JS and CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
-    integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+  <!-- Leaflet.js -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
     crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
-        integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
-        crossorigin=""></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  
+  <!-- Leaflet Lasso -->
+  <script src="https://unpkg.com/leaflet-lasso@2.2.13/dist/leaflet-lasso.umd.min.js"></script>
 
-    <!-- Leaflet Easy Button -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
-    <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
+  <!-- Leaflet Draw -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js" integrity="sha512-ozq8xQKq6urvuU6jNgkfqAmT7jKN2XumbrX1JiB3TnF7tI48DPI4Gy1GXKD/V3EExgAs1V+pRO7vwtS1LHg0Gw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw-src.css" integrity="sha512-vJfMKRRm4c4UupyPwGUZI8U651mSzbmmPgR3sdE3LcwBPsdGeARvUM5EcSTg34DK8YIRiIo+oJwNfZPMKEQyug==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Leaflet Search Control -->
+  <script src="https://cdn.jsdelivr.net/gh/stefanocudini/leaflet-search@master/src/leaflet-search.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/stefanocudini/leaflet-search@master/src/leaflet-search.css">
 
-    <!-- Leaflet Awesome-Markers-->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"
-    />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script> 
+  <!-- Leaflet Easy Button -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+  <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
 
-    <!-- Leaflet Draw -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js" integrity="sha512-ozq8xQKq6urvuU6jNgkfqAmT7jKN2XumbrX1JiB3TnF7tI48DPI4Gy1GXKD/V3EExgAs1V+pRO7vwtS1LHg0Gw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw-src.css" integrity="sha512-vJfMKRRm4c4UupyPwGUZI8U651mSzbmmPgR3sdE3LcwBPsdGeARvUM5EcSTg34DK8YIRiIo+oJwNfZPMKEQyug==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Plotly.js -->
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js" charset="utf-8"></script>
 
-    <!-- Leaflet Fullscreen Control -->
-    <link rel="stylesheet" href="./static/lib/control.fullscreen/Control.FullScreen.css">
-    <script src="./static/lib/control.fullscreen/Control.FullScreen.js"></script>
+  <!-- Bootstrap UI -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 
-    <!-- Leaflet Search Control -->
-    <script src="https://cdn.jsdelivr.net/gh/stefanocudini/leaflet-search@master/src/leaflet-search.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/stefanocudini/leaflet-search@master/src/leaflet-search.css">
-
-    <!-- Plotly JS and CSS -->
-    <script src="https://cdn.plot.ly/plotly-2.14.0.min.js"></script>
-
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
-    crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
-        crossorigin="anonymous"></script>
-
-    <!-- CSS & JavaScript-->
-    <link rel="stylesheet" href="./static/styles/main.css"/>
-    <script src="./static/js/main.js" defer></script>
+  <!-- Main styles; Keep link here in the case of overriding external scripts' styles -->
+  <link rel="stylesheet" href="./src/styles/main.css">
 </head>
 <body>
-    <!-- Button group -->
-    <div class="bs-btn-group">
-      <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-        <!-- About button -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#about" title="About">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
-            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
-          </svg>
-        </button>
-
-        <button type="button" class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#legend" title="Legend">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-task" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M2 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5H2zM3 3H2v1h1V3z"/>
-            <path d="M5 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM5.5 7a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 4a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9z"/>
-            <path fill-rule="evenodd" d="M1.5 7a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5V7zM2 7h1v1H2V7zm0 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5H2zm1 .5H2v1h1v-1z"/>
-          </svg>
-        </button>
-
-        <a class="btn btn-primary" href="https://guamhydrologicsurvey.uog.edu/index.php/2022/11/09/mappfx-ngla-well-nitrates/" target="_blank" rel="noreferrer noopener" role="button" title="Home">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
-            <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
-          </svg>
-        </a>
-      
-        <!-- Dropdown for links to WERI and GHS sites -->
-        <div class="btn-group" role="group">
-          <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" title="Links">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
-              <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
-              <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
-            </svg>
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="https://weri.uog.edu/" target="_blank" rel="noreferrer noopener">Water & Environmental Research Institute of the Western Pacific (WERI)</a></li>
-            <li><a class="dropdown-item" href="https://guamhydrologicsurvey.uog.edu/" target="_blank" rel="noreferrer noopener">Guam Hydrologic Survey (GHS)</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- Leaflet Map -->
-    <div id="map" class="sidebar-map"></div>
-
-    <!-- Bootstrap Modal for Plot -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <!-- <h5 class="modal-title" id="exampleModalLabel">Well Nitrates Plot</h5> -->
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <div id="large-plot"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    <!-- Bootstrap Modal for About -->
-    <div class="modal fade" id="about" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-xl">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">About</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <p><strong>MAppFx</strong> is a web page interactive map environment that retrieves an interactive graph of a site upon clicking a map feature object (be it a point, polygon, or a line). WERI Web MAppFx is a product of WERI through the Guam Hydrologic Survey Program (P.L. 24-247) and USGS 104-b, available through the <a href="https://guamhydrologicsurvey.uog.edu/" target="_blank" rel="noreferrer noopener">Guam Hydrologic Survey website</a>. MAppFx is developed by GHS Information Management Team Dannika K. U. Valerio, Matt W. Zapata, Leroy F. Heitz, and Nathan C. Habana in collaboration with Brigham Young University Civil Engineering Department Riley Hales, Gus Williams, and Norm Jones.
-              <br><br>
-              GHS data analysis of Guam’s production well nitrate-n samples was done by Jezreelyn Y. Bulaklak and Nathan Habana. A <a href="https://www.postguam.com/news/local/study-nitrate-levels-rising-in-water-wells/article_030ad950-27a5-11eb-b457-275e19ec9e17.html" target="_blank" rel="noreferrer noopener">Scientific Advisory Report </a>was produced and written by Jezreelyn Bulaklak, Nathan Habana, and John Jenson.
-              <br><br>
-              Data originated from Guam Waterworks Authority as organized and transferred through Mauryn McDonald (<a href="https://weri-cdn.uog.edu/wp-content/PDFs/TRs/WERI%20TR%2095%20-%20McDonald%202002.pdf" target="_blank" rel="noreferrer noopener">WERI Technical Report 95</a>), and lab records from Jennifer Cruz, N’tasha Perez, and Carmen Sian-Denton and Gary Denton.
-              <br><br>
-              <i>References:</i>
-              <br>
-              McDonald, M.Q. (2002) Nitrate-Nitrogen Concentrations in the Northern Guam Lens and Potential Nitrogen Sources. WERI Technical Report 95, WERI UOG, Mangilao, Guam.
-              <br>
-              Bulaklak, J.Y., Habana, N.C., and J.W. Jenson (2020) WERI Scientific Advisory Paper, Nitrate Occurrence and Trends in the Northern Guam Lens Aquifer: Observations and Findings to Date. WERI UOG. Made available through the Guam Daily Post article, WERI advisory paper on Bill 404.
-            </p>
-          </div>
-          <div class="modal-footer about-btns">
-            <a class="btn btn-primary" title="Read WERI TR No. 180 on GHS" href="https://guamhydrologicsurvey.uog.edu/index.php/2023/02/28/mappfx-production-well-nitrates-northern-guam-lens-aquifer-v2/" target="_blank" rel="noreferrer noopener" role="button">WERI Technical Report</a>
-            <div class="dropdown">
-              <button title="WERI Map Series" class="btn btn-primary dropdown-toggle ghs-map-library-links" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                WERI Map Series
-              </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item ghs-map-library-links" href="https://guamhydrologicsurvey.uog.edu/index.php/mappfx/" title="MAppFx Library on GHS" target="_blank" rel="noreferrer noopener">MAppFx Library</a></li>
-                <li><a class="dropdown-item ghs-map-library-links" href="https://guamhydrologicsurvey.uog.edu/index.php/web-mapps/" title="Web MApps on GHS" target="_blank" rel="noreferrer noopener">Web MApps</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Bootstrap Offcanvas for Stats Side Panel -->
-    <div class="offcanvas offcanvas-start offcanvas-size-xl rounded shadow bg-body" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel" data-bs-backdrop="false">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel"></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body" id="stats-sidebar"></div>
-    </div>
-
-    <!-- Bootstrap Offcanvas for Legend -->
-    <div class="offcanvas offcanvas-start offcanvas-size-sm rounded shadow bg-body" data-bs-scroll="true" tabindex="-1" id="legend" aria-labelledby="offcanvasWithBothOptionsLabel" data-bs-backdrop="false">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel"></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body">
-        <h3>Legend</h3>
-        <hr>
-        <p>Increasing:</p>
-        <img src="./static/assets/Legend_Increasing.PNG">
-        <br>
-        <br>
-        <br>
-        <p>Decreasing:</p>
-        <img src="./static/assets/Legend_Decreasing.PNG">
-        <br>
-        <br>
-        <br>
-        <p>Insignificant:</p>
-        <img src="./static/assets/Legend_Insignificant.PNG">
-      </div>
-    </div>
-
+  <div id="app"></div>
+  <script type="module" src="./src/index.js" defer></script>
 </body>
 </html>

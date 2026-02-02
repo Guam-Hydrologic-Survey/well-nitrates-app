@@ -1,0 +1,196 @@
+/* Global font */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Roboto+Slab:wght@500&display=swap');
+
+/* Override styles for Leaflet Control Search plugin */
+.leaflet-control-search.search-exp {
+    background: #0d6efd; 
+    border: 0;
+    border-radius: 0 5px 5px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-items: center;
+}
+
+.leaflet-control-search .search-button {
+    display: block;
+    float: left;
+    width: 30px;
+    height: 30px;
+    background-color: #0d6efd;
+    background: url(../assets/search.svg) no-repeat 4px 6px #0d6efd;
+    border-radius: 0 5px 5px 0;
+}
+
+.leaflet-control-search .search-button:hover {
+    background-color: #0d6efd;
+    background: url(../assets/search.svg) no-repeat 4px 6px #0d6efd;
+}
+
+.leaflet-control-search .search-cancel {
+    right: 38px;
+    background: url(../assets/cancel.svg) no-repeat 4px 4px #fff;
+}
+
+.leaflet-control-search .search-input {
+    float: left;
+    border: 0;
+    border-radius: 8px;
+    height: 20px;
+    padding: 16px;
+    margin: 6px;
+}
+
+.leaflet-control-search .search-tooltip {
+    padding-left: 4px;
+}
+
+/* */
+.search-pulse {
+    animation: pulsate 1s ease-out;
+    -webkit-animation: pulsate 1s ease-out;
+    -webkit-animation-iteration-count: infinite; 
+    opacity: 0.0
+}
+
+
+@keyframes pulsate {
+    0% { transform: opacity: 0.0; }
+    50% { opacity: 1.0; }
+    100% { transform: opacity: 0.0; }
+}
+
+/* Change map height and width */
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+}
+
+/* Hides tooltips on page load */
+.leaflet-tooltip {
+    visibility: hidden;
+  }
+
+.bs-btn-group {
+    margin: 20px;
+}
+
+.btn-group { 
+    z-index: 9999;
+    float: right;
+}
+
+/* About contents */
+#about {
+    font-size: 14px;
+}
+
+.weri-tr-title {
+    font-family: 'Roboto Slab', serif;
+    font-weight: 600;
+}
+
+#weri-tr-num {
+    font-size: 20px;
+}
+
+#weri-tr-text {
+    font-size: 20px;
+}
+
+.people {
+    font-weight: 600;
+}
+
+.group {
+    font-weight: 400;
+    text-decoration: underline;
+}
+
+.dept {
+    font-weight: 400;
+    font-style: italic; 
+}
+
+.names {
+    font-weight: 400;
+}
+
+/* Side panel header */
+/* .side-panel-header {
+    font-size: 16px;
+}  */
+
+.location {
+    font-size: 16px;
+    font-style: italic;
+}
+
+/* Side panel - Statistics section */
+.stats-row {
+    display: flex;
+}
+
+.stats-col {
+    flex: 50%;
+    padding: 5px;
+}
+
+.stats-text {
+    padding: 3px;
+    margin: 0;
+}
+
+.stats-num {
+    text-align: right;
+    padding: 3px;
+    margin: 0;
+}
+
+#stats-basic, #stats-additional {
+    font-size: 14px;
+}
+
+/* #plot-content {
+    padding-top: 10px;
+} */
+
+/* To ensure that this stays on top */
+#multi-plot-view {
+    z-index: 9999;
+}
+
+/* The NavBar buttons is beneath */
+.btn-group {
+    z-index: 9998;
+}
+
+#multi-plot-view-contents {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.toast-msg-title {
+    padding-left: 7px;
+}
+
+.plot-btn-container {
+    float: right;
+}
+
+.tab-pane {
+    font-size: 16px;
+    min-height: 375px;
+    max-height: 450px;
+}
+
+.offcanvas-size-sm {
+    --bs-offcanvas-width: min(95vw, 200px) !important;
+}
