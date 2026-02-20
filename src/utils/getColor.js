@@ -28,7 +28,7 @@ export function getColors(sig) {
         },
         {
             name: "red",
-            hex: "F50000", 
+            hex: "#F50000", 
             range: "> 5"
         }
     ]
