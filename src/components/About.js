@@ -62,6 +62,10 @@ export function About(element) {
                   <strong>WERI-GHS Information Management Team:</strong>
                   <br>DK Valerio · MW Zapata · NC Habana
                 </p>
+                <p>
+                  <strong>Contributors:</strong>
+                  <br>SM Quintanilla · AL Bautista · MC Snaer
+                </p>
               </div> <!-- end of tab 2 -->
 
               <!-- start of tab 3 -->
