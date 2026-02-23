@@ -40,7 +40,7 @@ export function Legend(element) {
 }
 
 // import these into LMap
-export {nitrateToggleBtns, significanceToggleBtns, layersResetBtnId, layersRemoveBtnId}
+export { nitrateToggleBtns, significanceToggleBtns, layersResetBtnId, layersRemoveBtnId }
 
 const height = 34;
 const width = 34;
