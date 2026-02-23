@@ -177,6 +177,22 @@ export function LMap(element) {
         ]
     }
 
+    //  let legendLayers = {
+    //     nitrateLayers: {
+    //         nitrateRange5: L.layerGroup(),
+    //         nitrateRange4: L.layerGroup(),
+    //         nitrateRange3: L.layerGroup(),
+    //         nitrateRange2: L.layerGroup(),
+    //         nitrateRange1: L.layerGroup(),
+    //         nitrateRange0: L.layerGroup()
+    //     }, 
+    //     significantLayers: {
+    //         increasing: L.layerGroup(),
+    //         decreasing: L.layerGroup(),
+    //         insignificant: L.layerGroup()
+    //     }
+    // }
+
     function checkLayerExistence(layer) {
         if (!map.hasLayer(layer)) {
             layer.addTo(map);
@@ -288,7 +304,7 @@ export function LMap(element) {
     fetch(geoJsonUrl)
         .then(response => response.json())
         .then(geojson => {
-            let popup = L.popup()
+            // let popup = L.popup()
             const getValues = (feature, layer) => {
                 // popup with basic well info and buttons for stats and plot
                 layer.bindPopup(MarkerPopup(feature.properties.name, feature.properties.basin, feature.properties.lat, feature.properties.lon, feature.properties.desc)); 
@@ -351,6 +367,8 @@ export function LMap(element) {
             onEachFeature: getValues}).addTo(map);
             layerControl.addOverlay(sigIncWells, "Significantly Increasing");
 
+            sigIncWells.addTo(legendLayers.significantLayers[0].increasing)
+
             const sigDecWells = L.geoJSON(geojson, {
                 filter: function(feature, layer) {
                     return (feature.properties.sig) == -1;
@@ -371,6 +389,8 @@ export function LMap(element) {
                 }, 
                 onEachFeature: getValues}).addTo(map);
             layerControl.addOverlay(sigDecWells, "Significantly Decreasing");
+
+            sigDecWells.addTo(legendLayers.significantLayers[1].decreasing);
             
             const insWells = L.geoJSON(geojson, {
                 filter: function(feature, layer) {
@@ -388,6 +408,8 @@ export function LMap(element) {
                 }, 
                 onEachFeature: getValues}).addTo(map);
             layerControl.addOverlay(insWells, "Insignificant");
+
+            insWells.addTo(legendLayers.significantLayers[2].insignificant);
 
             const mapJson = L.layerGroup([sigIncWells, sigDecWells, insWells]).addTo(map);
 
