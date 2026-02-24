@@ -44,7 +44,7 @@ export function MarkerIcon(point) {
         // get shape and then determine color for each case
         iconStyle = `
         <svg height="100%" width="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <g fill="${getColors(feature.properties.LTG2019)}" stroke="black">
+            <g fill="${getColors(point.LTG2019)}" stroke="black">
                 <path stroke-width="5" d="M50 0 L0 100 L100 100 Z"></path>
             </g>
         </svg>
@@ -52,7 +52,7 @@ export function MarkerIcon(point) {
     } else if (point.sig == -1) {
         iconStyle = `
         <svg height="100%" width="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <g fill="${getColors(feature.properties.LTG2019)}" stroke="black">
+            <g fill="${getColors(point.LTG2019)}" stroke="black">
                 <path stroke-width="5" d="M0 0 L50 100 L100 0 Z"></path>
             </g>
         </svg>
