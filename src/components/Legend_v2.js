@@ -83,8 +83,8 @@ const shapes = [
         sig_lvl: 1,
         svg: `<svg height="${height}" width="${width}" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                         <title>Significantly Increasing</title>
-                        <g fill="none" stroke="black">
-                            <path stroke-width="8" d="M50 0 L0 100 L100 100 Z"></path>
+                        <g fill="#d9d9d9" stroke="black">
+                            <path stroke-width="4" d="M50 0 L0 100 L100 100 Z"></path>
                         </g>
                     </svg>`
     },
@@ -93,15 +93,15 @@ const shapes = [
         sig_lvl: 0,
         svg: `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 24 24">
         <title>Insignificant</title>
-        <circle cx="12" cy="12" r="10" fill="none" stroke="black" stroke-width="2"/></svg>`
+        <circle cx="12" cy="12" r="10" fill="#d9d9d9" stroke="black" stroke-width="1"/></svg>`
     },
     {
         name: "Decreasing",
         sig_lvl: -1,
         svg: `<svg height="${height}" width="${width}" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                                     <title>Significantly Decreasing</title>
-                                    <g fill="none" stroke="black">
-                                        <path stroke-width="8" d="M0 0 L50 100 L100 0 Z"></path>
+                                    <g fill="#d9d9d9" stroke="black">
+                                        <path stroke-width="4" d="M0 0 L50 100 L100 0 Z"></path>
                                     </g>
                                 </svg>`
     }
