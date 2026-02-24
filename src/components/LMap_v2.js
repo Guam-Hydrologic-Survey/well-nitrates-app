@@ -18,6 +18,7 @@ import { geoJsonUrl } from "../utils/dataSource.js";
 import { createChoice } from "../utils/createChoice.js";
 import { getColors } from "../utils/getColor.js";
 import { nitrateToggleBtns, significanceToggleBtns, layersResetBtnId, layersRemoveBtnId } from "./Legend_v2.js";
+import { MarkerIcon } from "./MarkerIcon.js";
 
 let geoJsonData;
 
@@ -329,6 +330,20 @@ export function LMap(element) {
 
             // geoJsonData = L.geoJSON(geojson, { onEachFeature: (getValues) }).addTo(map);
             // layerControl.addOverlay(geoJsonData, "Layer Name");
+
+            // TODO - using MarkerIcon, need to crosscheck LTG2019 vs LTG2026 
+            const wells = L.geoJSON(geojson, {
+                pointToLayer: function(feature, latlng) {
+                    let svg = MarkerIcon(feature.properties);
+                    let point = L.marker(latlng, {
+                        icon: L.divIcon({
+                            className: "custom-icon",
+                            html: `${svg}`,
+                            iconSize: [30, 30]
+                        })
+                    })
+                }
+            })
 
             const sigIncWells = L.geoJSON(geojson, {
             filter: function(feature, layer) {
