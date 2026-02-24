@@ -177,22 +177,6 @@ export function LMap(element) {
         ]
     }
 
-    //  let legendLayers = {
-    //     nitrateLayers: {
-    //         nitrateRange5: L.layerGroup(),
-    //         nitrateRange4: L.layerGroup(),
-    //         nitrateRange3: L.layerGroup(),
-    //         nitrateRange2: L.layerGroup(),
-    //         nitrateRange1: L.layerGroup(),
-    //         nitrateRange0: L.layerGroup()
-    //     }, 
-    //     significantLayers: {
-    //         increasing: L.layerGroup(),
-    //         decreasing: L.layerGroup(),
-    //         insignificant: L.layerGroup()
-    //     }
-    // }
-
     function checkLayerExistence(layer) {
         if (!map.hasLayer(layer)) {
             layer.addTo(map);
