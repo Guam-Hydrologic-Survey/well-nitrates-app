@@ -8,7 +8,7 @@ import { About } from "./components/About.js";
 import { FullscreenModal } from "./components/FullscreenModal.js";
 import { NavBar } from "./components/NavBar.js";
 import { Legend } from "./components/Legend_v2.js";
-import { LMap } from "./components/LMap_v2.js";
+import { LMap } from "./components/LMap.js";
 import { LargePlotModal } from "./components/Plot.js";
 
 document.getElementById("app").innerHTML = /*html*/ 

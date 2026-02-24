@@ -27,11 +27,6 @@ export function Legend(element) {
         <div id="${nitrateId}"></div>
         <div id="${significanceId}"></div>
         <hr>
-        <div class="d-grid">
-            <button type="button" class="btn btn-primary" id="${layersResetBtnId}" title="Add layers back on map"><i class="bi bi-arrow-clockwise"></i> Reset Layers</button>
-            <span class="spacer"></span>
-            <button type="button" class="btn btn-secondary" id="${layersRemoveBtnId}" title="Remove layers from map"><i class="bi bi-x-lg"></i> Remove Layers</button>
-        </div>
       </div>
     </div>
     `;
@@ -87,8 +82,9 @@ const shapes = [
         name: "Increasing",
         sig_lvl: 1,
         svg: `<svg height="${height}" width="${width}" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <g fill="" stroke="black">
-                            <path stroke-width="5" d="M50 0 L0 100 L100 100 Z"></path>
+                        <title>Significantly Increasing</title>
+                        <g fill="none" stroke="black">
+                            <path stroke-width="8" d="M50 0 L0 100 L100 100 Z"></path>
                         </g>
                     </svg>`
     },
@@ -96,14 +92,16 @@ const shapes = [
         name: "Insignificant",
         sig_lvl: 0,
         svg: `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="10" fill="black" /></svg>`
+        <title>Insignificant</title>
+        <circle cx="12" cy="12" r="10" fill="none" stroke="black" stroke-width="2"/></svg>`
     },
     {
         name: "Decreasing",
         sig_lvl: -1,
         svg: `<svg height="${height}" width="${width}" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                    <g fill="black" stroke="black">
-                                        <path stroke-width="5" d="M0 0 L50 100 L100 0 Z"></path>
+                                    <title>Significantly Decreasing</title>
+                                    <g fill="none" stroke="black">
+                                        <path stroke-width="8" d="M0 0 L50 100 L100 0 Z"></path>
                                     </g>
                                 </svg>`
     }
@@ -128,12 +126,9 @@ function legend(nitrateId, significanceId) {
         significanceToggleBtns.push(toggleBtnId);
         sig.innerHTML += /*html*/
         `
-        <div class="form-check" style="padding-bottom: 10px;">
-            <input class="form-check-input checkbox-input" type="checkbox" value="${toggleBtnId}" id="${toggleBtnId}" checked>
-            <label class="form-check-label" for="${toggleBtnId}">
-                ${shapes[i].svg}
-                ${shapes[i].name}
-            </label>
+        <div style="padding-bottom: 10px;">
+            ${shapes[i].svg}
+            ${shapes[i].name}
         </div>
         `;
     }
@@ -144,14 +139,11 @@ function legend(nitrateId, significanceId) {
         nitrateToggleBtns.push(toggleBtnId);
         nitrate.innerHTML += /*html*/
         `
-        <div class="form-check" style="padding-bottom: 10px;">
-            <input class="form-check-input checkbox-input" type="checkbox" value="${toggleBtnId}" id="${toggleBtnId}" checked>
-            <label class="form-check-label" for="${toggleBtnId}">
-                <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 34 34">
-                    <rect x="2" y="2" width="${width - 4}" height="${height - 4}" fill="${colors[i].hex}" stroke="black" stroke-width="1" rx="4" ry="4"/>
-                </svg>
-                ${colors[i].range}
-            </label>
+        <div style="padding-bottom: 10px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 34 34">
+                <rect x="2" y="2" width="${width - 4}" height="${height - 4}" fill="${colors[i].hex}" stroke="black" stroke-width="1" rx="4" ry="4"/>
+            </svg>
+            ${colors[i].range}
         </div>
         `;
     }
