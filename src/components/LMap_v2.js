@@ -328,86 +328,27 @@ export function LMap(element) {
                 })
             }
 
-            // geoJsonData = L.geoJSON(geojson, { onEachFeature: (getValues) }).addTo(map);
-            // layerControl.addOverlay(geoJsonData, "Layer Name");
-
-            // TODO - using MarkerIcon, need to crosscheck LTG2019 vs LTG2026 
-            const wells = L.geoJSON(geojson, {
-                pointToLayer: function(feature, latlng) {
-                    let svg = MarkerIcon(feature.properties);
-                    let point = L.marker(latlng, {
-                        icon: L.divIcon({
-                            className: "custom-icon",
-                            html: `${svg}`,
-                            iconSize: [30, 30]
-                        })
-                    })
-                }
-            })
-
-            const sigIncWells = L.geoJSON(geojson, {
-            filter: function(feature, layer) {
-                return (feature.properties.sig) == 1;
-            }, 
-            pointToLayer: function(feature, latlng) {
-                var iconStyle = L.divIcon({
-                    html: `
-                    <svg height="100%" width="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <g fill="${getColors(feature.properties.LTG2019)}" stroke="black">
-                            <path stroke-width="5" d="M50 0 L0 100 L100 100 Z"></path>
-                        </g>
-                    </svg>
-                    `,
-                    className: "",
-                    iconSize: [18, 18]
+            // TODO add another filter for nitrate level 
+            function createLayer(sig_level) {
+                const wells = L.geoJSON(geojson, {
+                    filter: feature => feature.properties.sig == sig_level,
+                    pointToLayer: function(feature, latlng) {
+                        let point = L.marker(latlng, {
+                            icon: MarkerIcon(feature.properties)
+                        });
+                        return point;
+                    }, 
+                    onEachFeature: getValues
                 });
-                return L.marker(latlng, {icon: iconStyle});
-            }, 
-            onEachFeature: getValues}).addTo(map);
-            layerControl.addOverlay(sigIncWells, "Significantly Increasing");
+                return wells;
+            }
 
-            sigIncWells.addTo(legendLayers.significantLayers[0].increasing)
+            const sigIncWells = createLayer(1);
+            const sigDecWells = createLayer(-1);
+            const insWells = createLayer(0);
 
-            const sigDecWells = L.geoJSON(geojson, {
-                filter: function(feature, layer) {
-                    return (feature.properties.sig) == -1;
-                }, 
-                pointToLayer: function(feature, latlng) {
-                    var iconStyle = L.divIcon({
-                        html: `
-                        <svg height="100%" width="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                            <g fill="${getColors(feature.properties.LTG2019)}" stroke="black">
-                                <path stroke-width="5" d="M0 0 L50 100 L100 0 Z"></path>
-                            </g>
-                        </svg>
-                        `,
-                        className: "",
-                        iconSize: [18, 18]
-                    });
-                    return L.marker(latlng, {icon: iconStyle});
-                }, 
-                onEachFeature: getValues}).addTo(map);
-            layerControl.addOverlay(sigDecWells, "Significantly Decreasing");
-
+            sigIncWells.addTo(legendLayers.significantLayers[0].increasing);
             sigDecWells.addTo(legendLayers.significantLayers[1].decreasing);
-            
-            const insWells = L.geoJSON(geojson, {
-                filter: function(feature, layer) {
-                    return (feature.properties.sig) == 0;
-                }, 
-                pointToLayer: function(feature, latlng) {
-                    return L.circleMarker(latlng, {
-                        radius: 8, 
-                        fillColor: getColors(feature.properties.LTG2019),
-                        weight: 1,
-                        fillOpacity: 1.0,
-                        color: "black",
-                        opacity: 1.0,
-                    })
-                }, 
-                onEachFeature: getValues}).addTo(map);
-            layerControl.addOverlay(insWells, "Insignificant");
-
             insWells.addTo(legendLayers.significantLayers[2].insignificant);
 
             const mapJson = L.layerGroup([sigIncWells, sigDecWells, insWells]).addTo(map);
