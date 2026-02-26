@@ -164,6 +164,7 @@ export function LMap(element) {
 
     let legendLayers = {
         nitrateLayers: [
+            { nitrateRange6: L.layerGroup() },
             { nitrateRange5: L.layerGroup() },
             { nitrateRange4: L.layerGroup() },
             { nitrateRange3: L.layerGroup() },
@@ -329,7 +330,7 @@ export function LMap(element) {
             }
 
             // TODO add another filter for nitrate level 
-            function createLayer(sig_level) {
+            function createSigLayer(sig_level) {
                 const wells = L.geoJSON(geojson, {
                     filter: feature => feature.properties.sig == sig_level,
                     pointToLayer: function(feature, latlng) {
@@ -343,13 +344,43 @@ export function LMap(element) {
                 return wells;
             }
 
-            const sigIncWells = createLayer(1);
-            const sigDecWells = createLayer(-1);
-            const insWells = createLayer(0);
+            function createNitrateLayer(ltg) {
+                const wells = L.geoJSON(geojson, {
+                    filter: feature => feature.properties.LTG2019 == ltg,
+                    pointToLayer: function(feature, latlng) {
+                        let point = L.marker(latlng, {
+                            icon: MarkerIcon(feature.properties)
+                        });
+                        return point;
+                    }, 
+                    onEachFeature: getValues
+                });
+                return wells;
+            }
+
+            const sigIncWells = createSigLayer(1);
+            const sigDecWells = createSigLayer(-1);
+            const insWells = createSigLayer(0);
+
+            const nitrateLevel6 = createNitrateLayer(6);
+            const nitrateLevel5 = createNitrateLayer(5);
+            const nitrateLevel4 = createNitrateLayer(4);
+            const nitrateLevel3 = createNitrateLayer(3);
+            const nitrateLevel2 = createNitrateLayer(2);
+            const nitrateLevel1 = createNitrateLayer(1);
+            const nitrateLevel0 = createNitrateLayer(0);
 
             sigIncWells.addTo(legendLayers.significantLayers[0].increasing);
             sigDecWells.addTo(legendLayers.significantLayers[1].decreasing);
             insWells.addTo(legendLayers.significantLayers[2].insignificant);
+
+            nitrateLevel6.addTo(legendLayers.nitrateLayers[0].nitrateRange6);
+            nitrateLevel5.addTo(legendLayers.nitrateLayers[1].nitrateRange5);
+            nitrateLevel4.addTo(legendLayers.nitrateLayers[2].nitrateRange4);
+            nitrateLevel3.addTo(legendLayers.nitrateLayers[3].nitrateRange3);
+            nitrateLevel2.addTo(legendLayers.nitrateLayers[4].nitrateRange2);
+            nitrateLevel1.addTo(legendLayers.nitrateLayers[5].nitrateRange1);
+            nitrateLevel0.addTo(legendLayers.nitrateLayers[6].nitrateRange0);
 
             const mapJson = L.layerGroup([sigIncWells, sigDecWells, insWells]).addTo(map);
 
