@@ -40,26 +40,68 @@ const shapes = [
 export function MarkerIcon(point) {
     let iconStyle;
 
+    // if (point.sig == 1) {
+    //     // get shape and then determine color for each case
+    //     iconStyle = `
+    //     <svg height="100%" width="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    //         <g fill="${getColors(point.LTG2019)}" stroke="black">
+    //             <path stroke-width="5" d="M50 0 L0 100 L100 100 Z"></path>
+    //         </g>
+    //     </svg>
+    //     `;
+    // } else if (point.sig == -1) {
+    //     iconStyle = `
+    //     <svg height="100%" width="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    //         <g fill="${getColors(point.LTG2019)}" stroke="black">
+    //             <path stroke-width="5" d="M0 0 L50 100 L100 0 Z"></path>
+    //         </g>
+    //     </svg>
+    //     `
+    // } else {
+    //     // just created a circle icon here, but maybe use svg instead 
+    // }
+
     if (point.sig == 1) {
-        // get shape and then determine color for each case
-        iconStyle = `
-        <svg height="100%" width="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <g fill="${getColors(point.LTG2019)}" stroke="black">
-                <path stroke-width="5" d="M50 0 L0 100 L100 100 Z"></path>
-            </g>
-        </svg>
-        `;
+        iconStyle = L.divIcon({
+                    html: `
+                    <svg height="100%" width="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <g fill="${getColors(point.LTG2019)}" stroke="black">
+                            <path stroke-width="5" d="M50 0 L0 100 L100 100 Z"></path>
+                        </g>
+                    </svg>
+                    `,
+                    className: "",
+                    iconSize: [18, 18]
+                });
     } else if (point.sig == -1) {
-        iconStyle = `
-        <svg height="100%" width="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <g fill="${getColors(point.LTG2019)}" stroke="black">
-                <path stroke-width="5" d="M0 0 L50 100 L100 0 Z"></path>
-            </g>
-        </svg>
-        `
+        iconStyle = L.divIcon({
+                        html: `
+                        <svg height="100%" width="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <g fill="${getColors(point.LTG2019)}" stroke="black">
+                                <path stroke-width="5" d="M0 0 L50 100 L100 0 Z"></path>
+                            </g>
+                        </svg>
+                        `,
+                        className: "",
+                        iconSize: [18, 18]
+                    });
     } else {
-        // just created a circle icon here, but maybe use svg instead 
+        // iconStyle = L.circleMarker([point.lat, point.lon], {
+        //                 radius: 8, 
+        //                 fillColor: getColors(point.LTG2019),
+        //                 weight: 1,
+        //                 fillOpacity: 1.0,
+        //                 color: "black",
+        //                 opacity: 1.0,
+        //             });
+        iconStyle = L.divIcon({
+            html: `<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24">
+        <title>Insignificant</title>
+        <circle cx="12" cy="12" r="10" fill="${getColors(point.LTG2019)}" stroke="black" stroke-width="1"/></svg>`,
+            className: "",
+            iconSize: [18, 18]
+        })
     }
 
-    return iconStyle;
+    return iconStyle; 
 }
