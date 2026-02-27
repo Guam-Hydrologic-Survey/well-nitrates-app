@@ -127,8 +127,10 @@ function legend(nitrateId, significanceId) {
 
     // create checkboxes for significance level 
     for (let i = 0; i < shapes.length; i++) {
-        let toggleBtnId = `significance-level-${shapes.name}`;
+        let toggleBtnId = `significance-level-${shapes[i].name}`;
+
         significanceToggleBtns.push(toggleBtnId);
+
         sig.innerHTML += /*html*/
         `
         <div class="form-check" style="padding-bottom: 10px;">
@@ -143,8 +145,9 @@ function legend(nitrateId, significanceId) {
 
     // create checkboxes for nitrate level 
     for (let i = 0; i < colors.length; i++) {
-        let toggleBtnId = `nitrate-level-${colors.name}`;
+        let toggleBtnId = `nitrate-level-${colors[i].name}`;
         nitrateToggleBtns.push(toggleBtnId);
+        
         nitrate.innerHTML += /*html*/
         `
         <div class="form-check" style="padding-bottom: 10px;">
