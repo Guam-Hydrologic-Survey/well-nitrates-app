@@ -18,8 +18,7 @@ import { geoJsonUrl } from "../utils/dataSource.js";
 import { createChoice } from "../utils/createChoice.js";
 import { getColors } from "../utils/getColor.js";
 import { nitrateToggleBtns, significanceToggleBtns, layersResetBtnId, layersRemoveBtnId } from "./Legend_v2.js";
-
-let geoJsonData;
+import { MarkerIcon } from "./MarkerIcon.js";
 
 let selectionMode = "";
 
@@ -41,7 +40,6 @@ const pointSelectBtn = L.easyButton({
                 console.log(pointSelectBtnState);
                 map.on("click", function(point) {
                     console.log(point.latlng);
-                    // console.log(point.target.feature.properties.name);
                     console.log("Selected a point.")
                 });
                 selectionMode = "click";
@@ -58,7 +56,6 @@ const pointSelectBtn = L.easyButton({
                 btn.state('detrigger-pointSelectBtn');
                 pointSelectBtnState = false;
                 pointSelectLayers = [];
-                // choicesLayers = [];
                 const selectionView = document.getElementById("selection-view-offcanvas");
                 const selectionViewOffcanvas = bootstrap.Offcanvas.getOrCreateInstance(selectionView);
                 selectionViewOffcanvas.hide();
@@ -163,12 +160,13 @@ export function LMap(element) {
 
     let legendLayers = {
         nitrateLayers: [
-            { nitrateRange5: L.layerGroup() },
-            { nitrateRange4: L.layerGroup() },
-            { nitrateRange3: L.layerGroup() },
-            { nitrateRange2: L.layerGroup() },
+            { nitrateRange0: L.layerGroup() },
             { nitrateRange1: L.layerGroup() },
-            { nitrateRange0: L.layerGroup() }
+            { nitrateRange2: L.layerGroup() },
+            { nitrateRange3: L.layerGroup() },
+            { nitrateRange4: L.layerGroup() },
+            { nitrateRange5: L.layerGroup() },
+            { nitrateRange6: L.layerGroup() }
         ],
         significantLayers: [
             { increasing: L.layerGroup() },
@@ -176,22 +174,6 @@ export function LMap(element) {
             { insignificant: L.layerGroup() }
         ]
     }
-
-    //  let legendLayers = {
-    //     nitrateLayers: {
-    //         nitrateRange5: L.layerGroup(),
-    //         nitrateRange4: L.layerGroup(),
-    //         nitrateRange3: L.layerGroup(),
-    //         nitrateRange2: L.layerGroup(),
-    //         nitrateRange1: L.layerGroup(),
-    //         nitrateRange0: L.layerGroup()
-    //     }, 
-    //     significantLayers: {
-    //         increasing: L.layerGroup(),
-    //         decreasing: L.layerGroup(),
-    //         insignificant: L.layerGroup()
-    //     }
-    // }
 
     function checkLayerExistence(layer) {
         if (!map.hasLayer(layer)) {
@@ -201,10 +183,18 @@ export function LMap(element) {
         }
     }
 
+    // function addLayerObjectsToMap(rangeLayers) {
+    //     rangeLayers.forEach((layer) => {
+    //         for (const [key, value] of Object.entries(layer)) {
+    //             layer[key].addTo(map);
+    //         }
+    //     });
+    // }
+
     function addLayerObjectsToMap(rangeLayers) {
         rangeLayers.forEach((layer) => {
             for (const [key, value] of Object.entries(layer)) {
-                layer[key].addTo(map);
+                value.addTo(map);
             }
         });
     }
@@ -212,7 +202,7 @@ export function LMap(element) {
     function removeLayerObjectsFromMap(rangeLayers) {
         rangeLayers.forEach((layer) => {
             for (const [key, value] of Object.entries(layer)) {
-                map.removeLayer(layer[key]);
+                map.removeLayer(value);
             }
         })
     }
@@ -220,14 +210,14 @@ export function LMap(element) {
     document.addEventListener('DOMContentLoaded', (e) => {
         setTimeout(() => {
 
-            addLayerObjectsToMap(legendLayers.nitrateLayers);
+            // addLayerObjectsToMap(legendLayers.nitrateLayers);
             addLayerObjectsToMap(legendLayers.significantLayers);
 
             // TODO - simplify adding layers back to map
             // Resets layers on map (adds everything back)
             document.getElementById(layersResetBtnId).addEventListener('click', () => {
 
-                addLayerObjectsToMap(legendLayers.nitrateLayers);
+                // addLayerObjectsToMap(legendLayers.nitrateLayers);
                 addLayerObjectsToMap(legendLayers.significantLayers);
 
                 // Check the respective checkboxes
@@ -246,40 +236,48 @@ export function LMap(element) {
                     checkbox.checked = false;
                 });
 
-                removeLayerObjectsFromMap(legendLayers.nitrateLayers);
+                // removeLayerObjectsFromMap(legendLayers.nitrateLayers);
                 removeLayerObjectsFromMap(legendLayers.significantLayers);
             });
 
             // TODO - change to for loop, add each chlorideRange layer into an array list (same goes for productionRange layers)
 
             // Event listeners for chloride range layers 
-            for (let i = 0; i < nitrateToggleBtns.length; i++) {
-                document.getElementById(nitrateToggleBtns[i]).addEventListener('click', () => {
-                    for (const [key, value] of Object.entries(legendLayers.nitrateLayers[i])) {
-                        checkLayerExistence(legendLayers.nitrateLayers[i][key]);
-                    }
-                })
-            }
+            // for (let i = 0; i < nitrateToggleBtns.length; i++) {
+            //     document.getElementById(nitrateToggleBtns[i]).addEventListener('click', () => {
+            //         for (const [key, value] of Object.entries(legendLayers.nitrateLayers[i])) {
+            //             checkLayerExistence(legendLayers.nitrateLayers[i][key]);
+            //         }
+            //     })
+            // }
 
             // Event listeners for production range layers 
-            for (let i = 0; i < significanceToggleBtns.length; i++) {
-                document.getElementById(significanceToggleBtns[i]).addEventListener('click', () => {
-                        // Loop for layer objects (below) must be [i + 1], since legendLayers.significantLayers.length (10) > significanceToggleBtns.length (9)
-                        for (const [key, value] of Object.entries(legendLayers.significantLayers[i])) {
-                            checkLayerExistence(legendLayers.significantLayers[i][key]);
+            // for (let i = 0; i < significanceToggleBtns.length; i++) {
+            //     document.getElementById(significanceToggleBtns[i]).addEventListener('click', () => {
+            //             // Loop for layer objects (below) must be [i + 1], since legendLayers.significantLayers.length (10) > significanceToggleBtns.length (9)
+            //             for (const [key, value] of Object.entries(legendLayers.significantLayers[i])) {
+            //                 checkLayerExistence(legendLayers.significantLayers[i][key]);
+            //             }
+            //         });
+            // }
+            significanceToggleBtns.forEach((id, i) => {
+                const checkbox = document.getElementById(id);
+                const layerObj = legendLayers.significantLayers[i];
+
+                checkbox.addEventListener("change", () => {
+                    Object.values(layerObj).forEach(layer => {
+                        if (checkbox.checked) {
+                            layer.addTo(map);
+                            console.log(`Checked ${checkbox}`)
+                        } else {
+                            map.removeLayer(layer);
+                            console.log(`Unchecked ${checkbox}`)
                         }
-                    });
-            }
+                    })
+                })
+            })
         }, 1000);
     });
-
-    // console.log(pointSelectBtn.options.states);
-
-    // const pointSelectionControls = L.easyBar([
-    //     pointSelectBtn,
-    // ], { position: "bottomright" });
-
-    // pointSelectionControls.addTo(map);
     
     lassoControl.addTo(map); 
 
@@ -296,15 +294,11 @@ export function LMap(element) {
             });
         }
     });
-
-    // array holding well with status for use on point selection through click 
-    // let choices = [];
     
     // get data 
     fetch(geoJsonUrl)
         .then(response => response.json())
         .then(geojson => {
-            // let popup = L.popup()
             const getValues = (feature, layer) => {
                 // popup with basic well info and buttons for stats and plot
                 layer.bindPopup(MarkerPopup(feature.properties.name, feature.properties.basin, feature.properties.lat, feature.properties.lon, feature.properties.desc)); 
@@ -317,10 +311,8 @@ export function LMap(element) {
                     map.closePopup(); 
                     // prevents popup from opening since side panel automatically opens 
                     if (!pointSelectBtnState) {
-                        // map.closePopup(); 
                         SidePanel(point.target.feature.properties);
                         pointSelectLayers = [];
-                        // choicesLayers = [];
                         choicesLayers.length = 0;
                        
                     } else {
@@ -334,8 +326,6 @@ export function LMap(element) {
 
                             // create choice object and add to choices array 
                             choices.push(createChoice(point.target.feature.properties.name, true));
-                            // console.log(choices);
-
                         } else {
                             alreadySelected(document.getElementById("notif"), point.target.feature.properties.name);
                         }
@@ -343,75 +333,66 @@ export function LMap(element) {
                 })
             }
 
-            // geoJsonData = L.geoJSON(geojson, { onEachFeature: (getValues) }).addTo(map);
-            // layerControl.addOverlay(geoJsonData, "Layer Name");
-
-            const sigIncWells = L.geoJSON(geojson, {
-            filter: function(feature, layer) {
-                return (feature.properties.sig) == 1;
-            }, 
-            pointToLayer: function(feature, latlng) {
-                var iconStyle = L.divIcon({
-                    html: `
-                    <svg height="100%" width="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <g fill="${getColors(feature.properties.LTG2019)}" stroke="black">
-                            <path stroke-width="5" d="M50 0 L0 100 L100 100 Z"></path>
-                        </g>
-                    </svg>
-                    `,
-                    className: "",
-                    iconSize: [18, 18]
+            function createSigLayer(sig_level) {
+                const wells = L.geoJSON(geojson, {
+                    filter: feature => feature.properties.sig == sig_level,
+                    pointToLayer: function(feature, latlng) {
+                        let point = L.marker(latlng, {
+                            icon: MarkerIcon(feature.properties)
+                        });
+                        return point;
+                    }, 
+                    onEachFeature: getValues
                 });
-                return L.marker(latlng, {icon: iconStyle});
-            }, 
-            onEachFeature: getValues}).addTo(map);
-            layerControl.addOverlay(sigIncWells, "Significantly Increasing");
+                return wells;
+            }
 
-            sigIncWells.addTo(legendLayers.significantLayers[0].increasing)
+            function createNitrateLayer(ltg) {
+                const wells = L.geoJSON(geojson, {
+                    filter: feature => feature.properties.LTG2019 == ltg,
+                    pointToLayer: function(feature, latlng) {
+                        let point = L.marker(latlng, {
+                            icon: MarkerIcon(feature.properties)
+                        });
+                        return point;
+                    }, 
+                    onEachFeature: getValues
+                });
+                return wells;
+            }
 
-            const sigDecWells = L.geoJSON(geojson, {
-                filter: function(feature, layer) {
-                    return (feature.properties.sig) == -1;
-                }, 
-                pointToLayer: function(feature, latlng) {
-                    var iconStyle = L.divIcon({
-                        html: `
-                        <svg height="100%" width="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                            <g fill="${getColors(feature.properties.LTG2019)}" stroke="black">
-                                <path stroke-width="5" d="M0 0 L50 100 L100 0 Z"></path>
-                            </g>
-                        </svg>
-                        `,
-                        className: "",
-                        iconSize: [18, 18]
-                    });
-                    return L.marker(latlng, {icon: iconStyle});
-                }, 
-                onEachFeature: getValues}).addTo(map);
-            layerControl.addOverlay(sigDecWells, "Significantly Decreasing");
+            const sigIncWells = createSigLayer(1);
+            const sigDecWells = createSigLayer(-1);
+            const insWells = createSigLayer(0);
 
+            const nitrateLevel6 = createNitrateLayer(6);
+            const nitrateLevel5 = createNitrateLayer(5);
+            const nitrateLevel4 = createNitrateLayer(4);
+            const nitrateLevel3 = createNitrateLayer(3);
+            const nitrateLevel2 = createNitrateLayer(2);
+            const nitrateLevel1 = createNitrateLayer(1);
+            const nitrateLevel0 = createNitrateLayer(0);
+
+            sigIncWells.addTo(legendLayers.significantLayers[0].increasing);
             sigDecWells.addTo(legendLayers.significantLayers[1].decreasing);
-            
-            const insWells = L.geoJSON(geojson, {
-                filter: function(feature, layer) {
-                    return (feature.properties.sig) == 0;
-                }, 
-                pointToLayer: function(feature, latlng) {
-                    return L.circleMarker(latlng, {
-                        radius: 8, 
-                        fillColor: getColors(feature.properties.LTG2019),
-                        weight: 1,
-                        fillOpacity: 1.0,
-                        color: "black",
-                        opacity: 1.0,
-                    })
-                }, 
-                onEachFeature: getValues}).addTo(map);
-            layerControl.addOverlay(insWells, "Insignificant");
-
             insWells.addTo(legendLayers.significantLayers[2].insignificant);
 
-            const mapJson = L.layerGroup([sigIncWells, sigDecWells, insWells]).addTo(map);
+            nitrateLevel6.addTo(legendLayers.nitrateLayers[6].nitrateRange6);
+            nitrateLevel5.addTo(legendLayers.nitrateLayers[5].nitrateRange5);
+            nitrateLevel4.addTo(legendLayers.nitrateLayers[4].nitrateRange4);
+            nitrateLevel3.addTo(legendLayers.nitrateLayers[3].nitrateRange3);
+            nitrateLevel2.addTo(legendLayers.nitrateLayers[2].nitrateRange2);
+            nitrateLevel1.addTo(legendLayers.nitrateLayers[1].nitrateRange1);
+            nitrateLevel0.addTo(legendLayers.nitrateLayers[0].nitrateRange0);
+
+            // const mapJson = L.layerGroup([sigIncWells, sigDecWells, insWells]).addTo(map);
+            // const mapJson = L.layerGroup([sigIncWells, sigDecWells, insWells])
+            const mapJson = L.layerGroup();
+            Object.values(legendLayers.significantLayers).forEach(obj => {
+                Object.values(obj).forEach(group => {
+                    mapJson.addLayer(group);
+                })
+            })
 
             // for search control 
             let searchCoords = [];
@@ -469,7 +450,6 @@ export function LMap(element) {
         if (event.layers.length != 0) {
             completeSelection(document.getElementById("notif"), event.layers);
             MultiplePlots(event.layers, document.getElementById("multi-plot-view-contents"), "lasso");
-            // console.log(event.layers);
         } 
 
         selectionMode = "lasso";

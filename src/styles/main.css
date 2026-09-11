@@ -45,7 +45,7 @@
     padding-left: 4px;
 }
 
-/* */
+/* Animation for found search item */
 .search-pulse {
     animation: pulsate 1s ease-out;
     -webkit-animation: pulsate 1s ease-out;
@@ -60,7 +60,10 @@
     100% { transform: opacity: 0.0; }
 }
 
-/* Change map height and width */
+/* 
+IMPORTANT: Map container must be set for appearance on page 
+(Change map height and width, if needed) 
+*/
 #map {
     position: absolute;
     top: 0;
@@ -75,6 +78,7 @@
     visibility: hidden;
   }
 
+/* Navigation bar button group */
 .bs-btn-group {
     margin: 20px;
 }
@@ -125,6 +129,9 @@
     font-size: 16px;
 }  */
 
+
+/* For side panel/offcanvas inner elements */
+
 .location {
     font-size: 16px;
     font-style: italic;
@@ -159,16 +166,17 @@
     padding-top: 10px;
 } */
 
-/* To ensure that this stays on top */
+/* To ensure that this (plot modal) stays on top */
 #multi-plot-view {
     z-index: 9999;
 }
 
-/* The NavBar buttons is beneath */
+/* The NavBar buttons is right beneath */
 .btn-group {
     z-index: 9998;
 }
 
+/* Styling for lasso selection for multi-plot view */
 #multi-plot-view-contents {
     display: flex;
     flex-direction: row;
@@ -191,6 +199,7 @@
     max-height: 450px;
 }
 
+/* Overrides Bootstrap style for offcanvas size */
 .offcanvas-size-sm {
     --bs-offcanvas-width: min(95vw, 200px) !important;
 }
