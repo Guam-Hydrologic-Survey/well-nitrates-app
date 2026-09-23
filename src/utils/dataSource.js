@@ -5,6 +5,6 @@ Return:
 */
 
 // update this with data set; must be full path, starting from the root directory 
-const geoJsonUrl = "./src/data/gu_nitrates_2026.09.09.json";
+const geoJsonUrl = "./src/data/gu_nitrates_2026.09.23.json";
 
 export { geoJsonUrl }
